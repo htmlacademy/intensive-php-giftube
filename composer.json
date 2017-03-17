@@ -1,0 +1,13 @@
+{
+    "name": "htmlacademy/giftube",
+    "author": "Senkevich Kirill <frexin@htmlacademy.ru>",
+    "description": "Сервис для публикации гифок",
+    "require": {
+        "league/plates": "3.*"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "GifTube\\" : "classes/"
+        }
+    }
+}
