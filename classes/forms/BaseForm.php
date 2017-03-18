@@ -11,6 +11,7 @@ class BaseForm {
 
     protected $fields = [];
     protected $rules  = [];
+    protected $labels = [];
 
     protected $formData = [];
 
@@ -59,6 +60,16 @@ class BaseForm {
         return $this->formData;
     }
 
+    public function getLabelFor($field) {
+        $result = null;
+
+        if (isset($this->labels[$field])) {
+            $result = $this->labels[$field];
+        }
+
+        return $result;
+    }
+
     protected function runRequiredValidator($fields) {
         $result = true;
 
@@ -66,7 +77,7 @@ class BaseForm {
             if (!$this->formData[$value]) {
                 $result = false;
 
-                $this->errors[] = [$value => "Это поле должно быть заполнено"];
+                $this->errors[$value] = "Это поле должно быть заполнено";
             }
         }
 
@@ -82,7 +93,7 @@ class BaseForm {
             if (!filter_var($field, FILTER_VALIDATE_EMAIL)) {
                 $result = false;
 
-                $this->errors[] = [$value => "Введите корректный email"];
+                $this->errors[$value] = "Введите корректный email";
             }
         }
 

@@ -9,25 +9,36 @@
 
     <form class="form" action="" method="post">
         <div class="form__column">
+            <?php if (!$form->isValid()): ?>
+                <div class="form__errors">
+                    <p>Пожалуйста, исправьте следующие ошибки:</p>
+                    <ul>
+                    <?php foreach ($form->getErrors() as $field => $error): ?>
+                        <li><strong><?=$form->getLabelFor($field);?>:</strong> <?=$error;?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <div class="form__row">
                 <label class="form__label" for="email">E-mail:</label>
 
                 <input class="form__input" type="text" name="signup[email]" id="email"
-                       value="<?=$this->e($form->email); ?>" placeholder="Укажите e-mail">
+                       value="<?=$form->email; ?>" placeholder="Укажите e-mail">
             </div>
 
             <div class="form__row">
                 <label class="form__label" for="password">Пароль:</label>
 
                 <input class="form__input" type="password" name="signup[password]" id="password"
-                       value="<?=$this->e($form->password); ?>" placeholder="Задайте пароль">
+                       value="<?=$form->password; ?>" placeholder="Задайте пароль">
             </div>
 
             <div class="form__row">
                 <label class="form__label" for="nickname">Имя:</label>
 
                 <input class="form__input" type="text" name="signup[name]" id="nickname"
-                       value="<?=$this->e($form->name); ?>" placeholder="Ваш никнейм на сайте">
+                       value="<?=$form->name; ?>" placeholder="Ваш никнейм на сайте">
             </div>
 
             <div class="form__row">

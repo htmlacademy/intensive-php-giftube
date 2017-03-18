@@ -13,4 +13,9 @@ class BaseController {
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
     }
+
+    public function redirect($path) {
+        header("Location: " . $path);
+        exit;
+    }
 }

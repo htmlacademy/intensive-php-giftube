@@ -858,6 +858,14 @@ body {
   margin-left: 100px;
 }
 
+.form__errors {
+  background-color: #F27458;
+  padding: 10px;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
 .preview {
   position: relative;
 }

@@ -1,29 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: frexin
- * Date: 17.03.2017
- * Time: 19:10
- */
-
 namespace GifTube\controllers;
 
+use GifTube\DatabaseConnect;
 use GifTube\forms\SignupForm;
+use GifTube\models\UserModel;
 
-class UserController extends BaseController{
+class UserController extends BaseController {
 
     public function actionSignup() {
         $form = new SignupForm();
+        $userModel = new UserModel(DatabaseConnect::getInstance());
 
         if ($form->isSubmitted()) {
             $form->validate();
 
             if ($form->isValid()) {
+                $user = $form->getData();
+                $userModel->createNewUser($user['email'], $user['password'], $user['name'], $user['avatar']);
 
-            }
-            else {
-                $errors = $form->getErrors();
-                var_dump($errors);
+                $this->redirect('/');
             }
         }
 
