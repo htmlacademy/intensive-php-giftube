@@ -7,7 +7,7 @@
         <a class="button button--transparent content__header-button" href="/">Назад</a>
     </header>
 
-    <form class="form" action="" method="post">
+    <form class="form" action="" method="post" enctype="multipart/form-data">
         <div class="form__column">
             <?php if (!$form->isValid()): ?>
                 <div class="form__errors">
@@ -45,7 +45,7 @@
                 <label class="form__label" for="avatar">Фото:</label>
 
                 <div class="form__input-file">
-                    <input class="visually-hidden" type="file" name="signup[avatar]" id="avatar" value="Выбрать файл:">
+                    <input class="visually-hidden" type="file" name="signup[avatar]" id="preview" value="Выбрать файл:">
 
                     <label for="preview">
                         <span>Выбрать файл</span>

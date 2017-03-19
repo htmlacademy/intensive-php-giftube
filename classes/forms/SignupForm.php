@@ -11,6 +11,7 @@ class SignupForm extends BaseForm {
         ['required', ['email', 'password', 'name']],
         ['email', ['email']],
         ['unique', 'email'],
+        ['image', 'avatar']
     ];
 
     public function __construct($data = false) {

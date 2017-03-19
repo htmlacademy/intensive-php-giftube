@@ -50,6 +50,9 @@ class BaseForm {
                 case 'unique':
                     $this->runUniqueValidator($fields, $this->formData[$fields]);
                     break;
+                case 'image':
+                    $this->runImageValidator($fields);
+                    break;
             }
         }
     }
@@ -78,6 +81,10 @@ class BaseForm {
         }
 
         return $result;
+    }
+
+    public function setModel(BaseModel $model) {
+        $this->model = $model;
     }
 
     protected function runRequiredValidator($fields) {
@@ -110,7 +117,7 @@ class BaseForm {
         return $result;
     }
 
-    public function runUniqueValidator($field, $value) {
+    protected function runUniqueValidator($field, $value) {
         $result = true;
 
         if ($this->model) {
@@ -126,8 +133,24 @@ class BaseForm {
         return $result;
     }
 
-    public function setModel(BaseModel $model) {
-        $this->model = $model;
+    protected function runImageValidator($field) {
+        $result = true;
+
+        if (isset($_FILES[$this->name])) {
+            $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/tiff'];
+            $file = $_FILES[$this->name]['tmp_name'][$field];
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime  = finfo_file($finfo, $file);
+
+            $result = in_array($mime, $allowed_types);
+        }
+
+        if (!$result) {
+            $this->errors[$field] = "Загруженный файл должен быть изображением";
+        }
+
+        return $result;
     }
 
     private function fillFormData($data = false) {
