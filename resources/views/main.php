@@ -12,7 +12,7 @@
             <a class="filter__item" href="#">Выбор редакции</a>
         </nav>
 
-        <a class="button button--transparent button--transparent-thick content__header-button" href="#">Загрузить свою</a>
+        <a class="button button--transparent button--transparent-thick content__header-button" href="/gif/add">Загрузить свою</a>
     </header>
 
     <ul class="gif-list">
