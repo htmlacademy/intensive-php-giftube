@@ -6,6 +6,7 @@ use League\Plates\Engine;
 require_once '../vendor/autoload.php';
 
 define('APP_PATH', __DIR__ . '/..');
+session_start();
 
 $routes = include '../config/routes.php';
 $database = include '../config/database.php';

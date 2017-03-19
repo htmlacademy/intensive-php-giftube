@@ -33,11 +33,17 @@
             <div class="navigation__item">
                 <h3 class="navigation__title navigation__title--account">Мой Giftube</h3>
 
+                <?php if (!$user): ?>
                 <nav class="navigation__links">
                     <a href="/signup">Регистрация</a>
-
-                    <a href="#">Вход для своих</a>
+                    <a href="/signin">Вход для своих</a>
                 </nav>
+                <?php else: ?>
+                    <nav class="navigation__links">
+                        <a href="javascript:;"><?=$user['name'];?></a>
+                        <a href="/logout">Выход</a>
+                    </nav>
+                <?php endif; ?>
             </div>
 
             <div class="navigation__item">

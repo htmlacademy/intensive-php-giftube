@@ -40,20 +40,7 @@ class BaseForm {
         foreach ($this->rules as $rule) {
             list($rulename, $fields) = $rule;
 
-            switch ($rulename) {
-                case 'required':
-                    $this->runRequiredValidator($fields);
-                    break;
-                case 'email':
-                    $this->runEmailValidator($fields);
-                    break;
-                case 'unique':
-                    $this->runUniqueValidator($fields, $this->formData[$fields]);
-                    break;
-                case 'image':
-                    $this->runImageValidator($fields);
-                    break;
-            }
+            $this->runValidator($rulename, $fields);
         }
     }
 
@@ -87,6 +74,14 @@ class BaseForm {
         $this->model = $model;
     }
 
+    protected function runValidator($name, $fields) {
+        $method_name = 'run' . ucfirst($name) . 'Validator';
+
+        if (method_exists($this, $method_name)) {
+            $this->$method_name($fields);
+        }
+    }
+
     protected function runRequiredValidator($fields) {
         $result = true;
 
@@ -117,8 +112,9 @@ class BaseForm {
         return $result;
     }
 
-    protected function runUniqueValidator($field, $value) {
+    protected function runUniqueValidator($field) {
         $result = true;
+        $value = $this->formData[$field];
 
         if ($this->model) {
             $row = $this->model->findByField($field, $value);

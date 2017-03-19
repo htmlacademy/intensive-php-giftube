@@ -18,20 +18,28 @@ class Router {
 
         if ($uri !== "/" && $controller = $this->matchController($uri)) {
             list($class, $action) = $controller;
+
             $ctrl = new $class($templateEngine);
+            $ctrl->beforeAction();
+
             return $ctrl->$action();
         }
         else {
             $controller = new $this->defaultController($templateEngine);
+            $controller->beforeAction();
+
             return $controller->actionIndex();
         }
     }
 
     protected function matchController($uri) {
         $result = null;
+        $uri = substr($uri, 1);
 
         foreach ($this->routes as $route => $controller) {
-            if (preg_match('/' . $route . '/', $uri) !== false) {
+            $regexp = '/' . $route . '/';
+
+            if (preg_match($regexp, $uri) != false) {
                 $result = $controller;
                 break;
             }
