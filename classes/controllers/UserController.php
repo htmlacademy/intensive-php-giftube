@@ -10,6 +10,7 @@ class UserController extends BaseController {
     public function actionSignup() {
         $form = new SignupForm();
         $userModel = new UserModel(DatabaseConnect::getInstance());
+        $form->setModel($userModel);
 
         if ($form->isSubmitted()) {
             $form->validate();

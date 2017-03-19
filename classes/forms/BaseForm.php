@@ -1,6 +1,8 @@
 <?php
 namespace GifTube\forms;
 
+use GifTube\models\BaseModel;
+
 class BaseForm {
 
     protected $name;
@@ -8,6 +10,11 @@ class BaseForm {
     protected $errors  = [];
 
     protected $tableName;
+
+    /**
+     * @var BaseModel
+     */
+    protected $model;
 
     protected $fields = [];
     protected $rules  = [];
@@ -39,6 +46,9 @@ class BaseForm {
                     break;
                 case 'email':
                     $this->runEmailValidator($fields);
+                    break;
+                case 'unique':
+                    $this->runUniqueValidator($fields, $this->formData[$fields]);
                     break;
             }
         }
@@ -98,6 +108,26 @@ class BaseForm {
         }
 
         return $result;
+    }
+
+    public function runUniqueValidator($field, $value) {
+        $result = true;
+
+        if ($this->model) {
+            $row = $this->model->findByField($field, $value);
+
+            if ($row) {
+                $result = false;
+
+                $this->errors[$field] = "Это поле должно быть уникальным";
+            }
+        }
+
+        return $result;
+    }
+
+    public function setModel(BaseModel $model) {
+        $this->model = $model;
     }
 
     private function fillFormData($data = false) {

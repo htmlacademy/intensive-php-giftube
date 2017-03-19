@@ -10,7 +10,7 @@ class SignupForm extends BaseForm {
     protected $rules = [
         ['required', ['email', 'password', 'name']],
         ['email', ['email']],
-        ['unique', ['email']]
+        ['unique', 'email'],
     ];
 
     public function __construct($data = false) {
