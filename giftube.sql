@@ -64,3 +64,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO categories (name) VALUES ("Фильмы и анимация"), ("Животные"), ("Спорт"), ("Видеоигры"), ("Приколы"),
+  ("Наука"), ("Фейлы");

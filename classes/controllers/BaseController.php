@@ -1,6 +1,8 @@
 <?php
 namespace GifTube\controllers;
 
+use GifTube\DatabaseConnect;
+use GifTube\models\CategoryModel;
 use League\Plates\Engine;
 
 class BaseController {
@@ -17,6 +19,11 @@ class BaseController {
 
     public function __construct($templateEngine) {
         $this->templateEngine = $templateEngine;
+
+        $categoryModel = new CategoryModel(DatabaseConnect::getInstance());
+        $categories = $categoryModel->getAll();
+
+        $this->templateEngine->addData(['categories' => $categories], 'layout');
     }
 
     public function redirect($path) {
