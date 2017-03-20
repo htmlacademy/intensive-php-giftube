@@ -47,4 +47,10 @@ class BaseController {
             $this->redirect('/');
         }
     }
+
+    protected function getParam($name, $default = null) {
+        $value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+
+        return $value;
+    }
 }

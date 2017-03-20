@@ -16,4 +16,16 @@ class GifModel extends BaseModel {
 
         return $res;
     }
+
+    public function findById($id) {
+        $sql = 'SELECT category_id, user_id, dt_add, show_count, like_count, title, description, path FROM gifs WHERE id = ?';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+
+        $gif = $stmt->get_result()->fetch_assoc();
+
+        return $gif;
+    }
 }

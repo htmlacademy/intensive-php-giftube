@@ -8,4 +8,5 @@ return [
     'signin' => [UserController::class, 'actionSignin'],
     'logout' => [UserController::class, 'actionLogout'],
     'gif\/add' => [GifController::class, 'actionAdd'],
+    'gif\/view' => [GifController::class, 'actionView'],
 ];

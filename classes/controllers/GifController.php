@@ -31,4 +31,11 @@ class GifController extends BaseController {
 
         return $this->templateEngine->render('gif/add', ['form' => $form]);
     }
+
+    public function actionView() {
+        $id = $this->getParam('id');
+        $model = new GifModel(DatabaseConnect::getInstance());
+
+        return $this->templateEngine->render('gif/view', ['id' => $id, 'model' => $model]);
+    }
 }
