@@ -1,6 +1,6 @@
 <?php
-use GifTube\DatabaseConnect;
-use GifTube\Router;
+use GifTube\services\DatabaseConnect;
+use GifTube\services\Router;
 use League\Plates\Engine;
 
 require_once '../vendor/autoload.php';
@@ -8,7 +8,7 @@ require_once '../vendor/autoload.php';
 define('APP_PATH', __DIR__ . '/..');
 session_start();
 
-$routes = include '../config/routes.php';
+$routes   = include '../config/routes.php';
 $database = include '../config/database.php';
 
 $template_engine = new Engine(APP_PATH . '/resources/views');

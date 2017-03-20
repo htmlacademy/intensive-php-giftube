@@ -1,7 +1,7 @@
 <?php
 namespace GifTube\models;
 
-use GifTube\DatabaseConnect;
+use GifTube\services\DatabaseConnect;
 
 class BaseModel {
 

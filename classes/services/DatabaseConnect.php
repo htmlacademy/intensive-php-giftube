@@ -1,5 +1,5 @@
 <?php
-namespace GifTube;
+namespace GifTube\services;
 
 class DatabaseConnect {
 

@@ -129,17 +129,36 @@ class BaseForm {
         return $result;
     }
 
-    protected function runImageValidator($field) {
+    protected function runNumericValidator($field) {
         $result = true;
+        $value = $this->formData[$field];
+
+        if (!preg_match('/\d+/', $value)) {
+            $result = false;
+            $this->errors[$field] = "Значение поля должно быть цифровым";
+        }
+
+        return $result;
+    }
+
+    protected function runImageValidator($field, $allowed_mime = false) {
+        $result = false;
 
         if (isset($_FILES[$this->name])) {
             $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/tiff'];
+
+            if ($allowed_mime) {
+                $allowed_types = [$allowed_mime];
+            }
+
             $file = $_FILES[$this->name]['tmp_name'][$field];
 
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mime  = finfo_file($finfo, $file);
+            if ($file) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $file);
 
-            $result = in_array($mime, $allowed_types);
+                $result = in_array($mime, $allowed_types);
+            }
         }
 
         if (!$result) {

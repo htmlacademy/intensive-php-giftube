@@ -1,8 +1,8 @@
 <?php
 namespace GifTube\controllers;
 
-use GifTube\DatabaseConnect;
-use GifTube\FileUploader;
+use GifTube\services\DatabaseConnect;
+use GifTube\services\FileUploader;
 use GifTube\forms\LoginForm;
 use GifTube\forms\SignupForm;
 use GifTube\models\UserModel;

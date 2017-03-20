@@ -1,7 +1,7 @@
 <?php
 namespace GifTube\controllers;
 
-use GifTube\DatabaseConnect;
+use GifTube\services\DatabaseConnect;
 use GifTube\models\CategoryModel;
 use League\Plates\Engine;
 
@@ -11,6 +11,7 @@ class BaseController {
      * @var Engine
      */
     protected $templateEngine;
+    protected $user;
 
     protected $rules = [
         'guest' => ["/gif/add", "/logout"],
@@ -23,7 +24,7 @@ class BaseController {
         $categoryModel = new CategoryModel(DatabaseConnect::getInstance());
         $categories = $categoryModel->getAll();
 
-        $this->templateEngine->addData(['categories' => $categories], 'layout');
+        $this->templateEngine->addData(['categories' => $categories]);
     }
 
     public function redirect($path) {
@@ -33,15 +34,14 @@ class BaseController {
 
     public function beforeAction() {
         $uri = $_SERVER['REQUEST_URI'];
-        $user = null;
 
         if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
+            $this->user = $_SESSION['user'];
         }
 
-        $this->templateEngine->addData(['user' => $user], 'layout');
+        $this->templateEngine->addData(['user' => $this->user], 'layout');
 
-        $rules = $user ? $this->rules['user'] : $this->rules['guest'];
+        $rules = $this->user ? $this->rules['user'] : $this->rules['guest'];
 
         if (in_array($uri, $rules)) {
             $this->redirect('/');

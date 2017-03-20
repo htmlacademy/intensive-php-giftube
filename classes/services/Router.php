@@ -1,5 +1,5 @@
 <?php
-namespace GifTube;
+namespace GifTube\services;
 
 use GifTube\controllers\MainController;
 

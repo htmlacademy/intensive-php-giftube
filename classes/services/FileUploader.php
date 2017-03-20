@@ -1,5 +1,5 @@
 <?php
-namespace GifTube;
+namespace GifTube\services;
 
 class FileUploader {
 
@@ -20,8 +20,8 @@ class FileUploader {
         return $result;
     }
 
-    public function generateFilename() {
-        $name = uniqid('avatar');
+    public function generateFilename($prefix = 'avatar') {
+        $name = uniqid($prefix);
         $extension = pathinfo($this->file['name'][$this->name], PATHINFO_EXTENSION);
 
         $filename = $name . '.' . $extension;

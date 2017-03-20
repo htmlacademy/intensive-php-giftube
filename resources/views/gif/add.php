@@ -7,7 +7,7 @@
         <a class="button button--transparent content__header-button" href="#">Назад</a>
     </header>
 
-    <form class="form" action="add.html" method="post">
+    <form class="form" action="" method="post" enctype="multipart/form-data">
         <div class="form__columns">
             <div class="form__column form__column--short">
                 <div class="form__row">
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="form__input-file">
-                            <input class="visually-hidden" type="file" name="preview" id="preview" value="Выбрать файл:">
+                            <input class="visually-hidden" type="file" name="gif[path]" id="preview" value="">
 
                             <label for="preview">
                                 <span>Выбрать файл</span>
@@ -35,24 +35,41 @@
                 <div class="form__row">
                     <label class="form__label" for="category">Категория:</label>
 
-                    <select class="form__input form__input--select" name="category" id="category">
-                        <option>Выберите категорию</option>
+                    <select class="form__input form__input--select" name="gif[category]" id="category">
+                        <option value="">Выберите категорию</option>
+                        <?php foreach ($categories as $cat): ?>
+                            <option value="<?=$cat['id'];?>"
+                            <?php if ($cat['id'] == $form->category): ?>selected<?php endif; ?> >
+                                <?= $cat['name']; ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="form__row">
                     <label class="form__label" for="name">Название:</label>
-
-                    <input class="form__input" type="text" name="name" id="name" value="" placeholder="Введите название">
+                    <input class="form__input" type="text" name="gif[title]" id="name" value="<?=$form->title;?>"
+                           placeholder="Введите название">
                 </div>
 
                 <div class="form__row">
                     <label class="form__label" for="description">Описание:</label>
-
-                    <textarea class="form__input" name="description" id="description" rows="5" cols="80" placeholder="Краткое описание"></textarea>
+                    <textarea class="form__input" name="gif[description]" id="description" rows="5" cols="80"
+                              placeholder="Краткое описание"><?=$form->description;?></textarea>
                 </div>
             </div>
         </div>
+
+        <?php if (!$form->isValid()): ?>
+            <div class="form__errors">
+                <p>Пожалуйста, исправьте следующие ошибки:</p>
+                <ul>
+                    <?php foreach ($form->getErrors() as $field => $error): ?>
+                        <li><strong><?=$form->getLabelFor($field);?>:</strong> <?=$error;?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <div class="form__controls">
             <input class="button form__control" type="submit" name="" value="Добавить">
