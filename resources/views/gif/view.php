@@ -1,6 +1,8 @@
 <?php $this->layout('layout'); ?>
 <?php
-$gif = $model->findById($id);
+$gif = $gifModel->findById($id);
+$author = $userModel->findByField('id', $gif['user_id']);
+$comments = $commentModel->findAllByField('user_id', $gif['user_id']);
 ?>
 
 <div class="content__main-col">
@@ -24,39 +26,53 @@ $gif = $model->findById($id);
             </div>
         </div>
 
+        <?php if ($user): ?>
         <div class="gif__controls">
             <button class="button gif__control" type="button">Мне нравится</button>
             <button class="button gif__control" type="button">В избранное</button>
         </div>
+        <?php endif; ?>
     </div>
 
     <div class="comment-list">
         <h3 class="comment-list__title">Комментарии:</h3>
 
+        <?php foreach ($comments as $comment) : ?>
         <article class="comment">
-            <img class="comment__picture" src="img/GIF-2.jpg" alt="" width="100" height="100">
+            <img class="comment__picture" src="uploads/<?=$comment['avatar_path'];?>" alt="" width="100" height="100">
 
             <div class="comment__data">
-                <div class="comment__author">@Марфа-Петровна</div>
+                <div class="comment__author">@<?=$comment['name']; ?></div>
 
-                <p class="comment__text">Мозги бы лучше себе купил!</p>
+                <p class="comment__text"><?=$comment['content']; ?></p>
 
-                <div class="comment__controls">
-                    <a href="#">Ответить</a>
-
-                    <a href="#">Это спам</a>
-                </div>
+                <div class="comment__controls"></div>
             </div>
         </article>
+        <?php endforeach; ?>
     </div>
 
+    <?php if ($user): ?>
     <form class="comment-form" action="" method="post">
-        <label class="comment-form__label" for="comment">Добавить коммент:</label>
+        <label class="comment-form__label" for="comment">Добавить комментарий:</label>
 
-        <textarea class="comment-form__text" name="comment" id="comment" rows="8" cols="80" placeholder="Помните о правилах и этикете. Написал гадость — потом не удивляйся"></textarea>
+        <textarea class="comment-form__text" name="comment[content]" id="comment" rows="8" cols="80" placeholder="Помните о правилах и этикете. Написал гадость — потом не удивляйся"><?= $form->content; ?></textarea>
 
+        <input type="hidden" name="comment[gif_id]" value="<?=$id;?>">
+
+        <?php if (!$form->isValid()): ?>
+            <div class="form__errors">
+                <p>Пожалуйста, исправьте следующие ошибки:</p>
+                <ul>
+                    <?php foreach ($form->getErrors() as $field => $error): ?>
+                        <li><strong><?=$form->getLabelFor($field);?>:</strong> <?=$error;?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <input class="button comment-form__button" type="submit" name="" value="Отправить">
     </form>
+    <?php endif; ?>
 </div>
 
 <aside class="content__additional-col">

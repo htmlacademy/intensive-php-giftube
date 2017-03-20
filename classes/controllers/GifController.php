@@ -1,8 +1,11 @@
 <?php
 namespace GifTube\controllers;
 
+use GifTube\forms\CommentForm;
 use GifTube\forms\GifForm;
+use GifTube\models\CommentModel;
 use GifTube\models\GifModel;
+use GifTube\models\UserModel;
 use GifTube\services\DatabaseConnect;
 use GifTube\services\FileUploader;
 
@@ -34,8 +37,21 @@ class GifController extends BaseController {
 
     public function actionView() {
         $id = $this->getParam('id');
-        $model = new GifModel(DatabaseConnect::getInstance());
 
-        return $this->templateEngine->render('gif/view', ['id' => $id, 'model' => $model]);
+        $gifModel     = new GifModel(DatabaseConnect::getInstance());
+        $userModel    = new UserModel(DatabaseConnect::getInstance());
+        $commentModel = new CommentModel(DatabaseConnect::getInstance());
+
+        $form = new CommentForm();
+
+        if ($form->isSubmitted()) {
+            $comment = $form->getData();
+            $commentModel->createNewComment($this->user['id'], $id, $comment['content']);
+
+            $this->redirect('/gif/view?id=' . $id);
+        }
+
+        return $this->templateEngine->render('gif/view', ['id' => $id, 'gifModel' => $gifModel,
+            'userModel' => $userModel, 'commentModel' => $commentModel, 'form' => $form]);
     }
 }

@@ -3,6 +3,8 @@ namespace GifTube\forms;
 
 class SignupForm extends BaseForm {
 
+    protected $name = 'signup';
+
     protected $fields = ['email', 'password', 'name', 'avatar'];
     protected $labels = [
         'email' => 'E-mail', 'password' => 'Пароль', 'name' => 'Имя', 'avatar' => 'Аватар'
@@ -13,10 +15,4 @@ class SignupForm extends BaseForm {
         ['unique', 'email'],
         ['image', 'avatar']
     ];
-
-    public function __construct($data = false) {
-        $this->name = 'signup';
-
-        parent::__construct($data);
-    }
 }

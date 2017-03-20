@@ -51,7 +51,7 @@
                 <h3 class="navigation__title navigation__title--list">Будем посмотреть</h3>
 
                 <nav class="navigation__links">
-                    <?php foreach ($categories as $cat): ?>
+                    <?php foreach ($categoryModel->getAll() as $cat): ?>
                     <a href="/category?id=<?=$cat['id'];?>"><?=$cat['name'];?></a>
                     <?php endforeach; ?>
                 </nav>

@@ -1,7 +1,6 @@
 <?php
 namespace GifTube\models;
 
-
 class UserModel extends BaseModel {
 
     public function createNewUser($email, $password, $name, $avatar = '') {
@@ -17,8 +16,6 @@ class UserModel extends BaseModel {
     }
 
     public function findByField($field, $value) {
-        $result = null;
-
         $sql = 'SELECT id, email, name, avatar_path, password FROM users WHERE ' . $field . ' = ?';
 
         $stmt = $this->db->prepare($sql);

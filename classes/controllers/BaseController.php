@@ -22,9 +22,7 @@ class BaseController {
         $this->templateEngine = $templateEngine;
 
         $categoryModel = new CategoryModel(DatabaseConnect::getInstance());
-        $categories = $categoryModel->getAll();
-
-        $this->templateEngine->addData(['categories' => $categories]);
+        $this->templateEngine->addData(['categoryModel' => $categoryModel]);
     }
 
     public function redirect($path) {
@@ -39,7 +37,7 @@ class BaseController {
             $this->user = $_SESSION['user'];
         }
 
-        $this->templateEngine->addData(['user' => $this->user], 'layout');
+        $this->templateEngine->addData(['user' => $this->user]);
 
         $rules = $this->user ? $this->rules['user'] : $this->rules['guest'];
 
