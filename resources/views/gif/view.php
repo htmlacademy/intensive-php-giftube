@@ -79,23 +79,24 @@ $comments = $commentModel->findAllByField('user_id', $gif['user_id']);
     <h3 class="content__additional-title">Похожие гифки:</h3>
 
     <ul class="gif-list gif-list--vertical">
+        <?php foreach ($gifModel->findAllByCategory($gif['category_id'], $id) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
                 <button type="button">Проиграть</button>
 
-                <img src="img/GIF-3.jpg" alt="" width="200" height="200">
+                <img src="uploads/<?=$item['path'];?>" alt="" width="200" height="200">
             </div>
             <div class="gif__desctiption">
                 <h3 class="gif__desctiption-title">
-                    <a href="#">Купил Бентли в ипотеку</a>
+                    <a href="/gif/view?id=<?=$item['id'];?>"><?=$item['title']; ?></a>
                 </h3>
 
                 <div class="gif__description-data">
-                    <span class="gif__username">@Егор-Автомэн</span>
-
-                    <span class="gif__likes">666</span>
+                    <span class="gif__username">@<?=$item['name']; ?></span>
+                    <span class="gif__likes"><?=$item['like_count']; ?></span>
                 </div>
             </div>
         </li>
+        <?php endforeach; ?>
     </ul>
 </aside>
