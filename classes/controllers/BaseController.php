@@ -3,6 +3,7 @@ namespace GifTube\controllers;
 
 use GifTube\services\DatabaseConnect;
 use GifTube\models\CategoryModel;
+use GifTube\services\ModelFactory;
 use League\Plates\Engine;
 
 class BaseController {
@@ -11,6 +12,12 @@ class BaseController {
      * @var Engine
      */
     protected $templateEngine;
+
+    /**
+     * @var ModelFactory
+     */
+    protected $modelFactory;
+
     protected $user;
 
     protected $rules = [
@@ -18,10 +25,11 @@ class BaseController {
         'user'  => ["/signin", "/signup"]
     ];
 
-    public function __construct($templateEngine) {
+    public function __construct(Engine $templateEngine, ModelFactory $modelFactory) {
         $this->templateEngine = $templateEngine;
+        $this->modelFactory = $modelFactory;
 
-        $categoryModel = new CategoryModel(DatabaseConnect::getInstance());
+        $categoryModel = $this->modelFactory->getEmptyModel(CategoryModel::class);
         $this->templateEngine->addData(['categoryModel' => $categoryModel]);
     }
 
@@ -47,7 +55,7 @@ class BaseController {
     }
 
     protected function getParam($name, $default = null) {
-        $value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+        $value = $_REQUEST[$name] ?? $default;
 
         return $value;
     }

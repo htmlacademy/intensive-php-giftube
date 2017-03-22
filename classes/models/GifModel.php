@@ -3,11 +3,30 @@ namespace GifTube\models;
 
 class GifModel extends BaseModel {
 
-    public function createNewGif($user_id, $category_id, $title, $description, $path) {
+    public static $tableName = 'gifs';
+
+    protected $relations = [
+        'author' => [UserModel::class, 'user_id'],
+        'category' => [CategoryModel::class, 'category_id']
+    ];
+
+    protected $id;
+    protected $category_id;
+    protected $user_id;
+    protected $dt_add;
+    protected $show_count;
+    protected $like_count;
+    protected $fav_count;
+    protected $title;
+    protected $description;
+    protected $path;
+
+    public function createNewGif($user_id, array $gif_data) {
+        list($category, $title, $description, $path) = array_values($gif_data);
         $sql = 'INSERT INTO gifs (dt_add, user_id, category_id, title, description, path) VALUES (NOW(), ?, ?, ?, ?, ?)';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('iisss', $user_id, $category_id, $title, $description, $path);
+        $stmt->bind_param('iisss', $user_id, $category, $title, $description, $path);
         $res = $stmt->execute();
 
         if ($res) {
@@ -41,4 +60,6 @@ class GifModel extends BaseModel {
 
         return $gifs;
     }
+
+//    public function addLike($)
 }

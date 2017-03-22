@@ -27,11 +27,7 @@ class BaseForm {
     }
 
     public function __get($name) {
-        $result = null;
-
-        if (isset($this->formData[$name])) {
-            $result = $this->formData[$name];
-        }
+        $result = $this->formData[$name] ?? null;
 
         return $result;
     }
@@ -61,11 +57,7 @@ class BaseForm {
     }
 
     public function getLabelFor($field) {
-        $result = null;
-
-        if (isset($this->labels[$field])) {
-            $result = $this->labels[$field];
-        }
+        $result = $this->labels[$field] ?? null;
 
         return $result;
     }

@@ -3,6 +3,8 @@ namespace GifTube\models;
 
 class UserModel extends BaseModel {
 
+    public static $tableName = 'users';
+
     public function createNewUser($email, $password, $name, $avatar = '') {
         $password = password_hash($password, PASSWORD_DEFAULT);
 

@@ -53,7 +53,7 @@
 
                 <nav class="navigation__links">
                     <?php foreach ($categoryModel->getAll() as $cat): ?>
-                    <a href="/category?id=<?=$cat['id'];?>"><?=$cat['name'];?></a>
+                    <a href="/category?id=<?=$cat->id;?>"><?=$cat->name;?></a>
                     <?php endforeach; ?>
                 </nav>
             </div>

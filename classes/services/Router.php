@@ -13,19 +13,19 @@ class Router {
         $this->defaultController = $default_controller;
     }
 
-    public function dispatch($templateEngine) {
+    public function dispatch($templateEngine, $modelFactory) {
         $uri = $_SERVER['REQUEST_URI'];
 
         if ($uri !== "/" && $controller = $this->matchController($uri)) {
             list($class, $action) = $controller;
 
-            $ctrl = new $class($templateEngine);
+            $ctrl = new $class($templateEngine, $modelFactory);
             $ctrl->beforeAction();
 
             return $ctrl->$action();
         }
         else {
-            $controller = new $this->defaultController($templateEngine);
+            $controller = new $this->defaultController($templateEngine, $modelFactory);
             $controller->beforeAction();
 
             return $controller->actionIndex();

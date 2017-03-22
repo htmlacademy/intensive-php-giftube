@@ -1,31 +1,30 @@
 <?php $this->layout('layout'); ?>
 <?php
-$gif = $gifModel->findById($id);
-$author = $userModel->findByField('id', $gif['user_id']);
-$comments = $commentModel->findAllByField('user_id', $gif['user_id']);
+$author = $gif->getRelation('author');
+$comments = $commentModel->findAllByField('user_id', $gif->user_id);
 ?>
 
 <div class="content__main-col">
     <header class="content__header">
-        <h2 class="content__header-text"><?=$gif['title'];?></h2>
+        <h2 class="content__header-text"><?=$gif->title;?></h2>
     </header>
 
     <div class="gif gif--large">
         <div class="gif__picture">
             <button type="button">Проиграть</button>
 
-            <img src="uploads/<?=$gif['path'];?>" alt="<?=$gif['title'];?>">
+            <img src="uploads/<?=$gif->path;?>" alt="<?=$gif->title;?>">
         </div>
 
         <div class="gif__desctiption">
             <div class="gif__description-data">
-                <span class="gif__username">@<?=$author['name'];?></span>
+                <span class="gif__username">@<?=$author->name;?></span>
 
-                <span class="gif__views"><?=$gif['show_count'];?></span>
-                <span class="gif__likes"><?=$gif['like_count'];?></span>
+                <span class="gif__views"><?=$gif->show_count;?></span>
+                <span class="gif__likes"><?=$gif->like_count;?></span>
             </div>
             <div class="gif__description">
-                <p><?=$gif['description'];?></p>
+                <p><?=$gif->description;?></p>
             </div>
         </div>
 
@@ -82,21 +81,21 @@ $comments = $commentModel->findAllByField('user_id', $gif['user_id']);
     <h3 class="content__additional-title">Похожие гифки:</h3>
 
     <ul class="gif-list gif-list--vertical">
-        <?php foreach ($gifModel->findAllByCategory($gif['category_id'], $id) as $item): ?>
+        <?php foreach ($gif->getAll(['category_id' => $gif->category_id]) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
                 <button type="button">Проиграть</button>
 
-                <img src="uploads/<?=$item['path'];?>" alt="" width="200" height="200">
+                <img src="uploads/<?=$item->path;?>" alt="" width="200" height="200">
             </div>
             <div class="gif__desctiption">
                 <h3 class="gif__desctiption-title">
-                    <a href="/gif/view?id=<?=$item['id'];?>"><?=$item['title']; ?></a>
+                    <a href="/gif/view?id=<?=$item->id;?>"><?=$item->title; ?></a>
                 </h3>
 
                 <div class="gif__description-data">
-                    <span class="gif__username">@<?=$item['name']; ?></span>
-                    <span class="gif__likes"><?=$item['like_count']; ?></span>
+                    <span class="gif__username">@<?=$item->getRelation('author')->name; ?></span>
+                    <span class="gif__likes"><?=$item->like_count; ?></span>
                 </div>
             </div>
         </li>

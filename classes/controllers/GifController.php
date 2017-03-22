@@ -13,7 +13,11 @@ class GifController extends BaseController {
 
     public function actionAdd() {
         $form  = new GifForm();
-        $model = new GifModel(DatabaseConnect::getInstance());
+
+        /**
+         * @var GifModel $model
+         */
+        $model = $this->modelFactory->getEmptyModel(GifModel::class);
 
         if ($form->isSubmitted()) {
             $form->validate();
@@ -25,8 +29,7 @@ class GifController extends BaseController {
                 $gif['path'] = $fileUploader->generateFilename('gif');
                 $fileUploader->upload($gif['path']);
 
-                $id = $model->createNewGif($this->user['id'], $gif['category'], $gif['title'], $gif['description'],
-                    $gif['path']);
+                $id = $model->createNewGif($this->user['id'], $gif);
 
                 $this->redirect('/gif/view?id=' . $id);
             }
@@ -38,9 +41,12 @@ class GifController extends BaseController {
     public function actionView() {
         $id = $this->getParam('id');
 
-        $gifModel     = new GifModel(DatabaseConnect::getInstance());
-        $userModel    = new UserModel(DatabaseConnect::getInstance());
-        $commentModel = new CommentModel(DatabaseConnect::getInstance());
+        $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+
+        /**
+         * @var CommentModel $commentModel
+         */
+        $commentModel = $this->modelFactory->getEmptyModel(CommentModel::class);
 
         $form = new CommentForm();
 
@@ -51,7 +57,13 @@ class GifController extends BaseController {
             $this->redirect('/gif/view?id=' . $id);
         }
 
-        return $this->templateEngine->render('gif/view', ['id' => $id, 'gifModel' => $gifModel,
-            'userModel' => $userModel, 'commentModel' => $commentModel, 'form' => $form]);
+        $view_params = ['id' => $id, 'gif' => $gifModel, 'commentModel' => $commentModel, 'form' => $form];
+        return $this->templateEngine->render('gif/view', $view_params);
+    }
+
+    public function actionLike() {
+        $id = $this->getParam('id');
+
+
     }
 }

@@ -3,6 +3,8 @@ namespace GifTube\models;
 
 class CommentModel extends BaseModel {
 
+    public static $tableName = 'comments';
+
     public function findAllByField($field, $value) {
         $result = null;
 
