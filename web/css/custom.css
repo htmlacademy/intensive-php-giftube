@@ -1,0 +1,15 @@
+.gif__description {
+    color: #000000;
+}
+
+.gif__picture img {
+    max-width: 520px;
+}
+
+.form__errors {
+    background-color: #F27458;
+    padding: 10px;
+    text-align: left;
+    color: #000000;
+    margin-bottom: 20px;
+}

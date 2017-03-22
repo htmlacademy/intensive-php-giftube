@@ -24,6 +24,9 @@ $comments = $commentModel->findAllByField('user_id', $gif['user_id']);
                 <span class="gif__views"><?=$gif['show_count'];?></span>
                 <span class="gif__likes"><?=$gif['like_count'];?></span>
             </div>
+            <div class="gif__description">
+                <p><?=$gif['description'];?></p>
+            </div>
         </div>
 
         <?php if ($user): ?>

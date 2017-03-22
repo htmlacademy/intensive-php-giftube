@@ -37,7 +37,7 @@
 
                     <select class="form__input form__input--select" name="gif[category]" id="category">
                         <option value="">Выберите категорию</option>
-                        <?php foreach ($categories as $cat): ?>
+                        <?php foreach ($categoryModel->getAll() as $cat): ?>
                             <option value="<?=$cat['id'];?>"
                             <?php if ($cat['id'] == $form->category): ?>selected<?php endif; ?> >
                                 <?= $cat['name']; ?>
