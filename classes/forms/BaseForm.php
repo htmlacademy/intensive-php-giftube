@@ -109,9 +109,9 @@ class BaseForm {
         $value = $this->formData[$field];
 
         if ($this->model) {
-            $row = $this->model->findByField($field, $value);
+            $row = $this->model->findOneBy([$field => $value]);
 
-            if ($row) {
+            if ($row->id) {
                 $result = false;
 
                 $this->errors[$field] = "Это поле должно быть уникальным";

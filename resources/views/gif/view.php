@@ -28,7 +28,7 @@ $comments = $commentModel->findAllByField('user_id', $gif->user_id);
             </div>
         </div>
 
-        <?php if ($user): ?>
+        <?php if (!$user->isGuest()): ?>
         <div class="gif__controls">
             <button class="button gif__control" type="button">Мне нравится</button>
             <button class="button gif__control" type="button">В избранное</button>
@@ -54,7 +54,7 @@ $comments = $commentModel->findAllByField('user_id', $gif->user_id);
         <?php endforeach; ?>
     </div>
 
-    <?php if ($user): ?>
+    <?php if (!$user->isGuest()): ?>
     <form class="comment-form" action="" method="post">
         <label class="comment-form__label" for="comment">Добавить комментарий:</label>
 
@@ -81,7 +81,7 @@ $comments = $commentModel->findAllByField('user_id', $gif->user_id);
     <h3 class="content__additional-title">Похожие гифки:</h3>
 
     <ul class="gif-list gif-list--vertical">
-        <?php foreach ($gif->getAll(['category_id' => $gif->category_id]) as $item): ?>
+        <?php foreach ($gif->findAllBy(['category_id' => $gif->category_id]) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
                 <button type="button">Проиграть</button>

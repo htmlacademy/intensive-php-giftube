@@ -8,7 +8,7 @@ class BaseModel {
     /**
      * @var \mysqli
      */
-    protected $db;
+    public $db;
 
     /**
      * @var ModelFactory
@@ -44,7 +44,7 @@ class BaseModel {
         return $this;
     }
 
-    public function getAll($where = array()) {
+    public function findAllBy($where = array()) {
         $rows = [];
         $sql = 'SELECT * FROM ' . static::$tableName;
 
@@ -69,6 +69,27 @@ class BaseModel {
         return $rows;
     }
 
+    public function findOneBy($where) {
+        $result = $this->modelFactory->getEmptyModel(static::class);
+        $sql = 'SELECT * FROM ' . static::$tableName . ' WHERE ' . key($where) . ' = ?';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('s', current($where));
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($res) {
+            $result = $res->fetch_object(static::class);
+
+            if ($result) {
+                $result->setModelFactory($this->modelFactory);
+                $result->db = $this->db;
+            }
+        }
+
+        return $result;
+    }
+
     public function getRelation($name) {
         $result = null;
 
@@ -83,5 +104,11 @@ class BaseModel {
         }
 
         return $result;
+    }
+
+    protected function runSimpleQuery($sql) {
+        $res = $this->db->query($sql);
+
+        return $res;
     }
 }

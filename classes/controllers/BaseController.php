@@ -1,7 +1,8 @@
 <?php
 namespace GifTube\controllers;
 
-use GifTube\services\DatabaseConnect;
+use GifTube\models\UserModel;
+use GifTube\services\AuthUser;
 use GifTube\models\CategoryModel;
 use GifTube\services\ModelFactory;
 use League\Plates\Engine;
@@ -18,6 +19,9 @@ class BaseController {
      */
     protected $modelFactory;
 
+    /**
+     * @var AuthUser
+     */
     protected $user;
 
     protected $rules = [
@@ -28,9 +32,12 @@ class BaseController {
     public function __construct(Engine $templateEngine, ModelFactory $modelFactory) {
         $this->templateEngine = $templateEngine;
         $this->modelFactory = $modelFactory;
+        $this->user = new AuthUser(UserModel::class, $modelFactory);
 
         $categoryModel = $this->modelFactory->getEmptyModel(CategoryModel::class);
+
         $this->templateEngine->addData(['categoryModel' => $categoryModel]);
+        $this->templateEngine->addData(['ctrl' => $this]);
     }
 
     public function redirect($path) {
@@ -39,15 +46,12 @@ class BaseController {
     }
 
     public function beforeAction() {
+        $this->user->proceedAuth();
+
         $uri = $_SERVER['REQUEST_URI'];
-
-        if (isset($_SESSION['user'])) {
-            $this->user = $_SESSION['user'];
-        }
-
         $this->templateEngine->addData(['user' => $this->user]);
 
-        $rules = $this->user ? $this->rules['user'] : $this->rules['guest'];
+        $rules = $this->user->isGuest() ? $this->rules['guest'] : $this->rules['user'];
 
         if (in_array($uri, $rules)) {
             $this->redirect('/');

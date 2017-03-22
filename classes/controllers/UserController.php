@@ -32,6 +32,7 @@ class UserController extends BaseController {
                 }
 
                 $userModel->createNewUser($user['email'], $user['password'], $user['name'], $avatar);
+                
                 $this->redirect('/');
             }
         }
@@ -48,7 +49,7 @@ class UserController extends BaseController {
             $form->validate();
 
             if ($form->isValid()) {
-                $form->login($form->email);
+                $this->user->loginByEmail($form->email);
 
                 $this->redirect('/');
             }
@@ -58,8 +59,7 @@ class UserController extends BaseController {
     }
 
     public function actionLogout() {
-        unset($_SESSION['user']);
-
+        $this->user->logout();
         $this->redirect('/');
     }
 }

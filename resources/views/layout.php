@@ -35,14 +35,14 @@
             <div class="navigation__item">
                 <h3 class="navigation__title navigation__title--account">Мой Giftube</h3>
 
-                <?php if (!$user): ?>
+                <?php if ($user->isGuest()): ?>
                 <nav class="navigation__links">
                     <a href="/signup">Регистрация</a>
                     <a href="/signin">Вход для своих</a>
                 </nav>
                 <?php else: ?>
                     <nav class="navigation__links">
-                        <a href="javascript:;"><?=$user['name'];?></a>
+                        <a href="javascript:;"><?=$user->getUserModel()->name;?></a>
                         <a href="/logout">Выход</a>
                     </nav>
                 <?php endif; ?>
@@ -52,7 +52,7 @@
                 <h3 class="navigation__title navigation__title--list">Будем посмотреть</h3>
 
                 <nav class="navigation__links">
-                    <?php foreach ($categoryModel->getAll() as $cat): ?>
+                    <?php foreach ($categoryModel->findAllBy() as $cat): ?>
                     <a href="/category?id=<?=$cat->id;?>"><?=$cat->name;?></a>
                     <?php endforeach; ?>
                 </nav>

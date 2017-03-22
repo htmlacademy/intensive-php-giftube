@@ -41,6 +41,9 @@ class GifController extends BaseController {
     public function actionView() {
         $id = $this->getParam('id');
 
+        /**
+         * @var GifModel $gifModel
+         */
         $gifModel  = $this->modelFactory->load(GifModel::class, $id);
 
         /**
@@ -57,13 +60,20 @@ class GifController extends BaseController {
             $this->redirect('/gif/view?id=' . $id);
         }
 
+        $gifModel->changeCounter('show_count', '+');
+
         $view_params = ['id' => $id, 'gif' => $gifModel, 'commentModel' => $commentModel, 'form' => $form];
         return $this->templateEngine->render('gif/view', $view_params);
     }
 
     public function actionLike() {
-        $id = $this->getParam('id');
+        $id  = $this->getParam('id');
+        $rem = $this->getParam('rem');
 
-
+        /**
+         * @var GifModel $gifModel
+         */
+        $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+//        $gifModel->
     }
 }

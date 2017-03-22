@@ -78,3 +78,8 @@ CREATE TABLE `users` (
 
 INSERT INTO categories (name) VALUES ("Фильмы и анимация"), ("Животные"), ("Спорт"), ("Видеоигры"), ("Приколы"),
   ("Наука"), ("Фейлы");
+
+ALTER TABLE `gifs_like` ADD UNIQUE INDEX (`user_id`, `gif_id`);
+ALTER TABLE `gifs_fav` ADD UNIQUE INDEX (`user_id`, `gif_id`) ;
+
+ALTER TABLE `users` ADD COLUMN `token` char(32) NOT NULL AFTER `avatar_path`;

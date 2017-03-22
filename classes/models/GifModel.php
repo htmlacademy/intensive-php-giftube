@@ -36,18 +36,6 @@ class GifModel extends BaseModel {
         return $res;
     }
 
-    public function findById($id) {
-        $sql = 'SELECT category_id, user_id, dt_add, show_count, like_count, title, description, path FROM gifs WHERE id = ?';
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-
-        $gif = $stmt->get_result()->fetch_assoc();
-
-        return $gif;
-    }
-
     public function findAllByCategory($category_id, $exclude_id, $limit = 3) {
         $sql = 'SELECT u.name, g.like_count, g.title, g.description, g.path, g.title FROM gifs g INNER JOIN users u 
                 ON g.user_id = u.id WHERE category_id = ? AND g.id <> ? LIMIT ?';
@@ -61,5 +49,37 @@ class GifModel extends BaseModel {
         return $gifs;
     }
 
-//    public function addLike($)
+    public function changeCounter($name, $sign) {
+        $sql = 'UPDATE ' . static::$tableName . ' SET ' . $name . ' = ' . $name . ' ' . $sign . ' 1 WHERE id = ' . $this->id;
+
+        return $this->runSimpleQuery($sql);
+    }
+
+    public function addLike(UserModel $userModel) {
+        $sql = "INSERT INTO gifs_like (user_id, gif_id) VALUES ({$userModel->id}, {$this->id})";
+        $this->changeCounter('like_count', '+');
+
+        return $this->runSimpleQuery($sql);
+    }
+
+    public function removeLike(UserModel $userModel) {
+        $sql = "DELETE FROM gifs_like WHERE user_id = {$userModel->id} AND gif_id = {$this->id}";
+        $this->changeCounter('like_count', '-');
+
+        return $this->runSimpleQuery($sql);
+    }
+
+    public function addFav(UserModel $userModel) {
+        $sql = "INSERT INTO gifs_fav (user_id, gif_id) VALUES ({$userModel->id}, {$this->id})";
+        $this->changeCounter('fav_count', '+');
+
+        return $this->runSimpleQuery($sql);
+    }
+
+    public function removeFav(UserModel $userModel) {
+        $sql = "DELETE FROM gifs_fav WHERE user_id = {$userModel->id} AND gif_id = {$this->id}";
+        $this->changeCounter('fav_count', '-');
+
+        return $this->runSimpleQuery($sql);
+    }
 }
