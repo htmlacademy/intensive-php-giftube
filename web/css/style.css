@@ -424,7 +424,15 @@ body {
 }
 
 .gif {
+  position: relative;
+
   width: 260px;
+}
+
+.gif .gif__picture {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
 }
 
 .gif--large {
@@ -432,6 +440,7 @@ body {
 }
 
 .gif--large .gif__picture {
+  max-height: 520px;
   margin-bottom: 19px;
 }
 
@@ -456,6 +465,7 @@ body {
 }
 
 .gif--small .gif__picture {
+  max-height: 200px;
   margin-bottom: 16px;
 }
 
@@ -490,8 +500,19 @@ body {
   margin-bottom: 15px;
 }
 
+.gif__picture img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+
+  transform: translate(-50%, -50%);
+}
+
 .gif__picture button {
   position: absolute;
+  z-index: 1;
 
   width: 100%;
   height: 100%;
