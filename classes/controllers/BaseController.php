@@ -1,8 +1,10 @@
 <?php
 namespace GifTube\controllers;
 
-use GifTube\services\DatabaseConnect;
+use GifTube\models\UserModel;
+use GifTube\services\AuthUser;
 use GifTube\models\CategoryModel;
+use GifTube\services\ModelFactory;
 use League\Plates\Engine;
 
 class BaseController {
@@ -11,6 +13,15 @@ class BaseController {
      * @var Engine
      */
     protected $templateEngine;
+
+    /**
+     * @var ModelFactory
+     */
+    protected $modelFactory;
+
+    /**
+     * @var AuthUser
+     */
     protected $user;
 
     protected $rules = [
@@ -18,11 +29,15 @@ class BaseController {
         'user'  => ["/signin", "/signup"]
     ];
 
-    public function __construct($templateEngine) {
+    public function __construct(Engine $templateEngine, ModelFactory $modelFactory) {
         $this->templateEngine = $templateEngine;
+        $this->modelFactory = $modelFactory;
+        $this->user = new AuthUser(UserModel::class, $modelFactory);
 
-        $categoryModel = new CategoryModel(DatabaseConnect::getInstance());
+        $categoryModel = $this->modelFactory->getEmptyModel(CategoryModel::class);
+
         $this->templateEngine->addData(['categoryModel' => $categoryModel]);
+        $this->templateEngine->addData(['ctrl' => $this]);
     }
 
     public function redirect($path) {
@@ -31,15 +46,12 @@ class BaseController {
     }
 
     public function beforeAction() {
+        $this->user->proceedAuth();
+
         $uri = $_SERVER['REQUEST_URI'];
-
-        if (isset($_SESSION['user'])) {
-            $this->user = $_SESSION['user'];
-        }
-
         $this->templateEngine->addData(['user' => $this->user]);
 
-        $rules = $this->user ? $this->rules['user'] : $this->rules['guest'];
+        $rules = $this->user->isGuest() ? $this->rules['guest'] : $this->rules['user'];
 
         if (in_array($uri, $rules)) {
             $this->redirect('/');
@@ -47,7 +59,7 @@ class BaseController {
     }
 
     protected function getParam($name, $default = null) {
-        $value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+        $value = $_REQUEST[$name] ?? $default;
 
         return $value;
     }

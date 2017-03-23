@@ -53,6 +53,17 @@ CREATE TABLE `gifs_fav` (
   CONSTRAINT `gifs_fav_ibfk_2` FOREIGN KEY (`gif_id`) REFERENCES `gifs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `gifs_like` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `gif_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `gif_id` (`gif_id`),
+  CONSTRAINT `gifs_like_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gifs_like_ibfk_2` FOREIGN KEY (`gif_id`) REFERENCES `gifs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -67,3 +78,8 @@ CREATE TABLE `users` (
 
 INSERT INTO categories (name) VALUES ("Фильмы и анимация"), ("Животные"), ("Спорт"), ("Видеоигры"), ("Приколы"),
   ("Наука"), ("Фейлы");
+
+ALTER TABLE `gifs_like` ADD UNIQUE INDEX (`user_id`, `gif_id`);
+ALTER TABLE `gifs_fav` ADD UNIQUE INDEX (`user_id`, `gif_id`) ;
+
+ALTER TABLE `users` ADD COLUMN `token` char(32) NOT NULL AFTER `avatar_path`;

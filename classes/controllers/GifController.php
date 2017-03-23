@@ -5,15 +5,17 @@ use GifTube\forms\CommentForm;
 use GifTube\forms\GifForm;
 use GifTube\models\CommentModel;
 use GifTube\models\GifModel;
-use GifTube\models\UserModel;
-use GifTube\services\DatabaseConnect;
 use GifTube\services\FileUploader;
 
 class GifController extends BaseController {
 
     public function actionAdd() {
         $form  = new GifForm();
-        $model = new GifModel(DatabaseConnect::getInstance());
+
+        /**
+         * @var GifModel $model
+         */
+        $model = $this->modelFactory->getEmptyModel(GifModel::class);
 
         if ($form->isSubmitted()) {
             $form->validate();
@@ -25,8 +27,7 @@ class GifController extends BaseController {
                 $gif['path'] = $fileUploader->generateFilename('gif');
                 $fileUploader->upload($gif['path']);
 
-                $id = $model->createNewGif($this->user['id'], $gif['category'], $gif['title'], $gif['description'],
-                    $gif['path']);
+                $id = $model->createNewGif($this->user->getUserModel()->id, $gif);
 
                 $this->redirect('/gif/view?id=' . $id);
             }
@@ -38,9 +39,15 @@ class GifController extends BaseController {
     public function actionView() {
         $id = $this->getParam('id');
 
-        $gifModel     = new GifModel(DatabaseConnect::getInstance());
-        $userModel    = new UserModel(DatabaseConnect::getInstance());
-        $commentModel = new CommentModel(DatabaseConnect::getInstance());
+        /**
+         * @var GifModel $gifModel
+         */
+        $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+
+        /**
+         * @var CommentModel $commentModel
+         */
+        $commentModel = $this->modelFactory->getEmptyModel(CommentModel::class);
 
         $form = new CommentForm();
 
@@ -51,7 +58,29 @@ class GifController extends BaseController {
             $this->redirect('/gif/view?id=' . $id);
         }
 
-        return $this->templateEngine->render('gif/view', ['id' => $id, 'gifModel' => $gifModel,
-            'userModel' => $userModel, 'commentModel' => $commentModel, 'form' => $form]);
+        $gifModel->changeCounter('show_count', '+');
+
+        $view_params = ['id' => $id, 'gif' => $gifModel, 'commentModel' => $commentModel, 'form' => $form];
+        return $this->templateEngine->render('gif/view', $view_params);
+    }
+
+    public function actionLike() {
+        $id  = $this->getParam('id');
+        $rem = $this->getParam('rem');
+
+        /**
+         * @var GifModel $gifModel
+         */
+        $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+        $user = $this->user->getUserModel();
+
+        if ($rem) {
+            $gifModel->removeLike($user);
+        }
+        else {
+            $gifModel->addLike($user);
+        }
+
+        $this->redirect('/gif/view?id=' . $id);
     }
 }

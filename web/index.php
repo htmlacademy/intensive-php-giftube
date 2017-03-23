@@ -1,5 +1,6 @@
 <?php
 use GifTube\services\DatabaseConnect;
+use GifTube\services\ModelFactory;
 use GifTube\services\Router;
 use League\Plates\Engine;
 
@@ -14,7 +15,9 @@ $database = include '../config/database.php';
 $template_engine = new Engine(APP_PATH . '/resources/views');
 $databaseConnect = DatabaseConnect::getInstance($database);
 
+$modelFactory = ModelFactory::getInstance($databaseConnect);
+
 $router = new Router($routes);
-$content = $router->dispatch($template_engine);
+$content = $router->dispatch($template_engine, $modelFactory);
 
 print $content;
