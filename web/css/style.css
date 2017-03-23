@@ -668,14 +668,13 @@ body {
   display: flex;
 }
 
+.comment + .comment {
+  margin-top: 30px;
+}
+
 .comment__picture {
   flex-shrink: 1;
   margin-right: 28px;
-}
-
-.comment__data {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .comment__author {
@@ -691,23 +690,6 @@ body {
   margin-bottom: 10px;
 
   color: #444444;
-}
-
-.comment__controls {
-  align-self: flex-end;
-}
-
-.comment__controls a {
-  color: #0060c0;
-}
-
-.comment__controls a:hover,
-.comment__controls a:focus {
-  color: #004285;
-}
-
-.comment__controls a:active {
-  opacity: 0.3;
 }
 
 .comment-form__label {

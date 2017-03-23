@@ -48,8 +48,6 @@ $comments = $commentModel->findAllByField('user_id', $gif['user_id']);
                 <div class="comment__author">@<?=$comment['name']; ?></div>
 
                 <p class="comment__text"><?=$comment['content']; ?></p>
-
-                <div class="comment__controls"></div>
             </div>
         </article>
         <?php endforeach; ?>
