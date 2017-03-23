@@ -15,9 +15,9 @@
     <header class="main-header">
         <h1 class="visually-hidden">Giftube</h1>
 
-        <div class="logo">
-            <a href="/"><img class="logo__img" src="img/logotype.svg" alt="Giftube" width="160" height="38"></a>
-        </div>
+        <a class="logo" href="/">
+          <img class="logo__img" src="img/logotype.svg" alt="Giftube" width="160" height="38"></a>
+        </a>
 
         <form class="search" action="/" method="post">
             <div class="search__control">
