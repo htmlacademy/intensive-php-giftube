@@ -17,12 +17,10 @@
 
         <a class="logo" href="/">
           <img class="logo__img" src="img/logotype.svg" alt="Giftube" width="160" height="38"></a>
-        </a>
 
         <form class="search" action="/search" method="get">
             <div class="search__control">
                 <input class="search__text" type="text" name="q" value="<?=$ctrl->getParam('q'); ?>" placeholder="Поиск гифки…">
-                <input class="search__submit button" type="submit" name="" value="Найти">
 
                 <div class="search__submit">
                   <input class="button" type="submit" name="" value="Найти">

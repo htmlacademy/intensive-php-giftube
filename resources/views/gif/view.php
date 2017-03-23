@@ -1,7 +1,7 @@
 <?php $this->layout('layout'); ?>
 <?php
 $author = $gif->getRelation('author');
-$comments = $commentModel->findAllByField('user_id', $gif->user_id);
+$comments = $commentModel->findAllByField('gif_id', $gif->id);
 $userModel = $user->getUserModel();
 ?>
 

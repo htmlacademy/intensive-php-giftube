@@ -1,7 +1,8 @@
 <?php
 namespace GifTube\controllers;
 
-use GifTube\services\DatabaseConnect;
+use GifTube\models\GifModel;
+use GifTube\models\queries\GifQuery;
 use GifTube\services\FileUploader;
 use GifTube\forms\LoginForm;
 use GifTube\forms\SignupForm;
@@ -64,7 +65,10 @@ class UserController extends BaseController {
     }
 
     public function actionFavorites() {
-        $gifs = $this->user->getUserModel()->getRelatedGifs('fav');
+        $gifQuery = new GifQuery(new GifModel);
+        $sql = $gifQuery->getFavorites($this->user->getUserModel()->id);
+
+        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
 
         return $this->templateEngine->render('gif/grid', ['name' => 'Избранное', 'gifs' => $gifs]);
     }

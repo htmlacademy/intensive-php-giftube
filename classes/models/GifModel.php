@@ -20,6 +20,7 @@ class GifModel extends BaseModel {
     protected $title;
     protected $description;
     protected $path;
+    protected $authorName;
 
     public function createNewGif($user_id, array $gif_data) {
         list($category, $title, $description, $path) = array_values($gif_data);

@@ -53,7 +53,7 @@ class GifController extends BaseController {
 
         if ($form->isSubmitted()) {
             $comment = $form->getData();
-            $commentModel->createNewComment($this->user['id'], $id, $comment['content']);
+            $commentModel->createNewComment($this->user->getUserModel()->id, $id, $comment['content']);
 
             $this->redirect('/gif/view?id=' . $id);
         }

@@ -18,7 +18,7 @@ class GifQuery extends BaseQuery {
 
     public function getFavorites($user_id) {
         $user_id = intval($user_id);
-        $this->join = 'INNER JOIN gif_fav gf ON t1.id = gf.gif_id AND gf.user_id = ' . $user_id;
+        $this->join .= ' INNER JOIN gifs_fav gf ON t1.id = gf.gif_id AND gf.user_id = ' . $user_id;
 
         return $this->getSql();
     }
