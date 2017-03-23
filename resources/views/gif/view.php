@@ -2,6 +2,7 @@
 <?php
 $author = $gif->getRelation('author');
 $comments = $commentModel->findAllByField('user_id', $gif->user_id);
+$userModel = $user->getUserModel();
 ?>
 
 <div class="content__main-col">
@@ -30,7 +31,9 @@ $comments = $commentModel->findAllByField('user_id', $gif->user_id);
 
         <?php if (!$user->isGuest()): ?>
         <div class="gif__controls">
+            <?php if (!$userModel->hasLike($gif)): ?>
             <button class="button gif__control" type="button">Мне нравится</button>
+            <?php endif; ?>
             <button class="button gif__control" type="button">В избранное</button>
         </div>
         <?php endif; ?>

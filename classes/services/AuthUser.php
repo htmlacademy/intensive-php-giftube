@@ -66,7 +66,7 @@ class AuthUser {
             $token = $this->userModel->generateHash([$user->dt_add, $user->email, $user->name, $user->password]);
             $user->updateToken($token);
 
-            setcookie('ut', $token, mktime('+180 days'), '/');
+            setcookie('ut', $token, strtotime('+6 month'), '/');
             $_SESSION['user'] = $user;
         }
     }

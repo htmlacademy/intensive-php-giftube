@@ -5,8 +5,6 @@ use GifTube\forms\CommentForm;
 use GifTube\forms\GifForm;
 use GifTube\models\CommentModel;
 use GifTube\models\GifModel;
-use GifTube\models\UserModel;
-use GifTube\services\DatabaseConnect;
 use GifTube\services\FileUploader;
 
 class GifController extends BaseController {
@@ -29,7 +27,7 @@ class GifController extends BaseController {
                 $gif['path'] = $fileUploader->generateFilename('gif');
                 $fileUploader->upload($gif['path']);
 
-                $id = $model->createNewGif($this->user['id'], $gif);
+                $id = $model->createNewGif($this->user->getUserModel()->id, $gif);
 
                 $this->redirect('/gif/view?id=' . $id);
             }
@@ -74,6 +72,15 @@ class GifController extends BaseController {
          * @var GifModel $gifModel
          */
         $gifModel  = $this->modelFactory->load(GifModel::class, $id);
-//        $gifModel->
+        $user = $this->user->getUserModel();
+
+        if ($rem) {
+            $gifModel->removeLike($user);
+        }
+        else {
+            $gifModel->addLike($user);
+        }
+
+        $this->redirect('/gif/view?id=' . $id);
     }
 }

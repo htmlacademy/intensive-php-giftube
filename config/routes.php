@@ -9,4 +9,5 @@ return [
     'logout' => [UserController::class, 'actionLogout'],
     'gif\/add' => [GifController::class, 'actionAdd'],
     'gif\/view' => [GifController::class, 'actionView'],
+    'gif\/like' => [GifController::class, 'actionLike'],
 ];
