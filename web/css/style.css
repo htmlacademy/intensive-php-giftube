@@ -160,19 +160,23 @@ body {
 }
 
 .search__control {
-  display: flex;
-  padding: 7px;
+  position: relative;
 
-  background-color: #061e33;
-  border-radius: 50px;
+  display: flex;
+  height: 52px;
+  padding: 7px;
 }
 
-.search__control:hover {
+.search__control:hover .search__submit::after {
   background-color: #021628;
+  border-color: #021628;
 }
 
 .search__text {
-  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+
+  width: 628px;
   margin-right: 10px;
   padding-left: 52px;
 
@@ -184,6 +188,49 @@ body {
   background-repeat: no-repeat;
   background-position: 16px 50%;
   border: 0;
+  outline: none;
+}
+
+.search__text:focus + .search__submit::after {
+  background-color: transparent;
+}
+
+.search__submit {
+  position: relative;
+
+  width: 195px;
+}
+
+.search__submit::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: -698px;
+
+  width: 886px;
+  height: 52px;
+
+  background-color: #061e33;
+  border: 7px solid #061e33;
+  border-radius: 50px;
+}
+
+.search__submit .button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+
+  border-radius: 40px;
+  transform: translate(-50%, -50%);
+
+  transition: 0.1s;
+}
+
+.search__submit .button:hover,
+.search__submit .button:focus {
+  width: 210px;
+  padding: 23px;
 }
 
 .main-content {
@@ -424,7 +471,15 @@ body {
 }
 
 .gif {
+  position: relative;
+
   width: 260px;
+}
+
+.gif .gif__picture {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
 }
 
 .gif--large {
@@ -432,6 +487,7 @@ body {
 }
 
 .gif--large .gif__picture {
+  max-height: 520px;
   margin-bottom: 19px;
 }
 
@@ -456,6 +512,7 @@ body {
 }
 
 .gif--small .gif__picture {
+  max-height: 200px;
   margin-bottom: 16px;
 }
 
@@ -490,8 +547,19 @@ body {
   margin-bottom: 15px;
 }
 
+.gif__picture img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+
+  transform: translate(-50%, -50%);
+}
+
 .gif__picture button {
   position: absolute;
+  z-index: 1;
 
   width: 100%;
   height: 100%;
@@ -627,6 +695,10 @@ body {
 
 .gif__control + .gif__control {
   margin-left: 15px;
+}
+
+.gif__control--active {
+  opacity: 0.5;
 }
 
 .gif + .comment-list {
