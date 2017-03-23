@@ -5,8 +5,10 @@
 
     <header class="content__header">
         <nav class="filter">
-            <a class="filter__item filter__item--active" href="/">Топовые гифки</a>
-            <a class="filter__item" href="/?tab=new">Свежачок</a>
+            <a class="filter__item <?php if ($ctrl->getParam('tab', 'top') == 'top'): ?>filter__item--active<?php endif;?>"
+               href="/">Топовые гифки</a>
+            <a class="filter__item <?php if ($ctrl->getParam('tab') == 'new'): ?>filter__item--active<?php endif;?>"
+               href="/?tab=new">Свежачок</a>
         </nav>
 
         <a class="button button--transparent button--transparent-thick content__header-button" href="/gif/add">Загрузить свою</a>

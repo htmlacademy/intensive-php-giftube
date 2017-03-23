@@ -9,6 +9,7 @@ return [
     'signup'    => [UserController::class, 'actionSignup'],
     'signin'    => [UserController::class, 'actionSignin'],
     'logout'    => [UserController::class, 'actionLogout'],
+    'favorites' => [UserController::class, 'actionFavorites'],
     'gif\/add'  => [GifController::class, 'actionAdd'],
     'gif\/view' => [GifController::class, 'actionView'],
     'gif\/like' => [GifController::class, 'actionLike'],

@@ -32,7 +32,7 @@ class UserController extends BaseController {
                 }
 
                 $userModel->createNewUser($user['email'], $user['password'], $user['name'], $avatar);
-                
+
                 $this->redirect('/');
             }
         }
@@ -61,5 +61,11 @@ class UserController extends BaseController {
     public function actionLogout() {
         $this->user->logout();
         $this->redirect('/');
+    }
+
+    public function actionFavorites() {
+        $gifs = $this->user->getUserModel()->getRelatedGifs('fav');
+
+        return $this->templateEngine->render('gif/grid', ['name' => 'Избранное', 'gifs' => $gifs]);
     }
 }
