@@ -650,6 +650,10 @@ body {
   margin-left: 15px;
 }
 
+.gif__control--active {
+  opacity: 0.5;
+}
+
 .gif + .comment-list {
   margin-bottom: 54px;
 }

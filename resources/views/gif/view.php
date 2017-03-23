@@ -31,7 +31,7 @@ $comments = $commentModel->findAllByField('user_id', $gif['user_id']);
 
         <?php if ($user): ?>
         <div class="gif__controls">
-            <a class="button gif__control" href="/">Мне нравится</a>
+            <a class="button gif__control gif__control--active" href="/">Мне нравится</a>
             <a class="button gif__control" href="/">В избранное</a>
         </div>
         <?php endif; ?>
