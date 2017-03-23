@@ -161,6 +161,7 @@ body {
 
 .search__control {
   display: flex;
+  height: 52px;
   padding: 7px;
 
   background-color: #061e33;
@@ -172,7 +173,7 @@ body {
 }
 
 .search__text {
-  flex-grow: 1;
+  width: 628px;
   margin-right: 10px;
   padding-left: 52px;
 
@@ -184,6 +185,29 @@ body {
   background-repeat: no-repeat;
   background-position: 16px 50%;
   border: 0;
+}
+
+.search__submit {
+  position: relative;
+
+  width: 195px;
+}
+
+.search__submit .button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  border-radius: 40px;
+  transform: translate(-50%, -50%);
+
+  transition: 0.1s;
+}
+
+.search__submit .button:hover,
+.search__submit .button:focus {
+  width: 210px;
+  padding: 23px;
 }
 
 .main-content {

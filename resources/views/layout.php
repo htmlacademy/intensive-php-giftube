@@ -23,7 +23,9 @@
             <div class="search__control">
                 <input class="search__text" type="text" name="" value="" placeholder="Поиск гифки…">
 
-                <input class="search__submit button" type="submit" name="" value="Найти">
+                <div class="search__submit">
+                  <input class="button" type="submit" name="" value="Найти">
+                </div>
             </div>
         </form>
     </header>
