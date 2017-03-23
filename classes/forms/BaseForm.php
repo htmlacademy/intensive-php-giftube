@@ -27,11 +27,7 @@ class BaseForm {
     }
 
     public function __get($name) {
-        $result = null;
-
-        if (isset($this->formData[$name])) {
-            $result = $this->formData[$name];
-        }
+        $result = $this->formData[$name] ?? null;
 
         return $result;
     }
@@ -61,11 +57,7 @@ class BaseForm {
     }
 
     public function getLabelFor($field) {
-        $result = null;
-
-        if (isset($this->labels[$field])) {
-            $result = $this->labels[$field];
-        }
+        $result = $this->labels[$field] ?? null;
 
         return $result;
     }
@@ -117,9 +109,9 @@ class BaseForm {
         $value = $this->formData[$field];
 
         if ($this->model) {
-            $row = $this->model->findByField($field, $value);
+            $row = $this->model->findOneBy([$field => $value]);
 
-            if ($row) {
+            if ($row->id) {
                 $result = false;
 
                 $this->errors[$field] = "Это поле должно быть уникальным";

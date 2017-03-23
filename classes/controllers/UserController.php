@@ -11,7 +11,11 @@ class UserController extends BaseController {
 
     public function actionSignup() {
         $form = new SignupForm();
-        $userModel = new UserModel(DatabaseConnect::getInstance());
+
+        /**
+         * @var UserModel $userModel
+         */
+        $userModel = $this->modelFactory->getEmptyModel(UserModel::class);
         $form->setModel($userModel);
 
         if ($form->isSubmitted()) {
@@ -28,6 +32,7 @@ class UserController extends BaseController {
                 }
 
                 $userModel->createNewUser($user['email'], $user['password'], $user['name'], $avatar);
+                
                 $this->redirect('/');
             }
         }
@@ -37,14 +42,14 @@ class UserController extends BaseController {
 
     public function actionSignin() {
         $form = new LoginForm();
-        $userModel = new UserModel(DatabaseConnect::getInstance());
+        $userModel = $this->modelFactory->getEmptyModel(UserModel::class);
         $form->setModel($userModel);
 
         if ($form->isSubmitted()) {
             $form->validate();
 
             if ($form->isValid()) {
-                $form->login($form->email);
+                $this->user->loginByEmail($form->email);
 
                 $this->redirect('/');
             }
@@ -54,8 +59,7 @@ class UserController extends BaseController {
     }
 
     public function actionLogout() {
-        unset($_SESSION['user']);
-
+        $this->user->logout();
         $this->redirect('/');
     }
 }

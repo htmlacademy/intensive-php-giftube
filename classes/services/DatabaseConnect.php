@@ -4,6 +4,10 @@ namespace GifTube\services;
 class DatabaseConnect {
 
     private static $instance;
+
+    /**
+     * @var \mysqli
+     */
     private $mysqli;
 
     public static function getInstance($params = null) {
@@ -14,6 +18,9 @@ class DatabaseConnect {
         return self::$instance;
     }
 
+    /**
+     * @return \mysqli
+     */
     public function getDB() {
         return $this->mysqli;
     }

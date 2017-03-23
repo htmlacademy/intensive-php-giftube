@@ -3,28 +3,68 @@ namespace GifTube\models;
 
 class UserModel extends BaseModel {
 
+    protected $id;
+    protected $dt_add;
+    protected $email;
+    protected $name;
+    protected $password;
+    protected $avatar_path;
+
+    public static $tableName = 'users';
+
     public function createNewUser($email, $password, $name, $avatar = '') {
         $password = password_hash($password, PASSWORD_DEFAULT);
+        $token = $this->generateHash([$email, $password, $name]);
 
-        $sql = 'INSERT INTO users (dt_add, email, name, password, avatar_path) VALUES (NOW(), ?, ?, ?, ?)';
+        $sql = 'INSERT INTO users (dt_add, email, name, password, avatar_path, token) VALUES (NOW(), ?, ?, ?, ?, ?)';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('ssss', $email, $name, $password, $avatar);
+        $stmt->bind_param('sssss', $email, $name, $password, $avatar, $token);
         $res = $stmt->execute();
 
         return $res;
     }
 
-    public function findByField($field, $value) {
-        $sql = 'SELECT id, email, name, avatar_path, password FROM users WHERE ' . $field . ' = ?';
+    public function updateToken($token) {
+        $sql = 'UPDATE ' . static::$tableName . ' SET token = ? WHERE id = ?';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('s', $value);
-        $stmt->execute();
+        $stmt->bind_param('si', $token, $this->id);
+        $res = $stmt->execute();
 
-        $res = $stmt->get_result();
-        $result = $res->fetch_assoc();
+        return $res;
+    }
 
-        return $result;
+    public function generateHash(array $user_data) {
+        $ts  = microtime(true);
+        $str = implode(';', array_merge([$ts], $user_data));
+
+        $hash = md5($str);
+
+        return $hash;
+    }
+
+    public function hasLike(GifModel $gifModel) {
+        $likes = $this->getLikes();
+
+        return isset($likes[$gifModel->id]);
+    }
+
+    /**
+     * @return GifModel[]
+     */
+    public function getLikes() {
+        $gifs = [];
+        $sql = 'SELECT * FROM ' . GifModel::$tableName . ' g INNER JOIN gifs_like gl ON g.id = gl.gif_id';
+
+        $res = $this->db->query($sql);
+
+        if ($res) {
+            while ($gif = $res->fetch_object(GifModel::class)) {
+                $gifs[$gif->id] = $gif;
+            }
+        }
+
+        return $gifs;
     }
 }
