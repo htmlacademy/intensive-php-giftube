@@ -32,10 +32,10 @@ $userModel = $user->getUserModel();
         <?php if (!$user->isGuest()): ?>
         <div class="gif__controls">
             <?php if (!$userModel->hasRelatedGif($gif, 'like')): ?>
-            <button class="button gif__control" type="button">Мне нравится</button>
+            <a class="button gif__control" href="/">Мне нравится</a>
             <?php endif; ?>
             <?php if (!$userModel->hasRelatedGif($gif, 'fav')): ?>
-                <button class="button gif__control" type="button">В избранное</button>
+                <a class="button gif__control" href="/">В избранное</a>
             <?php endif; ?>
         </div>
         <?php endif; ?>
@@ -52,8 +52,6 @@ $userModel = $user->getUserModel();
                 <div class="comment__author">@<?=$comment['name']; ?></div>
 
                 <p class="comment__text"><?=$comment['content']; ?></p>
-
-                <div class="comment__controls"></div>
             </div>
         </article>
         <?php endforeach; ?>
