@@ -28,6 +28,10 @@ class BaseModel {
         return $result;
     }
 
+    public function getTableName() {
+        return static::$tableName;
+    }
+
     public function setDb(DatabaseConnect $databaseConnect) {
         $this->db = $databaseConnect->getDB();
 
@@ -106,9 +110,26 @@ class BaseModel {
         return $result;
     }
 
+    public function getQuery() {
+        $result = null;
+        $className = 'GifTube\\models\\queries\\' . ucfirst(static::$tableName) . 'sQuery';
+
+        if (class_exists($className)) {
+            $result = new $className($this);
+        }
+
+        return $result;
+    }
+
     protected function runSimpleQuery($sql) {
         $res = $this->db->query($sql);
 
         return $res;
+    }
+
+    protected function getDb() {
+        $db = DatabaseConnect::getInstance()->getDB();
+
+        return $db;
     }
 }

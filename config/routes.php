@@ -1,5 +1,6 @@
 <?php
 
+use GifTube\controllers\CategoryController;
 use GifTube\controllers\GifController;
 use GifTube\controllers\UserController;
 
@@ -10,4 +11,6 @@ return [
     'gif\/add' => [GifController::class, 'actionAdd'],
     'gif\/view' => [GifController::class, 'actionView'],
     'gif\/like' => [GifController::class, 'actionLike'],
+    'gif\/fav' => [GifController::class, 'actionFav'],
+    'category' => [CategoryController::class, 'actionIndex'],
 ];

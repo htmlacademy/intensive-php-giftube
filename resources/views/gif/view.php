@@ -31,10 +31,12 @@ $userModel = $user->getUserModel();
 
         <?php if (!$user->isGuest()): ?>
         <div class="gif__controls">
-            <?php if (!$userModel->hasLike($gif)): ?>
+            <?php if (!$userModel->hasRelatedGif($gif, 'like')): ?>
             <button class="button gif__control" type="button">Мне нравится</button>
             <?php endif; ?>
-            <button class="button gif__control" type="button">В избранное</button>
+            <?php if (!$userModel->hasRelatedGif($gif, 'fav')): ?>
+                <button class="button gif__control" type="button">В избранное</button>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>

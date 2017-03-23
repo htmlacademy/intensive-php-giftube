@@ -44,20 +44,23 @@ class UserModel extends BaseModel {
         return $hash;
     }
 
-    public function hasLike(GifModel $gifModel) {
-        $likes = $this->getLikes();
+    public function hasRelatedGif(GifModel $gifModel, $type) {
+        $items = $this->getRelatedGifs($type);
 
-        return isset($likes[$gifModel->id]);
+        return isset($items[$gifModel->id]);
     }
 
     /**
+     * @param string $type
      * @return GifModel[]
      */
-    public function getLikes() {
+    public function getRelatedGifs($type) {
         $gifs = [];
-        $sql = 'SELECT * FROM ' . GifModel::$tableName . ' g INNER JOIN gifs_like gl ON g.id = gl.gif_id';
+        $table = 'gifs_' . $type;
 
-        $res = $this->db->query($sql);
+        $sql = 'SELECT g.* FROM ' . GifModel::$tableName . ' g INNER JOIN ' . $table . ' gl ON g.id = gl.gif_id';
+
+        $res = $this->getDb()->query($sql);
 
         if ($res) {
             while ($gif = $res->fetch_object(GifModel::class)) {

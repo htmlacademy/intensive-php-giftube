@@ -10,7 +10,7 @@ class ModelFactory {
     /**
      * @var DatabaseConnect
      */
-    private $databaseConnect;
+    protected $databaseConnect;
 
     public static function getInstance(DatabaseConnect $databaseConnect = null) {
         if (!self::$instance) {
@@ -40,6 +40,19 @@ class ModelFactory {
         $model->setDb($this->databaseConnect)->setModelFactory($this);
 
         return $model;
+    }
+
+    public function getAllByQuery($className, $sql) {
+        $items = [];
+
+        if ($res = $this->databaseConnect->getDB()->query($sql)) {
+
+            while ($item = $res->fetch_object($className)) {
+                $items[] = $item;
+            }
+        }
+
+        return $items;
     }
 
     private function __construct(DatabaseConnect $databaseConnect = null) {

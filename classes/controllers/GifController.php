@@ -83,4 +83,24 @@ class GifController extends BaseController {
 
         $this->redirect('/gif/view?id=' . $id);
     }
+
+    public function actionFav() {
+        $id  = $this->getParam('id');
+        $rem = $this->getParam('rem');
+
+        /**
+         * @var GifModel $gifModel
+         */
+        $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+        $user = $this->user->getUserModel();
+
+        if ($rem) {
+            $gifModel->removeFav($user);
+        }
+        else {
+            $gifModel->addFav($user);
+        }
+
+        $this->redirect('/gif/view?id=' . $id);
+    }
 }
