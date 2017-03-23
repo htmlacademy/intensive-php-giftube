@@ -8,13 +8,16 @@ $userModel = $user->getUserModel();
 <div class="content__main-col">
     <header class="content__header">
         <h2 class="content__header-text"><?=$gif->title;?></h2>
+        <label for="gifControl">click</label>
+
     </header>
 
     <div class="gif gif--large">
         <div class="gif__picture">
-            <button type="button">Проиграть</button>
-
-            <img src="uploads/<?=$gif->path;?>" alt="<?=$gif->title;?>">
+            <input type="checkbox" name="" id="gifControl" value="1" class="hide">
+            <label for="gifControl">Проиграть</label>
+            <img src="uploads/<?=$gif->path;?>" alt="" class="gif_img main hide">
+            <img src="uploads/preview_<?=$gif->path;?>" alt="" class="gif_img preview">
         </div>
 
         <div class="gif__desctiption">
@@ -93,9 +96,9 @@ $userModel = $user->getUserModel();
         <?php foreach ($gif->findAllBy(['category_id' => $gif->category_id]) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
-                <button type="button">Проиграть</button>
+                <label>Проиграть</label>
 
-                <img src="uploads/<?=$item->path;?>" alt="" width="200" height="200">
+                <img src="uploads/preview_<?=$item->path;?>" alt="" width="200" height="200">
             </div>
             <div class="gif__desctiption">
                 <h3 class="gif__desctiption-title">

@@ -2,9 +2,8 @@
     <?php foreach ($gifs as $gif) : ?>
     <li class="gif gif-list__item">
         <div class="gif__picture">
-            <button type="button">Проиграть</button>
-
-            <img src="uploads/<?=$gif->path; ?>" alt="" width="260" height="260">
+            <label for="">Проиграть</label>
+            <img src="uploads/preview_<?=$gif->path; ?>" alt="" width="260" height="260">
         </div>
         <div class="gif__desctiption">
             <h3 class="gif__desctiption-title">

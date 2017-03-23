@@ -3,7 +3,9 @@
     "author": "Senkevich Kirill <frexin@htmlacademy.ru>",
     "description": "Сервис для публикации гифок",
     "require": {
-        "league/plates": "3.*"
+        "league/plates": "3.*",
+        "sybio/gif-frame-extractor": "^1.0",
+        "sybio/gif-creator": "^1.0"
     },
     "autoload" : {
         "psr-4" : {

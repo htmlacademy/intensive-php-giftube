@@ -491,12 +491,12 @@ body {
   margin-bottom: 19px;
 }
 
-.gif--large .gif__picture button::before {
+.gif--large .gif__picture label::before {
   width: 160px;
   height: 160px;
 }
 
-.gif--large .gif__picture button::after {
+.gif--large .gif__picture label::after {
   width: 180px;
   height: 180px;
 
@@ -516,12 +516,12 @@ body {
   margin-bottom: 16px;
 }
 
-.gif--small .gif__picture button::before {
+.gif--small .gif__picture label::before {
   width: 85px;
   height: 85px;
 }
 
-.gif--small .gif__picture button::after {
+.gif--small .gif__picture label::after {
   width: 95px;
   height: 95px;
 
@@ -557,7 +557,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.gif__picture button {
+.gif__picture label {
   position: absolute;
   z-index: 1;
 
@@ -571,8 +571,8 @@ body {
   border: 0;
 }
 
-.gif__picture button::before,
-.gif__picture button::after {
+.gif__picture label::before,
+.gif__picture label::after {
   content: "";
   position: absolute;
   top: 0;
@@ -583,7 +583,7 @@ body {
   margin: auto;
 }
 
-.gif__picture button::before {
+.gif__picture label::before {
   width: 80px;
   height: 80px;
 
@@ -591,7 +591,7 @@ body {
   border-radius: 50%;
 }
 
-.gif__picture button::after {
+.gif__picture label::after {
   width: 90px;
   height: 90px;
 
@@ -600,12 +600,12 @@ body {
   background-position: 0 0;
 }
 
-.gif__picture button:hover::before,
-.gif__picture button:focus::before {
+.gif__picture label:hover::before,
+.gif__picture label:focus::before {
   background-color: #ffffff;
 }
 
-.gif__picture button:active {
+.gif__picture label:active {
   background-color: rgba(255, 255, 255, 0.3);
 }
 

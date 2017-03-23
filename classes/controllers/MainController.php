@@ -28,7 +28,7 @@ class MainController extends BaseController {
     }
 
     public function actionSearch() {
-        $query = $this->getParam('q');
+        $query = trim($this->getParam('q'));
         $query = DatabaseConnect::getInstance()->getDB()->real_escape_string($query);
 
         $gifQuery = new GifQuery(new GifModel);

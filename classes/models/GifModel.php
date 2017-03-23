@@ -22,6 +22,12 @@ class GifModel extends BaseModel {
     protected $path;
     protected $authorName;
 
+    public function getFullPath() {
+        $path = realpath(UPLOAD_PATH . '/' . $this->path);
+
+        return $path;
+    }
+
     public function createNewGif($user_id, array $gif_data) {
         list($category, $title, $description, $path) = array_values($gif_data);
         $sql = 'INSERT INTO gifs (dt_add, user_id, category_id, title, description, path) VALUES (NOW(), ?, ?, ?, ?, ?)';

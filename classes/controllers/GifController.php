@@ -1,6 +1,7 @@
 <?php
 namespace GifTube\controllers;
 
+use GifTube\facades\GifFacade;
 use GifTube\forms\CommentForm;
 use GifTube\forms\GifForm;
 use GifTube\models\CommentModel;
@@ -21,15 +22,12 @@ class GifController extends BaseController {
             $form->validate();
 
             if ($form->isValid()) {
-                $gif = $form->getData();
+                $fileUploader = new FileUploader($_FILES['gif'], UPLOAD_PATH, 'path');
 
-                $fileUploader = new FileUploader($_FILES['gif'], APP_PATH . '/web/uploads', 'path');
-                $gif['path'] = $fileUploader->generateFilename('gif');
-                $fileUploader->upload($gif['path']);
+                $gifFacade = new GifFacade($this->modelFactory, $model, $fileUploader, $this->user->getUserModel());
+                $gifModel = $gifFacade->createAndSaveGif($form->getData());
 
-                $id = $model->createNewGif($this->user->getUserModel()->id, $gif);
-
-                $this->redirect('/gif/view?id=' . $id);
+                $this->redirect('/gif/view?id=' . $gifModel->id);
             }
         }
 

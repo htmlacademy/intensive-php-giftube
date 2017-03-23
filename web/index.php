@@ -7,6 +7,8 @@ use League\Plates\Engine;
 require_once '../vendor/autoload.php';
 
 define('APP_PATH', __DIR__ . '/..');
+define('UPLOAD_PATH', APP_PATH . '/web/uploads');
+
 session_start();
 
 $routes   = include '../config/routes.php';
