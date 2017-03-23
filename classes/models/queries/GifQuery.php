@@ -3,6 +3,12 @@ namespace GifTube\models\queries;
 
 class GifQuery extends BaseQuery {
 
+    public function searchByQuery($query) {
+        $this->where = 'WHERE t1.title LIKE \'%' . $query . '%\' OR description LIKE \'%' . $query . '%\'';
+
+        return $this->getSql();
+    }
+
     public function getByCategory($category_id) {
         $category_id = intval($category_id);
         $this->where = 'WHERE t1.category_id = ' . $category_id;

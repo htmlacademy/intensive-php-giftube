@@ -3,6 +3,7 @@ namespace GifTube\controllers;
 
 use GifTube\models\GifModel;
 use GifTube\models\queries\GifQuery;
+use GifTube\services\DatabaseConnect;
 
 class MainController extends BaseController {
 
@@ -24,5 +25,17 @@ class MainController extends BaseController {
         $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
 
         return $this->templateEngine->render('main', ['gifs' => $gifs]);
+    }
+
+    public function actionSearch() {
+        $query = $this->getParam('q');
+        $query = DatabaseConnect::getInstance()->getDB()->real_escape_string($query);
+
+        $gifQuery = new GifQuery(new GifModel);
+        $sql = $gifQuery->searchByQuery($query);
+
+        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
+
+        return $this->templateEngine->render('gif/grid', ['name' => 'Результаты поиска', 'gifs' => $gifs]);
     }
 }

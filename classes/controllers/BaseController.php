@@ -58,7 +58,7 @@ class BaseController {
         }
     }
 
-    protected function getParam($name, $default = null) {
+    public function getParam($name, $default = null) {
         $value = $_REQUEST[$name] ?? $default;
 
         return $value;

@@ -16,6 +16,6 @@ class CategoryController extends BaseController {
         $sql = $gifQuery->getByCategory($id);
         $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
 
-        return $this->templateEngine->render('category/index', ['category' => $category, 'gifs' => $gifs]);
+        return $this->templateEngine->render('gif/grid', ['name' => $category->name, 'gifs' => $gifs]);
     }
 }
