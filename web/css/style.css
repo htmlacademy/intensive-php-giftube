@@ -47,6 +47,7 @@ body {
 }
 
 .button {
+  display: inline-block;
   width: 195px;
   padding: 16px 0;
 
