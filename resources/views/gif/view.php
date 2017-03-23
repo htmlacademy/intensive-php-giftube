@@ -31,12 +31,18 @@ $userModel = $user->getUserModel();
 
         <?php if (!$user->isGuest()): ?>
         <div class="gif__controls">
-            <?php if (!$userModel->hasRelatedGif($gif, 'like')): ?>
-            <a class="button gif__control" href="/">Мне нравится</a>
-            <?php endif; ?>
-            <?php if (!$userModel->hasRelatedGif($gif, 'fav')): ?>
-                <a class="button gif__control" href="/">В избранное</a>
-            <?php endif; ?>
+            <?php
+            $isFavorite = $userModel->hasRelatedGif($gif, 'fav');
+            $isLiked    = $userModel->hasRelatedGif($gif, 'like');
+
+            $favClass = $isFavorite ? 'gif__control--active' : '';
+            $favUrl   = $isFavorite ? '&rem=1' : '';
+
+            $likeClass = $isLiked ? 'gif__control--active' : '';
+            $likeUrl   = $isLiked ? '&rem=1' : ''; ?>
+
+            <a class="button gif__control <?=$likeClass;?>" href="/gif/like?id=<?=$gif->id;?><?=$likeUrl;?>">Мне нравится</a>
+            <a class="button gif__control <?=$favClass;?>" href="/gif/fav?id=<?=$gif->id;?><?=$favUrl;?>">В избранное</a>
         </div>
         <?php endif; ?>
     </div>
