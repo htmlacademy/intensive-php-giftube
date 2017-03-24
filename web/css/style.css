@@ -167,7 +167,7 @@ body {
   padding: 7px;
 }
 
-.search__control:hover .search__submit::after {
+.search__control:placeholder-shown:hover .search__submit::after {
   background-color: #021628;
   border-color: #021628;
 }
@@ -191,6 +191,10 @@ body {
   outline: none;
 }
 
+.search__text:placeholder-shown + .search__submit::after {
+  background-color: #061e33;
+}
+
 .search__text:focus + .search__submit::after {
   background-color: transparent;
 }
@@ -210,7 +214,6 @@ body {
   width: 886px;
   height: 52px;
 
-  background-color: #061e33;
   border: 7px solid #061e33;
   border-radius: 50px;
 }
@@ -880,11 +883,23 @@ body {
 
 .form__input--select {
   height: 55px;
+
+  background-image: url("../img/dropdown.svg");
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  border-radius: 0;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form__input {
-  width: 350px;
-  padding: 17px;
+  width: 356px;
+  padding: 15px 17px;
+  box-sizing: border-box;
+
+  line-height: 1.3;
 
   background-color: #ebecee;
   border: 3px solid transparent;
@@ -908,9 +923,11 @@ body {
 
 .form__input-file label {
   display: inline-block;
-  padding: 16px 24px;
+  width: 192px;
+  padding: 16px 0;
 
   font-size: 18px;
+  text-align: center;
   color: #ffffff;
   text-transform: uppercase;
 
@@ -929,7 +946,7 @@ body {
 .form__label {
   flex-shrink: 0;
   min-width: 80px;
-  max-width: 87px;
+  max-width: 84px;
   margin-top: 16px;
   margin-right: 20px;
 
