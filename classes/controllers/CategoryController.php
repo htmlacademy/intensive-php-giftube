@@ -11,6 +11,7 @@ class CategoryController extends BaseController {
         $id = $this->getParam('id');
 
         $category = $this->modelFactory->load(CategoryModel::class, $id);
+        $this->pageTitle = 'Все гифки в категории «' . $category->name . '»';
 
         $gifQuery = new GifQuery(new GifModel);
         $sql = $gifQuery->getByCategory($id);

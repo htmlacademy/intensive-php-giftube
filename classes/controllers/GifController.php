@@ -11,6 +11,7 @@ use GifTube\services\FileUploader;
 class GifController extends BaseController {
 
     public function actionAdd() {
+        $this->pageTitle = 'Добавление новой гифки';
         $form  = new GifForm();
 
         /**
@@ -41,6 +42,8 @@ class GifController extends BaseController {
          * @var GifModel $gifModel
          */
         $gifModel  = $this->modelFactory->load(GifModel::class, $id);
+        $this->pageTitle = $gifModel->title;
+
 
         /**
          * @var CommentModel $commentModel

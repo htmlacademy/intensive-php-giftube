@@ -11,6 +11,7 @@ use GifTube\models\UserModel;
 class UserController extends BaseController {
 
     public function actionSignup() {
+        $this->pageTitle = 'Регистрация пользователя';
         $form = new SignupForm();
 
         /**
@@ -42,6 +43,8 @@ class UserController extends BaseController {
     }
 
     public function actionSignin() {
+        $this->pageTitle = 'Вход на сайт';
+
         $form = new LoginForm();
         $userModel = $this->modelFactory->getEmptyModel(UserModel::class);
         $form->setModel($userModel);
@@ -65,6 +68,8 @@ class UserController extends BaseController {
     }
 
     public function actionFavorites() {
+        $this->pageTitle = 'Моё избранное';
+
         $gifQuery = new GifQuery(new GifModel);
         $sql = $gifQuery->getFavorites($this->user->getUserModel()->id);
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <base href="/">
-    <title>Document</title>
+    <title><?=$ctrl->getTitle();?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/custom.css">

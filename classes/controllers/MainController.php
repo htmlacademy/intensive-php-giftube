@@ -8,6 +8,8 @@ use GifTube\services\DatabaseConnect;
 class MainController extends BaseController {
 
     public function actionIndex() {
+        $this->pageTitle = 'Главная страница';
+
         $gifQuery = new GifQuery(new GifModel);
         $sql = '';
 
@@ -28,6 +30,8 @@ class MainController extends BaseController {
     }
 
     public function actionSearch() {
+        $this->pageTitle = 'Результаты поиска';
+
         $query = trim($this->getParam('q'));
         $query = DatabaseConnect::getInstance()->getDB()->real_escape_string($query);
 

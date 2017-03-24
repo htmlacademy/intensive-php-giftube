@@ -1,6 +1,7 @@
 <?php
 namespace GifTube\controllers;
 
+use GifTube\helpers\AppRegistry;
 use GifTube\models\UserModel;
 use GifTube\services\AuthUser;
 use GifTube\models\CategoryModel;
@@ -29,6 +30,8 @@ class BaseController {
         'user'  => ["/signin", "/signup"]
     ];
 
+    protected $pageTitle;
+
     public function __construct(Engine $templateEngine, ModelFactory $modelFactory) {
         $this->templateEngine = $templateEngine;
         $this->modelFactory = $modelFactory;
@@ -38,6 +41,16 @@ class BaseController {
 
         $this->templateEngine->addData(['categoryModel' => $categoryModel]);
         $this->templateEngine->addData(['ctrl' => $this]);
+    }
+
+    public function getTitle() {
+        $title = AppRegistry::getTitle();
+
+        if ($this->pageTitle) {
+            $title = $this->pageTitle . ' | ' . $title;
+        }
+
+        return $title;
     }
 
     public function redirect($path) {
