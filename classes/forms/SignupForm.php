@@ -10,9 +10,9 @@ class SignupForm extends BaseForm {
         'email' => 'E-mail', 'password' => 'Пароль', 'name' => 'Имя', 'avatar' => 'Аватар'
     ];
     protected $rules = [
-        ['required', ['email', 'password', 'name']],
         ['email', ['email']],
         ['unique', 'email'],
-        ['image', 'avatar']
+        ['image', 'avatar'],
+        ['required', ['email', 'password', 'name']]
     ];
 }

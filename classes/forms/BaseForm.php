@@ -48,7 +48,11 @@ class BaseForm {
         return count($this->errors) == 0;
     }
 
-    public function getErrors() {
+    public function getError($field) {
+        return $this->errors[$field] ?? null;
+    }
+
+    public function getAllErrors() {
         return $this->errors;
     }
 
@@ -134,7 +138,7 @@ class BaseForm {
     }
 
     protected function runImageValidator($field, $allowed_mime = false) {
-        $result = false;
+        $result = true;
 
         if (isset($_FILES[$this->name])) {
             $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/tiff'];
@@ -151,10 +155,10 @@ class BaseForm {
 
                 $result = in_array($mime, $allowed_types);
             }
-        }
 
-        if (!$result) {
-            $this->errors[$field] = "Загруженный файл должен быть изображением";
+            if (!$result) {
+                $this->errors[$field] = "Загруженный файл должен быть изображением";
+            }
         }
 
         return $result;

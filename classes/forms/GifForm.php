@@ -9,9 +9,9 @@ class GifForm extends BaseForm {
         'category' => 'Категория', 'title' => 'Название', 'description' => 'Описание', 'path' => 'Gif файл'
     ];
     protected $rules = [
-        ['required', ['category', 'title', 'description']],
         ['gif', 'path'],
-        ['numeric', 'category']
+        ['numeric', 'category'],
+        ['required', ['category', 'title', 'description']]
     ];
 
     public function __construct($data = false) {

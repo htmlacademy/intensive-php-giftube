@@ -44,7 +44,6 @@ class GifController extends BaseController {
         $gifModel  = $this->modelFactory->load(GifModel::class, $id);
         $this->pageTitle = $gifModel->title;
 
-
         /**
          * @var CommentModel $commentModel
          */

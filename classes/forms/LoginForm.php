@@ -15,9 +15,9 @@ class LoginForm extends BaseForm {
         'email' => 'E-mail', 'password' => 'Пароль'
     ];
     protected $rules = [
-        ['required', ['email', 'password']],
         ['email', ['email']],
-        ['login', ['email', 'password']]
+        ['login', ['email', 'password']],
+        ['required', ['email', 'password']]
     ];
 
     public function __construct($data = false) {
@@ -34,7 +34,7 @@ class LoginForm extends BaseForm {
         $user = $this->model->findOneBy(['email' => $email]);
 
         if (!$user) {
-            $this->errors['email'] = "Пользователя с этим email на найдено";
+            $this->errors['email'] = "Пользователя с этим email не существует";
         }
         else if (!password_verify($password, $user->password)) {
             $this->errors['password'] = "Указан неверный пароль";
