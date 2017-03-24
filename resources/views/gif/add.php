@@ -65,7 +65,7 @@ $f = $form;
                 <div class="form__row">
                     <label class="form__label" for="name">Название:</label>
                     <input class="form__input <?php if ($f->getError('title')): ?>form__input--error<?php endif; ?>"
-                           type="text" name="gif[title]" id="name" value="<?=$f->title;?>"
+                           type="text" name="gif[title]" id="name" value="<?=$this->e($f->title);?>"
                            placeholder="Введите название">
 
                     <?php if ($err = $f->getError('title')): ?>
@@ -80,7 +80,7 @@ $f = $form;
                     <label class="form__label" for="description">Описание:</label>
                     <textarea class="form__input <?php if ($f->getError('description')): ?>form__input--error<?php endif; ?>"
                               name="gif[description]" id="description" rows="5" cols="80"
-                              placeholder="Краткое описание"><?=$f->description;?></textarea>
+                              placeholder="Краткое описание"><?=$this->e($f->description);?></textarea>
 
                     <?php if ($err = $f->getError('description')): ?>
                         <div class="error-notice">

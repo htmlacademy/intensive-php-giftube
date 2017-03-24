@@ -52,10 +52,13 @@ class GifController extends BaseController {
         $form = new CommentForm();
 
         if ($form->isSubmitted()) {
+            $form->validate();
             $comment = $form->getData();
-            $commentModel->createNewComment($this->user->getUserModel()->id, $id, $comment['content']);
 
-            $this->redirect('/gif/view?id=' . $id);
+            if ($form->isValid()) {
+                $commentModel->createNewComment($this->user->getUserModel()->id, $id, $comment['content']);
+                $this->redirect('/gif/view?id=' . $id);
+            }
         }
 
         $gifModel->changeCounter('show_count', '+');

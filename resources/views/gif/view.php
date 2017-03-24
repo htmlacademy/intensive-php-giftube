@@ -7,7 +7,7 @@ $userModel = $user->getUserModel();
 
 <div class="content__main-col">
     <header class="content__header">
-        <h2 class="content__header-text"><?=$gif->title;?></h2>
+        <h2 class="content__header-text"><?=$this->e($gif->title);?></h2>
         <label for="gifControl">click</label>
 
     </header>
@@ -22,13 +22,13 @@ $userModel = $user->getUserModel();
 
         <div class="gif__desctiption">
             <div class="gif__description-data">
-                <span class="gif__username">@<?=$author->name;?></span>
+                <span class="gif__username">@<?=$this->e($author->name);?></span>
 
                 <span class="gif__views"><?=$gif->show_count;?></span>
                 <span class="gif__likes"><?=$gif->like_count;?></span>
             </div>
             <div class="gif__description">
-                <p><?=$gif->description;?></p>
+                <p><?=$this->e($gif->description);?></p>
             </div>
         </div>
 
@@ -58,9 +58,8 @@ $userModel = $user->getUserModel();
             <img class="comment__picture" src="uploads/<?=$comment['avatar_path'];?>" alt="" width="100" height="100">
 
             <div class="comment__data">
-                <div class="comment__author">@<?=$comment['name']; ?></div>
-
-                <p class="comment__text"><?=$comment['content']; ?></p>
+                <div class="comment__author">@<?=$this->e($comment['name']); ?></div>
+                <p class="comment__text"><?=$this->e($comment['content']); ?></p>
             </div>
         </article>
         <?php endforeach; ?>
@@ -69,21 +68,17 @@ $userModel = $user->getUserModel();
     <?php if (!$user->isGuest()): ?>
     <form class="comment-form" action="" method="post">
         <label class="comment-form__label" for="comment">Добавить комментарий:</label>
-
-        <textarea class="comment-form__text" name="comment[content]" id="comment" rows="8" cols="80" placeholder="Помните о правилах и этикете. Написал гадость — потом не удивляйся"><?= $form->content; ?></textarea>
-
-        <input type="hidden" name="comment[gif_id]" value="<?=$id;?>">
-
-        <?php if (!$form->isValid()): ?>
-            <div class="form__errors">
-                <p>Пожалуйста, исправьте следующие ошибки:</p>
-                <ul>
-                    <?php foreach ($form->getErrors() as $field => $error): ?>
-                        <li><strong><?=$form->getLabelFor($field);?>:</strong> <?=$error;?></li>
-                    <?php endforeach; ?>
-                </ul>
+        <textarea class="comment-form__text <?php if ($form->getError('content')): ?>form__input--error<?php endif; ?>"
+                  name="comment[content]" id="comment" rows="8" cols="80"
+                  placeholder="Помните о правилах и этикете. "><?=$this->e($form->content); ?></textarea>
+        <?php if ($err = $form->getError('content')): ?>
+            <div class="error-notice">
+                <span class="error-notice__icon"></span>
+                <span class="error-notice__tooltip"><?=$err;?></span>
             </div>
         <?php endif; ?>
+
+        <input type="hidden" name="comment[gif_id]" value="<?=$id;?>">
         <input class="button comment-form__button" type="submit" name="" value="Отправить">
     </form>
     <?php endif; ?>
@@ -96,17 +91,17 @@ $userModel = $user->getUserModel();
         <?php foreach ($gif->findAllBy(['category_id' => $gif->category_id]) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
-                <label>Проиграть</label>
-
-                <img src="uploads/preview_<?=$item->path;?>" alt="" width="200" height="200">
+                <a href="/gif/view?id=<?=$gif->id;?>" class="gif__preview">
+                    <img src="uploads/preview_<?=$item->path;?>" alt="" width="200" height="200">
+                </a>
             </div>
             <div class="gif__desctiption">
                 <h3 class="gif__desctiption-title">
-                    <a href="/gif/view?id=<?=$item->id;?>"><?=$item->title; ?></a>
+                    <a href="/gif/view?id=<?=$item->id;?>"><?=$this->e($item->title); ?></a>
                 </h3>
 
                 <div class="gif__description-data">
-                    <span class="gif__username">@<?=$item->getRelation('author')->name; ?></span>
+                    <span class="gif__username">@<?=$this->e($item->getRelation('author')->name); ?></span>
                     <span class="gif__likes"><?=$item->like_count; ?></span>
                 </div>
             </div>

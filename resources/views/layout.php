@@ -45,7 +45,7 @@
                 </nav>
                 <?php else: ?>
                     <nav class="navigation__links">
-                        <a href="javascript:;"><?=$user->getUserModel()->name;?></a>
+                        <a href="javascript:;"><?=$this->e($user->getUserModel()->name);?></a>
                         <a href="/favorites">Избранное</a>
                         <a href="/logout">Выход</a>
                     </nav>

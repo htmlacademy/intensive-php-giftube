@@ -31,3 +31,19 @@
 .gif_img.preview {
   position: absolute;
 }
+
+.gif__preview {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: block;
+}
+
+.gif--small .gif__preview {
+  height: 200px;
+}
+
+.gif__preview:hover {
+  background-color: #ffffff;
+  opacity: 0.5;
+}

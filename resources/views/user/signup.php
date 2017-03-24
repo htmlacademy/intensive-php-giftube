@@ -26,7 +26,7 @@ $f = $form;
                 <label class="form__label" for="email">E-mail:</label>
 
                 <input class="form__input <?php if ($f->getError('email')): ?>form__input--error<?php endif; ?>"
-                       type="text" name="signup[email]" id="email" value="<?= $f->email; ?>" placeholder="Ваш e-mail">
+                       type="text" name="signup[email]" id="email" value="<?=$this->e($f->email); ?>" placeholder="Ваш e-mail">
 
                 <?php if ($err = $f->getError('email')): ?>
                     <div class="error-notice">
@@ -40,7 +40,7 @@ $f = $form;
                 <label class="form__label" for="password">Пароль:</label>
 
                 <input class="form__input <?php if ($f->getError('password')): ?>form__input--error<?php endif; ?>"
-                       type="password" name="signup[password]" id="password" value="<?= $f->password; ?>"
+                       type="password" name="signup[password]" id="password" value="<?=$this->e($f->password); ?>"
                        placeholder="Задайте пароль">
 
                 <?php if ($err = $f->getError('password')): ?>
@@ -56,7 +56,7 @@ $f = $form;
 
                 <input class="form__input <?php if ($f->getError('name')): ?>form__input--error<?php endif; ?>"
                        type="text" name="signup[name]" id="nickname"
-                       value="<?=$f->name; ?>" placeholder="Ваш никнейм на сайте">
+                       value="<?=$this->e($f->name); ?>" placeholder="Ваш никнейм на сайте">
 
                 <?php if ($err = $f->getError('name')): ?>
                     <div class="error-notice">

@@ -13,5 +13,4 @@ class CommentForm extends BaseForm {
         ['required', ['gif_id', 'content']],
         ['numeric', 'gif_id']
     ];
-
 }
