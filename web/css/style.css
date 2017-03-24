@@ -883,7 +883,7 @@ body {
 }
 
 .form__input {
-  width: 350px;
+  width: 356px;
   padding: 17px;
 
   background-color: #ebecee;
@@ -908,9 +908,11 @@ body {
 
 .form__input-file label {
   display: inline-block;
-  padding: 16px 24px;
+  width: 192px;
+  padding: 16px 0;
 
   font-size: 18px;
+  text-align: center;
   color: #ffffff;
   text-transform: uppercase;
 
@@ -929,7 +931,7 @@ body {
 .form__label {
   flex-shrink: 0;
   min-width: 80px;
-  max-width: 87px;
+  max-width: 84px;
   margin-top: 16px;
   margin-right: 20px;
 
