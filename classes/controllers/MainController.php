@@ -2,44 +2,41 @@
 namespace GifTube\controllers;
 
 use GifTube\models\GifModel;
-use GifTube\models\queries\GifQuery;
 use GifTube\services\DatabaseConnect;
+use GifTube\services\Paginator;
 
 class MainController extends BaseController {
 
     public function actionIndex() {
         $this->pageTitle = 'Главная страница';
 
-        $gifQuery = new GifQuery(new GifModel);
-        $sql = '';
+        $page = $this->getParam('page', 1);
+        $tab  = $this->getParam('tab', 'top');
 
-        $tab = $this->getParam('tab', 'top');
+        $method = $tab == 'new' ? 'getNewestItems' : 'getTopItems';
 
-        switch ($tab) {
-            case 'top':
-                $sql = $gifQuery->getTopItems();
-                break;
-            case 'new':
-                $sql = $gifQuery->getNewestItems();
-                break;
-        }
+        $paginator = new Paginator($this->modelFactory, new GifModel);
+        $paginator->setCurrentPage($page);
+        $paginator->init($method);
 
-        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
-
-        return $this->templateEngine->render('main', ['gifs' => $gifs]);
+        return $this->templateEngine->render('main', ['paginator' => $paginator]);
     }
 
     public function actionSearch() {
         $this->pageTitle = 'Результаты поиска';
 
         $query = trim($this->getParam('q'));
+        $page = $this->getParam('page', 1);
+
         $query = DatabaseConnect::getInstance()->getDB()->real_escape_string($query);
 
-        $gifQuery = new GifQuery(new GifModel);
-        $sql = $gifQuery->searchByQuery($query);
+        $paginator = new Paginator($this->modelFactory, new GifModel);
+        $paginator->setCurrentPage($page);
 
-        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
+        if ($query) {
+            $paginator->init('searchByQuery', [$query]);
+        }
 
-        return $this->templateEngine->render('gif/grid', ['name' => 'Результаты поиска', 'gifs' => $gifs]);
+        return $this->templateEngine->render('gif/grid', ['name' => 'Результаты поиска', 'paginator' => $paginator]);
     }
 }

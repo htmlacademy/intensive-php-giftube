@@ -14,11 +14,6 @@
         <a class="button button--transparent button--transparent-thick content__header-button" href="/gif/add">Загрузить свою</a>
     </header>
 
-    <?php $this->insert('partials/_gifs_grid', ['gifs' => $gifs]); ?>
-
-    <footer class="content__footer">
-        <button class="content__load-button" type="button">
-            <span>Мне нужно больше смешных гифок</span>
-        </button>
-    </footer>
+    <?php $this->insert('partials/_gifs_grid', ['paginator' => $paginator]); ?>
+    <?php $this->insert('partials/_pagination', ['paginator' => $paginator]); ?>
 </div>

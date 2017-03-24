@@ -4,6 +4,7 @@ namespace GifTube\models;
 class GifModel extends BaseModel {
 
     public static $tableName = 'gifs';
+    public static $queryName = 'GifQuery';
 
     protected $relations = [
         'author' => [UserModel::class, 'user_id'],

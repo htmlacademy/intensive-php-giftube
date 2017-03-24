@@ -17,6 +17,7 @@ class BaseModel {
 
     protected $relations;
     public static $tableName;
+    public static $queryName;
 
     public function __get($name) {
         $result = null;
@@ -46,6 +47,16 @@ class BaseModel {
         $this->modelFactory = $modelFactory;
 
         return $this;
+    }
+
+    public function getScalarValue($sql) {
+        $result = null;
+
+        if ($res = $this->getDb()->query($sql)) {
+            $result = $res->fetch_array(MYSQLI_NUM)[0];
+        }
+
+        return $result;
     }
 
     public function findAllBy($where = array()) {
@@ -112,7 +123,7 @@ class BaseModel {
 
     public function getQuery() {
         $result = null;
-        $className = 'GifTube\\models\\queries\\' . ucfirst(static::$tableName) . 'sQuery';
+        $className = 'GifTube\\models\\queries\\' . static::$queryName;
 
         if (class_exists($className)) {
             $result = new $className($this);

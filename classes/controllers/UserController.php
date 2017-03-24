@@ -7,6 +7,7 @@ use GifTube\services\FileUploader;
 use GifTube\forms\LoginForm;
 use GifTube\forms\SignupForm;
 use GifTube\models\UserModel;
+use GifTube\services\Paginator;
 
 class UserController extends BaseController {
 
@@ -70,11 +71,12 @@ class UserController extends BaseController {
     public function actionFavorites() {
         $this->pageTitle = 'Моё избранное';
 
-        $gifQuery = new GifQuery(new GifModel);
-        $sql = $gifQuery->getFavorites($this->user->getUserModel()->id);
+        $page = $this->getParam('page', 1);
 
-        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
+        $paginator = new Paginator($this->modelFactory, new GifModel);
+        $paginator->setCurrentPage($page);
+        $paginator->init('getFavorites', [$this->user->getUserModel()->id]);
 
-        return $this->templateEngine->render('gif/grid', ['name' => 'Избранное', 'gifs' => $gifs]);
+        return $this->templateEngine->render('gif/grid', ['name' => 'Избранное', 'paginator' => $paginator]);
     }
 }

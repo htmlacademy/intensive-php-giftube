@@ -4,19 +4,21 @@ namespace GifTube\controllers;
 use GifTube\models\CategoryModel;
 use GifTube\models\GifModel;
 use GifTube\models\queries\GifQuery;
+use GifTube\services\Paginator;
 
 class CategoryController extends BaseController {
 
     public function actionIndex() {
-        $id = $this->getParam('id');
+        $id   = $this->getParam('id');
+        $page = $this->getParam('page', 1);
 
         $category = $this->modelFactory->load(CategoryModel::class, $id);
         $this->pageTitle = 'Все гифки в категории «' . $category->name . '»';
 
-        $gifQuery = new GifQuery(new GifModel);
-        $sql = $gifQuery->getByCategory($id);
-        $gifs = $this->modelFactory->getAllByQuery(GifModel::class, $sql);
+        $paginator = new Paginator($this->modelFactory, new GifModel);
+        $paginator->setCurrentPage($page);
+        $paginator->init('getByCategory', [$id]);
 
-        return $this->templateEngine->render('gif/grid', ['name' => $category->name, 'gifs' => $gifs]);
+        return $this->templateEngine->render('gif/grid', ['name' => $category->name, 'paginator' => $paginator]);
     }
 }

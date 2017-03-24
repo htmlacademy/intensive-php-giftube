@@ -1,5 +1,5 @@
 <ul class="gif-list">
-    <?php foreach ($gifs as $gif) : ?>
+    <?php foreach ($paginator->getItems() as $gif) : ?>
     <li class="gif gif-list__item">
         <div class="gif__picture">
             <a href="/gif/view?id=<?=$gif->id;?>" class="gif__preview">

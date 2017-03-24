@@ -46,7 +46,6 @@ class ModelFactory {
         $items = [];
 
         if ($res = $this->databaseConnect->getDB()->query($sql)) {
-
             while ($item = $res->fetch_object($className)) {
                 $items[] = $item;
             }

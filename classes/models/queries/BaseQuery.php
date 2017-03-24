@@ -52,14 +52,13 @@ abstract class BaseQuery {
         $this->order = 'ORDER BY ' . $order;
     }
 
-    public function getSql($with_limit = true) {
-        $parts = [$this->select, $this->from, $this->join, $this->where];
+    public function getSql($with_limit = true, $replace = array()) {
+        $parts = [$this->select, $this->from, $this->join, $this->where, $this->order];
+        $parts = array_replace($parts, $replace);
 
         if ($with_limit) {
             $parts[] = $this->getLimitSql();
         }
-
-        $parts[] = $this->order;
 
         $sql = implode(' ', $parts);
 
@@ -67,9 +66,9 @@ abstract class BaseQuery {
     }
 
     public function getCountSql() {
-        $this->select = 'SELECT COUNT(t1.id)';
+        $select = ['SELECT COUNT(t1.id)'];
 
-        return $this->getSql(false);
+        return $this->getSql(false, $select);
     }
 
     protected function getLimitSql() {

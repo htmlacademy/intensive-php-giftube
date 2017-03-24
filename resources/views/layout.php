@@ -53,7 +53,7 @@
             </div>
 
             <div class="navigation__item">
-                <h3 class="navigation__title navigation__title--list">Будем посмотреть</h3>
+                <h3 class="navigation__title navigation__title--list">Категории</h3>
 
                 <nav class="navigation__links">
                     <?php foreach ($categoryModel->findAllBy() as $cat): ?>
