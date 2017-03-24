@@ -44,19 +44,6 @@ class GifModel extends BaseModel {
         return $res;
     }
 
-    public function findAllByCategory($category_id, $exclude_id, $limit = 3) {
-        $sql = 'SELECT u.name, g.like_count, g.title, g.description, g.path, g.title FROM gifs g INNER JOIN users u 
-                ON g.user_id = u.id WHERE category_id = ? AND g.id <> ? LIMIT ?';
-
-        $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('iii', $category_id, $exclude_id, $limit);
-        $stmt->execute();
-
-        $gifs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-        return $gifs;
-    }
-
     public function changeCounter($name, $sign) {
         $sql = 'UPDATE ' . static::$tableName . ' SET ' . $name . ' = ' . $name . ' ' . $sign . ' 1 WHERE id = ' . $this->id;
 
