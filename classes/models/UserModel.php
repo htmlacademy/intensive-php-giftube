@@ -58,7 +58,8 @@ class UserModel extends BaseModel {
         $gifs = [];
         $table = 'gifs_' . $type;
 
-        $sql = 'SELECT g.* FROM ' . GifModel::$tableName . ' g INNER JOIN ' . $table . ' gl ON g.id = gl.gif_id';
+        $sql = 'SELECT g.* FROM ' . GifModel::$tableName . ' g INNER JOIN ' . $table . ' gl ON g.id = gl.gif_id 
+        AND gl.user_id = ' . $this->id;
 
         $res = $this->getDb()->query($sql);
 
