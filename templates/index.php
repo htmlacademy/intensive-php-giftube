@@ -38,7 +38,7 @@
             <div class="navigation__item">
                 <h3 class="navigation__title navigation__title--account">Мой Giftube</h3>
                     <nav class="navigation__links">
-                        <a href="/signup">Регистрация</a>
+                        <a href="register.php">Регистрация</a>
                         <a href="/signin">Вход для своих</a>
                     </nav>
             </div>
