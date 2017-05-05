@@ -20,7 +20,7 @@
         <a class="logo" href="/">
             <img class="logo__img" src="../img/logotype.svg" alt="Giftube" width="160" height="38"></a>
 
-        <form class="search" action="/search" method="get">
+        <form class="search" action="/search.php" method="get">
             <div class="search__control">
                 <input class="search__text" type="text" name="q" value="" placeholder="Поиск гифки…">
 
