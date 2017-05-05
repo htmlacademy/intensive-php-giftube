@@ -2,10 +2,11 @@
 require_once 'init.php';
 
 $categories = [];
+$content = '';
 
 if (!$link) {
     $error = mysqli_connect_error();
-    $content = include_template('error.php', ['error' => $error]);
+    show_error($content, $error);
 }
 else {
     // Запрос на получение списка категорий
@@ -23,7 +24,21 @@ else {
 
         // получить текст последней ошибки
         $error = mysqli_error($link);
-        $content = include_template('error.php', ['error' => $error]);
+        show_error($content, $error);
+    }
+
+    // запрос на показ девяти самых популярных гифок
+    $sql = 'SELECT gifs.id, title, path, like_count, users.name FROM gifs '
+        . 'JOIN users ON gifs.user_id = users.id '
+        . 'ORDER BY show_count DESC LIMIT 9';
+
+    if ($gifs = mysqli_query($link, $sql)) {
+
+        // передаем в шаблон результат выполнения
+        $content = include_template('main.php', ['gifs' => $gifs]);
+    }
+    else {
+        show_error($content, mysqli_error($link));
     }
 }
 

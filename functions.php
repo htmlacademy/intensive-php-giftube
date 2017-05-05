@@ -44,6 +44,10 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
     return $stmt;
 }
 
+function show_error(&$content, $error) {
+    $content = include_template('error.php', ['error' => $error]);
+}
+
 function include_template($name, $data) {
     $name = 'templates/' . $name;
     $result = '';
