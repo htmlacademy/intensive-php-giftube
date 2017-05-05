@@ -1,9 +1,6 @@
 <?php
 require_once 'init.php';
 
-$categories = [];
-$content = '';
-
 if (!$link) {
     $error = mysqli_connect_error();
     show_error($content, $error);
