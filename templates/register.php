@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var SignupForm $form
+ */
+$f = $form;
+?>
 <div class="content__main-col">
     <header class="content__header content__header--left-pad">
         <h2 class="content__header-text">Регистрация</h2>
@@ -7,17 +13,29 @@
 
     <form class="form" action="" method="post" enctype="multipart/form-data">
         <div class="form__column">
+            <?php if (!$f->isValid()): ?>
+                <div class="form__errors">
+                    <p>Пожалуйста, исправьте следующие ошибки:</p>
+                    <ul>
+                        <?php foreach ($f->getAllErrors() as $field => $error): ?>
+                            <li><strong><?=$field;?></strong>: <?=$error;?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <div class="form__row">
                 <label class="form__label" for="email">E-mail:</label>
 
-                <input class="form__input"
-                       type="text" name="signup[email]" id="email"  placeholder="Ваш e-mail">
+                <input class="form__input <?php if ($f->getError('email')): ?>form__input--error<?php endif; ?>"
+                        type="text" name="signup[email]" id="email"  placeholder="Ваш e-mail"
+                        value="<?=htmlspecialchars($f->email); ?>">
             </div>
 
             <div class="form__row">
                 <label class="form__label" for="password">Пароль:</label>
 
-                <input class="form__input"
+                <input class="form__input <?php if ($f->getError('password')): ?>form__input--error<?php endif; ?>"
                        type="password" name="signup[password]" id="password"
                        placeholder="Задайте пароль">
             </div>
@@ -25,9 +43,9 @@
             <div class="form__row">
                 <label class="form__label" for="nickname">Имя:</label>
 
-                <input class="form__input"
+                <input class="form__input <?php if ($f->getError('name')): ?>form__input--error<?php endif; ?>"
                        type="text" name="signup[name]" id="nickname"
-                      placeholder="Ваш никнейм на сайте">
+                      placeholder="Ваш никнейм на сайте" value="<?=htmlspecialchars($f->name); ?>">
             </div>
 
             <div class="form__row">
@@ -39,6 +57,13 @@
                     <label for="preview">
                         <span>Выбрать файл</span>
                     </label>
+
+                    <?php if ($err = $f->getError('avatar')): ?>
+                        <div class="error-notice">
+                            <span class="error-notice__icon"></span>
+                            <span class="error-notice__tooltip"><?=$err;?></span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -17,28 +17,28 @@ else {
         show_error($content, $error);
     }
 
-    if (!empty($_POST)) {
-        list($email, $password, $name) = array_values($_POST['signup']);
-        $password = password_hash($password, PASSWORD_DEFAULT);
+    $form = new SignupForm();
 
-        $sql = 'INSERT INTO users (email, name, password) VALUES (?, ?, ?)';
+    // проверяем, что форма была отправлена
+    if ($form->isSubmitted()) {
+        // валидация формы
+        $form->validate();
 
-        $stmt = mysqli_prepare($link, $sql);
-        mysqli_stmt_bind_param($stmt, 'sss', $email, $name, $password);
+        if ($form->isValid()) { // форма заполнена корректно
+           // регистрация пользователя
+           $res = register_user($link, $form->getFormData());
 
-        $res = mysqli_stmt_execute($stmt);
-
-        if ($res) {
-            header("Location: /");
-        }
-        else {
-            $error = mysqli_error($link);
-            show_error($content, $error);
+            if ($res) {
+                header("Location: /");
+            }
+            else {
+                $error = mysqli_error($link);
+                show_error($content, $error);
+            }
         }
     }
-    else {
-        $content = include_template('register.php', []);
-    }
+
+    $content = include_template('register.php', ['form' => $form]);
 }
 
 print include_template('index.php', ['content' => $content, 'categories' => $categories]);

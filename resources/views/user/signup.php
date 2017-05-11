@@ -16,7 +16,7 @@ $f = $form;
                     <p>Пожалуйста, исправьте следующие ошибки:</p>
                     <ul>
                     <?php foreach ($f->getAllErrors() as $field => $error): ?>
-                        <li><strong><?=$f->getLabelFor($field);?>:</strong> <?=$error;?></li>
+                        <li><?=$error;?></li>
                     <?php endforeach; ?>
                     </ul>
                 </div>
