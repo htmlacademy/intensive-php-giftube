@@ -86,7 +86,7 @@ function loadExample($number, $base_path, $app_path)
     $files = getExampleFiles($path);
 
     foreach ($files as $file) {
-        updateState($number, $file, $base_path, $app_path);
+        updateState($number, $file, $base_path, $app_path, 0);
     }
 }
 
@@ -98,7 +98,7 @@ function updateState($example_number, $file, $base_path, $app_path, $state_numbe
     $states_content = getStatesContent($filepath);
 
     foreach ($states_content as $number => $lines) {
-        if ($state_number && $number > $state_number) {
+        if ($state_number !== null && $number > $state_number) {
             break;
         }
 
@@ -151,4 +151,5 @@ switch (getArg('action')) {
 }
 
 header("Content-Type: application/json; charset=utf-8");
+header("Access-Control-Allow-Origin: *");
 print json_encode($response, JSON_UNESCAPED_UNICODE);
