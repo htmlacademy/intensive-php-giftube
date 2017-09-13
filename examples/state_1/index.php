@@ -4,7 +4,7 @@ require_once 'functions.php';
 $content = '';
 $categories = [];
 
-$link = mysqli_connect("localhost", "root", "", "giftube");
+$link = mysqli_connect("localhost", "giftube_edu", "cerMLxxY", "giftube_edu");
 
 if (!$link) {
     $error = mysqli_connect_error();
