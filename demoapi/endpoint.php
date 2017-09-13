@@ -152,4 +152,5 @@ switch (getArg('action')) {
 
 header("Content-Type: application/json; charset=utf-8");
 header("Access-Control-Allow-Origin: *");
+
 print json_encode($response, JSON_UNESCAPED_UNICODE);

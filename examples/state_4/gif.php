@@ -4,6 +4,8 @@ require_once 'functions.php';
 $content = '';
 $categories = [];
 
+$link = mysqli_connect("localhost", "root", "", "giftube");
+
 if (!$link) {
     $error = mysqli_connect_error();
     show_error($content, $error);
