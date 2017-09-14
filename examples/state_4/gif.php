@@ -1,11 +1,5 @@
 <?php
-require_once 'functions.php';
-
-$content = '';
-$categories = [];
-
-$link = mysqli_connect("localhost", "giftube_edu", "cerMLxxY", "giftube_edu");
-
+require_once 'init.php';
 
 if (!$link) {
     $error = mysqli_connect_error();
