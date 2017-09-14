@@ -74,4 +74,7 @@
     </footer>
 </div>
 </body>
+<script>
+    document.domain = "giftube.academy";
+</script>
 </html>
