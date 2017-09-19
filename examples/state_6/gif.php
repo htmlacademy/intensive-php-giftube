@@ -18,7 +18,6 @@ else {
 
     $id = intval($_GET['id']);
 
-    // запрос на поиск гифок по имени или описанию
     $sql = "SELECT gifs.id, title, path, description, show_count, fav_count, users.name, category_id FROM gifs "
          . "JOIN users ON gifs.user_id = users.id "
          . "WHERE gifs.id = " . $id;
@@ -31,18 +30,18 @@ else {
         else {
             $gif = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-            // запрос на поиск гифок по имени или описанию
             $sql = "SELECT gifs.id, title, path, description, show_count, like_count, users.name FROM gifs "
                  . "JOIN users ON gifs.user_id = users.id "
                  . "WHERE category_id = " . $gif['category_id'] . " LIMIT 3";
 
             $result = mysqli_query($link, $sql);
 
+            /* BEGIN STATE 01 */
             $res = mysqli_query($link, "SELECT id FROM gifs_fav WHERE gif_id = $id AND user_id = " . $_SESSION['user_id']);
             $is_fav = mysqli_num_rows($res) > 0;
 
-            // передаем в шаблон результат выполнения
             $content = include_template('gif.php', ['gif' => $gif, 'result' => $result, 'is_fav' => $is_fav]);
+            /* END STATE 01 */
         }
     }
     else {

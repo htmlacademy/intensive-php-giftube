@@ -40,6 +40,7 @@
                     <nav class="navigation__links">
                         <a href="register.php">Регистрация</a>
                         <a href="/signin">Вход для своих</a>
+                        <a href="/favorites.php">Избранное</a>
                     </nav>
             </div>
 

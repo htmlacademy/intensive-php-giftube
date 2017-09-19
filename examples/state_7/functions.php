@@ -65,7 +65,56 @@ function include_template($name, $data) {
     return $result;
 }
 
+/* BEGIN STATE 01 */
+function cache_get_key($sql, $params, $tag) {
+    $str = md5(implode($params) . $tag);
+    $key = $str . md5($sql);
 
+    return $key;
+}
+/* END STATE 01 */
+
+/* BEGIN STATE 02 */
+function cache_save_data($filepath, $data) {
+    $res = false;
+
+    if (!file_exists($filepath)) {
+        $res = file_put_contents($filepath, json_encode($data));
+    }
+
+    return $res;
+}
+/* END STATE 02 */
+
+/* BEGIN STATE 03 */
+function cache_del_data($data, $tag) {
+    $cache_part = md5(implode($data) . $tag);
+    $files = scandir(CACHE_DIR);
+
+    foreach ($files as $file) {
+        if (substr($file, 0, 32) == $cache_part) {
+            unlink(CACHE_DIR . DIRECTORY_SEPARATOR . $file);
+        }
+    }
+}
+/* END STATE 03 */
+
+/* BEGIN STATE 04 */
+function is_cache_expired($filename, $ttl) {
+    $res = false;
+
+    $mod_time = filemtime($filename);
+
+    if ($mod_time + $ttl < time()) {
+        unlink($filename);
+        $res = true;
+    }
+
+    return $res;
+}
+/* END STATE 04 */
+
+/* BEGIN STATE 05 */
 function cache_get_data($link, $sql, $params, $tag, $ttl = 86400) {
     $filename = cache_get_key($sql, $params, $tag) . '.json';
     $filepath = CACHE_DIR . DIRECTORY_SEPARATOR . $filename;
@@ -86,44 +135,4 @@ function cache_get_data($link, $sql, $params, $tag, $ttl = 86400) {
 
     return $res_data;
 }
-
-function cache_save_data($filepath, $data) {
-    $res = false;
-
-    if (!file_exists($filepath)) {
-        $res = file_put_contents($filepath, json_encode($data));
-    }
-
-    return $res;
-}
-
-function cache_del_data($data, $tag) {
-    $cache_part = md5(implode($data) . $tag);
-    $files = scandir(CACHE_DIR);
-
-    foreach ($files as $file) {
-        if (substr($file, 0, 32) == $cache_part) {
-            unlink(CACHE_DIR . DIRECTORY_SEPARATOR . $file);
-        }
-    }
-}
-
-function cache_get_key($sql, $params, $tag) {
-    $str = md5(implode($params) . $tag);
-    $key = $str . md5($sql);
-
-    return $key;
-}
-
-function is_cache_expired($filename, $ttl) {
-    $res = false;
-
-    $mod_time = filemtime($filename);
-
-    if ($mod_time + $ttl < time()) {
-        unlink($filename);
-        $res = true;
-    }
-
-    return $res;
-}
+/* END STATE 05 */
