@@ -2,3 +2,4 @@
 uploads/*
 vendor/
 cache/*.json
+config/db.php

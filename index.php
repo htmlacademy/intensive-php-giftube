@@ -1,58 +1,52 @@
 <?php
 require_once 'init.php';
+require_once 'DbHelper.php';
 
-if (!$link) {
-    $error = mysqli_connect_error();
-    show_error($content, $error);
+$dbHelper = new DbHelper(...$db_cfg);
+
+if ($dbHelper->getLastError()) {
+	show_error($content, $dbHelper->getLastError());
 }
 else {
-    // Запрос на получение списка категорий
-    $sql = 'SELECT `id`, `name` FROM categories';
+	$dbHelper->executeQuery('SELECT `id`, `name` FROM categories');
 
-    // Выполняем запрос и получаем результат
-    $result = mysqli_query($link, $sql);
+	if (!$dbHelper->getLastError()) {
+		$categories = $dbHelper->getResultAsArray();
+	}
+	else {
+		show_error($content, $dbHelper->getLastError());
+	}
 
-    // запрос выполнен успешно
-    if ($result) {
-        // получаем все категории в виде двумерного массива
-        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-    else { // запрос выполнился с ошибкой
+	$cur_page = $_GET['page'] ?? 1;
+	$page_items_count = 6;
 
-        // получить текст последней ошибки
-        $error = mysqli_error($link);
-        show_error($content, $error);
-    }
+	$dbHelper->executeQuery("SELECT COUNT(*) as cnt FROM gifs");
 
-    $cur_page = $_GET['page'] ?? 1;
-    $page_items = 6;
+	$total_items_count = $dbHelper->getResultAsArray()[0]['cnt'];
+	$pages_count = ceil($total_items_count / $page_items_count);
+	$offset = ($cur_page - 1) * $page_items_count;
 
-    $result = mysqli_query($link, "SELECT COUNT(*) as cnt FROM gifs");
-    $items_count = mysqli_fetch_assoc($result)['cnt'];
+	$sql = 'SELECT gifs.id, title, path, like_count, users.name FROM gifs '
+		 . 'JOIN users ON gifs.user_id = users.id '
+		 . 'ORDER BY show_count DESC LIMIT ? OFFSET ?';
 
-    $pages_count = ceil($items_count / $page_items);
-    $offset = ($cur_page - 1) * $page_items;
+	$dbHelper->executeQuery($sql, [$page_items_count, $offset]);
 
-    $pages = range(1, $pages_count);
+	if (!$dbHelper->getLastError()) {
+		$gifs = $dbHelper->getResultAsArray();
 
-    // запрос на показ девяти самых популярных гифок
-    $sql = 'SELECT gifs.id, title, path, like_count, users.name FROM gifs '
-        . 'JOIN users ON gifs.user_id = users.id '
-        . 'ORDER BY show_count DESC LIMIT ' . $page_items . ' OFFSET ' . $offset;
+		$tpl_data = [
+			'gifs' => $gifs,
+			'pages' => range(1, $pages_count),
+			'pages_count' => $pages_count,
+			'cur_page' => $cur_page
+		];
 
-    if ($gifs = mysqli_query($link, $sql)) {
-        $tpl_data = [
-            'gifs' => $gifs,
-            'pages' => $pages,
-            'pages_count' => $pages_count,
-            'cur_page' => $cur_page
-        ];
-
-        $content = include_template('main.php', $tpl_data);
-    }
-    else {
-        show_error($content, mysqli_error($link));
-    }
+		$content = include_template('main.php', $tpl_data);
+	}
+	else {
+		show_error($content, $dbHelper->getLastError());
+	}
 }
 
 print include_template('index.php', ['content' => $content, 'categories' => $categories]);
