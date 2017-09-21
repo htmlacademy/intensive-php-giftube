@@ -1,8 +1,10 @@
 <?php
 require_once 'init.php';
 
+/* BEGIN STATE 01 */
 require_once 'vendor/autoload.php';
 require_once 'GifConverter.php';
+/* END STATE 01 */
 if (!$link) {
     $error = mysqli_connect_error();
     show_error($content, $error);
@@ -27,8 +29,10 @@ else {
         $filename = uniqid() . '.gif';
         move_uploaded_file($_FILES['gif_img']['tmp_name'], 'uploads/' . $filename);
 
+        /* BEGIN STATE 02 */
         $gifConverter = new GifConverter($filename);
         $gifConverter->createAndSaveThumbnail();
+        /* END STATE 02 */
 
         $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
         $stmt = mysqli_prepare($link, $sql);

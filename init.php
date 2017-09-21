@@ -3,6 +3,7 @@ session_start();
 $_SESSION['user_id'] = 3;
 
 define('CACHE_DIR', basename(__DIR__ . DIRECTORY_SEPARATOR . 'cache'));
+define('UPLOAD_PATH', basename(__DIR__ . DIRECTORY_SEPARATOR . 'uploads'));
 
 $db_cfg = require_once 'config/db.php';
 $db_cfg = array_values($db_cfg);
