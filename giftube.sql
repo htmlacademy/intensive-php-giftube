@@ -76,9 +76,6 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO categories (name) VALUES ("Фильмы и анимация"), ("Животные"), ("Спорт"), ("Видеоигры"), ("Приколы"),
-  ("Наука"), ("Фейлы");
-
 ALTER TABLE `gifs_like` ADD UNIQUE INDEX (`user_id`, `gif_id`);
 ALTER TABLE `gifs_fav` ADD UNIQUE INDEX (`user_id`, `gif_id`) ;
 
