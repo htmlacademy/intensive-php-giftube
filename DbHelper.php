@@ -12,6 +12,8 @@ class DbHelper {
 
 	public function __construct($host, $login, $password, $db) {
 		$this->db_resource = mysqli_connect($host, $login, $password, $db);
+		mysqli_set_charset($this->db_resource, "utf8");
+
 		if (!$this->db_resource) {
 			$this->last_error = mysqli_connect_error();
 		}
