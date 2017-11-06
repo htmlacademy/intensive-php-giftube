@@ -76,6 +76,6 @@
 </div>
 </body>
 <script>
-    document.domain = "giftube.academy";
+    document.domain = "phpdemo.ru";
 </script>
 </html>
