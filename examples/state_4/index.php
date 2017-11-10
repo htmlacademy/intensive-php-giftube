@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-<?php include("array.php"); ?>
+<?php include("loops.php"); ?>
 
 </body>
 <script>
