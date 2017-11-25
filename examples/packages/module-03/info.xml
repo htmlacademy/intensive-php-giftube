@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<examples>
+    <example name="Подключение файлов" index="1">
+        <description>to do</description>
+        <files>
+            <file name="config.php" main="false" show="true">
+                <states>
+                    <state>Вначале подключим все необходимые файлы, которые понадобятся на этой странице. funcs.php -
+                        содержит функцию для урезания текста, в config.php находятся настройки сайта, а data.php
+                        содержит массивы гифок и категорий
+                    </state>
+                    <state>Теперь напишем условие, которое будет проверять состояние сайта: включен он или находится на
+                        обслуживании
+                    </state>
+                    <state>Если сайт включен, то подключим сценарий с содержимым главной страницы</state>
+                    <state>Если сайт выключен на обслуживание, то подключим сценарий с текстом сообщения об ошибке
+                    </state>
+                    <state>В переменной $content теперь будет либо обычное содержимое главной страницы, либо сообщение о
+                        недоступности сайта. Не забудем вывести его на экран
+                    </state>
+                </states>
+            </file>
+            <file name="data.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="funcs.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="index.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="tpl/main.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="tpl/off.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Шаблонизация" index="2">
+        <description>to do</description>
+        <files>
+            <file name="data.php" main="false" show="true">
+                <states>
+                    <state>Подключаем сценарий с функцией-шаблонизаторам, а также необходимые данные для показа страницы
+                        (гифки, категории)
+                    </state>
+                    <state>Вначале с помощью функции-шаблонизатора подключаем и получаем содержимое шаблона главной
+                        страницы. Передаем в этот шаблон нужные ему данные - массив с гифками
+                    </state>
+                    <state>Теперь подключаем наш лейаут. Передадим туда содержимое шаблона страницы, а также пару других
+                        переменных
+                    </state>
+                    <state>Последним шагом выводим содержимое лейаута на экран</state>
+                </states>
+            </file>
+            <file name="index.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/_gif.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/layout.php" main="false" show="false">
+                <states/>
+            </file>
+            <file name="templates/main.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Буферизация вывода" index="3">
+        <description>to do</description>
+        <files>
+            <file name="index.php" main="false" show="true">
+                <states>
+                    <state>Текст, который сразу же будет выведен на экран</state>
+                    <state>Напишем цикл, который отработает 10 раз</state>
+                    <state>Внутри цикла будем показывать очередное значение переменной $counter с новой строки</state>
+                    <state>Сбросим буфер вывода PHP. Эта команда очистит буфер и сразу же покажет его содержимое, не
+                        дожидаясь окончания работы сценария
+                    </state>
+                    <state>Сделаем задержку в одну секунду, чтобы каждая новая цифра появлялась на экране через
+                        секунду
+                    </state>
+                </states>
+            </file>
+        </files>
+    </example>
+    <example name="Фильтрация данных" index="4">
+        <description>to do</description>
+        <files>
+            <file name="index.php" main="false" show="true">
+                <states>
+                    <state>Напишем простую функцию-обертку, которая будет фильтровать содержимое и возвращать строку,
+                        очищенную от опасных спецсимволов
+                    </state>
+                    <state>Поместим в массив отправленное из формы поле, если оно есть</state>
+                    <state>Подключим лейаут, шаблон и передадим туда данные из формы</state>
+                </states>
+            </file>
+            <file name="templates/layout.php" main="false" show="false">
+                <states/>
+            </file>
+            <file name="templates/view.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+</examples>

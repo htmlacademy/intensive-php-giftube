@@ -3,6 +3,8 @@ require_once('functions.php');
 require_once('data.php');
 require_once('func.php');
 
+session_start();
+
 /* BEGIN STATE 01 */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* BEGIN STATE 02 */
