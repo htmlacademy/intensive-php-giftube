@@ -14,9 +14,17 @@
                 </states>
             </file>
             <file name="headers2.php" main="false" show="true">
-                <states/>
+                <states>
+                    <state>Отправлять можно не только стандартные, существующие заголовки. Никто не запрещает нам
+                        придумать свой собственный заголовок и отправить его вместе с остальными.</state>
+                    <state>Чтобы посмотреть какие заголовки ответа будут отправлены вашим скриптом используйте функцию
+                        headers_list(). Она вернет массив из всех заголовков.</state>
+                    <state>Часто бывает необходимо переадресовать пользователя на другую страницу после выполнения
+                    какого нибудь действия. Например, после успешной аутентификации на сайте. Отправка специального
+                    заголовка ответа "Location" заставит браузер пользователя перейти по адресу из этого заголовка.</state>
+                </states>
             </file>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
         </files>
@@ -25,6 +33,15 @@
         <description>to do</description>
         <files>
             <file name="data.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/layout.php" main="false" show="false">
+                <states/>
+            </file>
+            <file name="templates/view.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="view.php" main="true" show="true">
                 <states>
                     <state>Подключаем массив с двумя гифками и функцию-шаблонизатор</state>
                     <state>Определяем переменную, в который поместим массив с найденной гифкой</state>
@@ -37,21 +54,12 @@
                     <state>Подключаем лейаут и шаблон страницы. Выводим результат на экран</state>
                 </states>
             </file>
-            <file name="templates/layout.php" main="false" show="false">
-                <states/>
-            </file>
-            <file name="templates/view.php" main="false" show="true">
-                <states/>
-            </file>
-            <file name="view.php" main="false" show="true">
-                <states/>
-            </file>
         </files>
     </example>
     <example name="Данные из формы" index="3">
         <description>to do</description>
         <files>
-            <file name="add.php" main="false" show="true">
+            <file name="add.php" main="true" show="true">
                 <states>
                     <state>Вначале убедимся, что форма была отправлена. Для этого проверяем метод, которым была
                         запрошена страница. Если метод POST - значит этот сценарий был вызван отправкой формы
@@ -85,7 +93,7 @@
     <example name="Валидация формы" index="4">
         <description>to do</description>
         <files>
-            <file name="add.php" main="false" show="true">
+            <file name="add.php" main="true" show="true">
                 <states>
                     <state>Вначале убедимся, что форма была отправлена. Для этого проверяем метод, которым была
                         запрошена страница. Если метод POST - значит этот сценарий был вызван отправкой формы
@@ -130,7 +138,7 @@
             <file name="templates/add.php" main="false" show="true">
                 <states/>
             </file>
-            <file name="templates/layout.php" main="false" show="true">
+            <file name="templates/layout.php" main="false" show="false">
                 <states/>
             </file>
             <file name="templates/view.php" main="false" show="true">

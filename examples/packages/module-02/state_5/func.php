@@ -25,4 +25,6 @@ function cut_text($text, $num_letters) {
 }
 
 $short_text = cut_text($long_text, 25);
+
+print($short_text);
 /* END STATE 02 */

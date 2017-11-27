@@ -23,7 +23,7 @@
             <file name="data.php" main="false" show="true">
                 <states/>
             </file>
-            <file name="funcs.php" main="false" show="true">
+            <file name="funcs.php" main="false" show="false">
                 <states/>
             </file>
             <file name="index.php" main="false" show="true">
@@ -42,7 +42,7 @@
         <files>
             <file name="data.php" main="false" show="true">
                 <states>
-                    <state>Подключаем сценарий с функцией-шаблонизаторам, а также необходимые данные для показа страницы
+                    <state>Подключаем сценарий с функцией-шаблонизатором, а также необходимые данные для показа страницы
                         (гифки, категории)
                     </state>
                     <state>Вначале с помощью функции-шаблонизатора подключаем и получаем содержимое шаблона главной
@@ -60,7 +60,7 @@
             <file name="templates/_gif.php" main="false" show="true">
                 <states/>
             </file>
-            <file name="templates/layout.php" main="false" show="false">
+            <file name="templates/layout.php" main="false" show="true">
                 <states/>
             </file>
             <file name="templates/main.php" main="false" show="true">

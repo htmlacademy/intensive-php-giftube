@@ -19,7 +19,7 @@
                     <state refresh="true">Посмотрим что у нас получилось! Выведем значение счетчика на страницу.</state>
                 </states>
             </file>
-            <file name="session.php" show="true">
+            <file name="session.php" show="true" main="false">
                 <states>
                     <state>Если в сценарии мы собираемся работать с сессиями, то очень важно не забывать вызвать в
                     начале функцию session_start(). Эта функция подготовливает сессии к работе.</state>
@@ -59,16 +59,16 @@
                     <state>Подключаем лейаут и выводим его на экран</state>
                 </states>
             </file>
-            <file name="func.php" show="true">
+            <file name="func.php" show="true" main="false">
                 <states/>
             </file>
-            <file name="data.php" show="true">
+            <file name="data.php" show="true" main="false">
                 <states/>
             </file>
-            <file name="templates/enter.php" show="true">
+            <file name="templates/enter.php" show="true" main="false">
                 <states/>
             </file>
-            <file name="templates/layout.php" show="false">
+            <file name="templates/layout.php" show="false" main="false">
                 <states/>
             </file>
         </files>

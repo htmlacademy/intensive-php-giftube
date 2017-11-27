@@ -47,7 +47,7 @@
                     </state>
                 </states>
             </file>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
         </files>
@@ -69,7 +69,7 @@
                     </state>
                 </states>
             </file>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
         </files>
@@ -77,22 +77,46 @@
     <example name="Двумерные массивы" index="3">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
             <file name="two_array.php" main="false" show="true">
-                <states/>
+                <states>
+                    <state>Наш первый двумерный массив состоит из двух обычных, ассоциативных массивов</state>
+                    <state>Вы можете создать двумерный массив, объявив вложенные ассоциативные массивы прямо в момент
+                     создания первого</state>
+                    <state>Двумерный массив - это простой массив, каждый элемент которого - массив ассоциативный.
+                    Поэтому, чтобы получить значение любого из вложенных массивов необходимо вначале указать индекс,
+                    под которым он сохранен, а затем интересующий ключ</state>
+                    <state>Стандартная функция array_rand вернет нам один случайный индекс из существующих в переданном
+                    ей массиве</state>
+                </states>
             </file>
         </files>
     </example>
     <example name="Циклы" index="4">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
             <file name="loops.php" main="false" show="true">
-                <states/>
+                <states>
+                    <state>Перед вами самый простой цикл. Он умеет выводить все цифры от 1 до 9 включительно.
+                    Цикл выполняется, пока значение в переменной $last_num будет меньше 10 - это задано в условии
+                    цикла. В теле цикла мы выводим текущее значение переменной, а затем увеличиваем её на единицу</state>
+                    <state>Тот же цикл, что и в прошлом примере, но здесь мы выводим все цифры в HTML-списке.
+                    Обратите внимание на альтернативную форму записи цикла. Она применяется при работе с HTML кодом</state>
+                    <state>Циклы часто используются для перебора массивов. В этом примере с помощью цикла на страницу
+                    выводятся все значения из массива $categories</state>
+                    <state>Опять тот же пример, но на этот раз весь массив категорий выводим в виде HTML-списка</state>
+                    <state>foreach - это другой вид циклов. Цикл foreach создан специально для удобного перебора всех
+                    ключей и значений любого массива. Здесь мы с его помощью обходим ассоциативный массив и показываем
+                    на странице каждый его ключ и значение.</state>
+                    <state>А вот и самый комплексный пример. Здесь у нас двумерный массив, цикл foreach и работа с HTML
+                    кодом. Благодаря всем этим возможностям мы можем сформировать HTML-страницу, где будет список гифок
+                    </state>
+                </states>
             </file>
         </files>
     </example>
@@ -100,9 +124,18 @@
         <description>to do</description>
         <files>
             <file name="func.php" main="false" show="true">
-                <states/>
+                <states>
+                    <state>Так выглядит объявление и последующее использование пользовательской функции. Функция
+                        calculate_amount очень простая - она складывает два числа и возвращает результат их сложения.
+                        Аргументы функции - это те переменные, которые мы передаем в функцию при её вызове. В данном
+                        примере таких аргументов два: $first и $second.
+                    </state>
+                    <state>Давайте напишем что нибудь более полезное. Функция cut_text() умеет обрезать строку текста
+                    до определенной длины и добавлять в конец знак многоточия. У функции два аргумента: искомая строка
+                    и число символов, до которой строку требуется обрезать.</state>
+                </states>
             </file>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="false" show="false">
                 <states/>
             </file>
         </files>
