@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<examples>
+    <example name="Список категорий" index="1">
+        <description>to do</description>
+        <files>
+            <file name="index.php" main="true" show="true">
+                <states>
+                    <state>Вначале сформируем весь SQL код запроса на получение всего списка категорий.
+                        Выполним этот запрос и получим ресурс результата.
+                    </state>
+                    <state>Проверяем успешность выполнения. Получаем все категории в виде двухмерного массива.</state>
+                    <state>Получаем текст последней ошибки MySQL и показываем это на странице</state>
+                </states>
+            </file>
+            <file name="init.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/error.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/index.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Список гифок" index="2">
+        <description>to do</description>
+        <files>
+            <file name="index.php" main="true" show="true">
+                <states>
+                    <state>Формируем SQL запрос: получить гифки вместе с именем автора, сортируем по кол-ву просмотров и
+                        ограничиваем девятью штуками.
+                    </state>
+                    <state>Выполняем запрос и получаем ресурс результата, который передаем в шаблон главной страницы
+                    </state>
+                    <state>Подключаем шаблон для показа ошибки и передаем туда текст последней MySQL ошибки</state>
+                </states>
+            </file>
+            <file name="init.php" main="false" show="false">
+                <states/>
+            </file>
+            <file name="templates/main.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/error.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Поиск гифок" index="3">
+        <description>to do</description>
+        <files>
+            <file name="search.php" main="true" show="true">
+                <states>
+                    <state>Получаем параметр запроса с поисковой строкой. Передаем его функции
+                        mysqli_real_escape_string, чтобы безопасно передать в SQL запрос
+                    </state>
+                    <state>Формируем SQL запрос на получение списка гифок с нестрогим поиском по названию или описанию
+                    </state>
+                    <state>Выполняем запрос и получаем ресурс результата, который передаем в шаблон главной страницы
+                    </state>
+                    <state>Подключаем шаблон для показа ошибки и передаем туда текст последней MySQL ошибки</state>
+                </states>
+            </file>
+            <file name="init.php" main="false" show="false">
+                <states/>
+            </file>
+            <file name="templates/search.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Страница показа гифки" index="4">
+        <description>to do</description>
+        <files>
+            <file name="gif.php" main="true" show="true">
+                <states>
+                    <state>Формируем SQL запрос на показ одной гифки по её идентификатору - первичному ключу.</state>
+                    <state>Выполняем запрос и проверяем кол-во результатов. Если результатов нет, то показываем ошибку
+                        404
+                    </state>
+                    <state>Получаем результат запроса в виде обычного ассоциативного массива</state>
+                    <state>Формируем запрос на показ гифок из этой же категории.
+                        Результат запроса передаем в шаблон вместе с ассоциативным массивом самой гифки
+                    </state>
+                </states>
+            </file>
+            <file name="templates/gif.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Добавление гифки" index="5">
+        <description>to do</description>
+        <files>
+            <file name="add.php" main="true" show="true">
+                <states>
+                    <state>Формируем SQL запрос на добавление новой гифки. Обратите внимание, что на месте значений
+                        располагаются знаки вопроса - плейсхолдеры. Создаем на основе этого запроса подготовленное
+                        выражение
+                    </state>
+                    <state>Подставляем на место плейсхолдеров значения из ассоциативного массива гифки. Каждое значение
+                        будет преобразовано к указанному типу. Отправляем подготовленное выржение в MySQL
+                    </state>
+                    <state>Если запрос выполнен успешно, то получаем ID новой гифки и перенаправляем пользователя на
+                        страницу с её просмотром
+                    </state>
+                    <state>Иначе подключаем шаблон для показа ошибки и передаем туда текст последней MySQL ошибки
+                    </state>
+                </states>
+            </file>
+            <file name="templates/add.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+</examples>
