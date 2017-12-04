@@ -71,7 +71,7 @@
     <example name="Буферизация вывода" index="3">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="true" show="true">
                 <states>
                     <state>Текст, который сразу же будет выведен на экран</state>
                     <state>Напишем цикл, который отработает 10 раз</state>

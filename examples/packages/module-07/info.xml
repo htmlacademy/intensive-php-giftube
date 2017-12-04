@@ -36,9 +36,6 @@
                     <state>Подключаем шаблон для показа ошибки и передаем туда текст последней MySQL ошибки</state>
                 </states>
             </file>
-            <file name="init.php" main="false" show="false">
-                <states/>
-            </file>
             <file name="templates/main.php" main="false" show="true">
                 <states/>
             </file>
@@ -46,6 +43,9 @@
                 <states/>
             </file>
             <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="init.php" main="false" show="false">
                 <states/>
             </file>
         </files>
@@ -65,13 +65,13 @@
                     <state>Подключаем шаблон для показа ошибки и передаем туда текст последней MySQL ошибки</state>
                 </states>
             </file>
-            <file name="init.php" main="false" show="false">
-                <states/>
-            </file>
             <file name="templates/search.php" main="false" show="true">
                 <states/>
             </file>
             <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="init.php" main="false" show="false">
                 <states/>
             </file>
         </files>
