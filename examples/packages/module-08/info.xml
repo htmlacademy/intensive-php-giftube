@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<examples>
+    <example name="Транзакции" index="1">
+        <description>to do</description>
+        <files>
+            <file name="addfav.php" main="true" show="true">
+                <states>
+                    <state>Открываем новую транзакцию. Все следующие запросы будут частью этой транзакции</state>
+                    <state>Выполняем все необходимые запросы и сохраняем их результат</state>
+                    <state>Фиксируем транзакцию, если все запросы выполнились успешно</state>
+                    <state>Если хотя бы один запрос завершился ошибкой, то откатываем транзакцию</state>
+                    <state>Перенаправляем пользователя обратно на страницу просмотра гифки</state>
+                </states>
+            </file>
+            <file name="gif.php" main="false" show="true">
+                <states>
+                    <state>Выполним запрос на получение гифок из той же категории (похожие гифки)</state>
+                    <state>Узнаем, добавлена ли эта гифка в избранное, выполнив запрос.</state>
+                </states>
+            </file>
+            <file name="templates/gif.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="init.php" main="false" show="false">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Кэширование" index="2">
+        <description>to do</description>
+        <files>
+            <file name="functions.php" main="true" show="true">
+                <states>
+                    <state>Функция для получения ключа. На основе SQL запроса, данных и тега возвращает ключ длиной в 64
+                        символа
+                    </state>
+                    <state>Фунция для оохранения данных в кэше</state>
+                    <state>Функция инвалидации кеша. Ищет файлы кэша на основе переданного тега и данных. Найденные
+                        файлы удаляет
+                    </state>
+                    <state>Функция проверки кэша. Проверяет, что срок жизни файл кэша еще не истек. Если истек -
+                        удаляет
+                    </state>
+                    <state>Главная кэш-функция. Получает данные из БД или кэша. Если в кеше данных нет, то делает SQL
+                        запрос, а результат записывает в кэш и возвращает
+                    </state>
+                </states>
+            </file>
+            <file name="addfav.php" main="false" show="true">
+                <states>
+                    <state>При добавлении новой гифки в избранное кэш надо очистить</state>
+                </states>
+            </file>
+            <file name="favorites.php" main="false" show="true">
+                <states>
+                    <state>Сформируем сложный SQL запрос на получение списка гифок в избранном у пользователя</state>
+                    <state>Проверим, что этот список уже есть в кеше. Функция cache_get_data по переданному запросу и
+                    данным для него попытается найти кэишированные данные на диске. Если таких данных не обнаружится, то
+                     она выполнит запрос и запишет результат в кэш.</state>
+                </states>
+            </file>
+            <file name="templates/favorites.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/_grid.php" main="false" show="false">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Постраничный вывод" index="3">
+        <description>to do</description>
+        <files>
+            <file name="index.php" main="true" show="true">
+                <states>
+                    <state>Получаем текущую страницу. Определяем число гифок на странице</state>
+                    <state>Узнаем общее число гифок. Считаем кол-во страниц и смещение</state>
+                    <state>Заполняем массив номерами всех страниц</state>
+                    <state>Формируем запрос на показ списка гифок, учитывая смещение и число гифок на странице</state>
+                    <state>Передаем в шаблон полученные гифки и всю информацию для пагинации</state>
+                </states>
+            </file>
+            <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/main.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/_pagination.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+    <example name="Полнотекстовый поиск" index="4">
+        <description>to do</description>
+        <files>
+            <file name="search.php" main="true" show="true">
+                <states>
+                    <state>Добавим полям "название" и "описание" полнотекстовый индекс, чтобы стало возможным выполнять
+                    по ним поиск</state>
+                    <state>Получим содержимое поискового запроса. Если поисковый запрос не задан, то присвоим пустую
+                        строку</state>
+                    <state>Будем выполнять поиск гифок, только если был задан поисковый запрос</state>
+                    <state>Напишем SQL запрос на поиск с использованием директивы MATCH. На месте искомой строки стоит
+                    плейсхолдер</state>
+                    <state>Выполним подготовленное выражение, получим его результат и преобразуем в двумерный массив
+                    </state>
+                </states>
+            </file>
+            <file name="templates/_grid.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="templates/search.php" main="false" show="true">
+                <states/>
+            </file>
+        </files>
+    </example>
+</examples>

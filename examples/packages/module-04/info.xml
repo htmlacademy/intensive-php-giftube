@@ -3,7 +3,7 @@
     <example name="HTTP-заголовки" index="1">
         <description>to do</description>
         <files>
-            <file name="headers.php" main="false" show="true">
+            <file name="headers.php" main="true" show="true">
                 <states>
                     <state>Вначале объявим список заголовков, которые нас интересуют. Дадим каждому заголовку
                         описательное имя
