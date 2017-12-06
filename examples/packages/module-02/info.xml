@@ -3,7 +3,7 @@
     <example name="Простые массивы" index="1">
         <description>to do</description>
         <files>
-            <file name="array.php" main="false" show="true">
+            <file name="array.php" main="true" show="true">
                 <states>
                     <state>Массив можно создать двумя способами: объявить его пустым или сразу заполнить значениями.
                         Рассмотрим первый способ
@@ -55,7 +55,7 @@
     <example name="Ассоциативные массивы" index="2">
         <description>to do</description>
         <files>
-            <file name="array_assoc.php" main="false" show="true">
+            <file name="array_assoc.php" main="true" show="true">
                 <states>
                     <state>Добавлять новое значение в ассоциативный массив надо вместе с ключом. Если в массиве не было
                         такого ключа, то это значение добавится, а если было - заменится
@@ -77,10 +77,7 @@
     <example name="Двумерные массивы" index="3">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="false">
-                <states/>
-            </file>
-            <file name="two_array.php" main="false" show="true">
+            <file name="two_array.php" main="true" show="true">
                 <states>
                     <state>Наш первый двумерный массив состоит из двух обычных, ассоциативных массивов</state>
                     <state>Вы можете создать двумерный массив, объявив вложенные ассоциативные массивы прямо в момент
@@ -92,15 +89,15 @@
                     ей массиве</state>
                 </states>
             </file>
+            <file name="index.php" main="false" show="false">
+                <states/>
+            </file>
         </files>
     </example>
     <example name="Циклы" index="4">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="false">
-                <states/>
-            </file>
-            <file name="loops.php" main="false" show="true">
+            <file name="loops.php" main="true" show="true">
                 <states>
                     <state>Перед вами самый простой цикл. Он умеет выводить все цифры от 1 до 9 включительно.
                     Цикл выполняется, пока значение в переменной $last_num будет меньше 10 - это задано в условии
@@ -118,12 +115,15 @@
                     </state>
                 </states>
             </file>
+            <file name="index.php" main="false" show="false">
+                <states/>
+            </file>
         </files>
     </example>
     <example name="Функции" index="5">
         <description>to do</description>
         <files>
-            <file name="func.php" main="false" show="true">
+            <file name="func.php" main="true" show="true">
                 <states>
                     <state>Так выглядит объявление и последующее использование пользовательской функции. Функция
                         calculate_amount очень простая - она складывает два числа и возвращает результат их сложения.

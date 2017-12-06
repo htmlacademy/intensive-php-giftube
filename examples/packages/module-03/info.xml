@@ -3,7 +3,7 @@
     <example name="Подключение файлов" index="1">
         <description>to do</description>
         <files>
-            <file name="config.php" main="false" show="true">
+            <file name="index.php" main="true" show="true">
                 <states>
                     <state>Вначале подключим все необходимые файлы, которые понадобятся на этой странице. funcs.php -
                         содержит функцию для урезания текста, в config.php находятся настройки сайта, а data.php
@@ -20,13 +20,13 @@
                     </state>
                 </states>
             </file>
+            <file name="config.php" main="false" show="true">
+                <states/>
+            </file>
             <file name="data.php" main="false" show="true">
                 <states/>
             </file>
             <file name="funcs.php" main="false" show="false">
-                <states/>
-            </file>
-            <file name="index.php" main="false" show="true">
                 <states/>
             </file>
             <file name="tpl/main.php" main="false" show="true">
@@ -41,6 +41,9 @@
         <description>to do</description>
         <files>
             <file name="data.php" main="false" show="true">
+                <states/>
+            </file>
+            <file name="index.php" main="true" show="true">
                 <states>
                     <state>Подключаем сценарий с функцией-шаблонизатором, а также необходимые данные для показа страницы
                         (гифки, категории)
@@ -53,9 +56,6 @@
                     </state>
                     <state>Последним шагом выводим содержимое лейаута на экран</state>
                 </states>
-            </file>
-            <file name="index.php" main="false" show="true">
-                <states/>
             </file>
             <file name="templates/_gif.php" main="false" show="true">
                 <states/>
@@ -89,7 +89,7 @@
     <example name="Фильтрация данных" index="4">
         <description>to do</description>
         <files>
-            <file name="index.php" main="false" show="true">
+            <file name="index.php" main="true" show="true">
                 <states>
                     <state>Напишем простую функцию-обертку, которая будет фильтровать содержимое и возвращать строку,
                         очищенную от опасных спецсимволов
