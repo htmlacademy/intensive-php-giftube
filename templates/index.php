@@ -75,7 +75,4 @@
     </footer>
 </div>
 </body>
-<script>
-    document.domain = "phpdemo.ru";
-</script>
 </html>

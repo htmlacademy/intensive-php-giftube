@@ -19,7 +19,4 @@
 <?php include("loops.php"); ?>
 
 </body>
-<script>
-    document.domain = "phpdemo.ru";
-</script>
 </html>

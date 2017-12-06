@@ -21,6 +21,7 @@ $cur_page = 1;
 </ul>
 /* END STATE 02 */
 /* BEGIN STATE 03 */
+<?php
 $categories = ["Животные", "Люди", "Наука", "Видеоигры", "Спорт", "Фейлы"];
 
 $index = 0;
@@ -47,6 +48,7 @@ $num_count = count($categories);
 </nav>
 /* END STATE 04 */
 /* BEGIN STATE 05 */
+<?php
 $gif = [
 	'gif' => '/uploads/preview_gif58d28ce80e3a9.gif',
 	'title' => 'Енотик',

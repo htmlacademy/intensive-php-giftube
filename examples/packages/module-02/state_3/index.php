@@ -19,7 +19,4 @@
 <?php include("two_array.php"); ?>
 
 </body>
-<script>
-    document.domain = "phpdemo.ru";
-</script>
 </html>

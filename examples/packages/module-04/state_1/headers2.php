@@ -11,3 +11,6 @@ print_r($response_headers);
 sleep(3);
 header("Location: /search.php");
 /* END STATE 03 */
+?>
+<!doctype html>
+<html><body></body></html>

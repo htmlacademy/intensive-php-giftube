@@ -17,9 +17,5 @@
 </head>
 <body>
 <?php include("array.php"); ?>
-
 </body>
-<script>
-    document.domain = "phpdemo.ru";
-</script>
 </html>
