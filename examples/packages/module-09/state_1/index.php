@@ -1,9 +1,9 @@
 <?php
-require_once 'init.php';
-require_once 'DbHelper.php';
+require_once('init.php');
+require_once('Database.php');
 
 /* BEGIN STATE 01 */
-$dbHelper = new DbHelper(...$db_cfg);
+$dbHelper = new Database(...$db_cfg);
 /* END STATE 01 */
 
 /* BEGIN STATE 02 */
