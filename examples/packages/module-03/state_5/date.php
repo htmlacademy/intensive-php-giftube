@@ -1,13 +1,13 @@
 <?php
 date_default_timezone_set("Europe/Moscow");
 
-/* END STATE 01 */
+/* BEGIN STATE 01 */
 // Покажем текущую дату
 $curdate = date('d.m.Y');
 print("Текущая дата: $curdate<br>");
 /* END STATE 01 */
 
-/* END STATE 02 */
+/* BEGIN STATE 02 */
 // Покажем текущее время
 $curtime = date('H:i:s');
 print("Текущее время: $curtime<br>");
