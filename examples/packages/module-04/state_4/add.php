@@ -7,15 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$gif = $_POST;
 
 	$required = ['title', 'description'];
-	$dict = ['title' => 'Название', 'description' => 'Описание'];
+	$dict = ['title' => 'Название', 'description' => 'Описание', 'file' => 'Гифка'];
 	$errors = [];
 /* END STATE 02 */
 /* BEGIN STATE 03 */
-	foreach ($_POST as $key => $value) {
-		if (in_array($key, $required)) {
-			if (!$value) {
-				$errors[$dict[$key]] = 'Это поле надо заполнить';
-			}
+	foreach ($required as $key) {
+		if (empty($_POST[$key])) {
+            $errors[$key] = 'Это поле надо заполнить';
 		}
 	}
 	/* END STATE 03 */
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		/* END STATE 05 */
 		/* BEGIN STATE 06 */
 		if ($file_type !== "image/gif") {
-			$errors['Файл'] = 'Загрузите картинку в формате GIF';
+			$errors['file'] = 'Загрузите картинку в формате GIF';
 		}
 		/* END STATE 06 */
 		/* BEGIN STATE 07 */
@@ -44,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* END STATE 04 */
 	/* BEGIN STATE 08 */
 	else {
-		$errors['Файл'] = 'Вы не загрузили файл';
+		$errors['file'] = 'Вы не загрузили файл';
 	}
 	/* END STATE 08 */
 
 	/* BEGIN STATE 09 */
 	if (count($errors)) {
-		$page_content = include_template('add.php', ['gif' => $gif, 'errors' => $errors]);
+		$page_content = include_template('add.php', ['gif' => $gif, 'errors' => $errors, 'dict' => $dict]);
 	}
 	/* END STATE 09 */
 	/* BEGIN STATE 10 */

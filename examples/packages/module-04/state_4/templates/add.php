@@ -30,7 +30,7 @@
 
       <div class="form__column">
         <div class="form__row">
-          <?php $classname = isset($errors['Название']) ? "form__input--error" : "";
+          <?php $classname = isset($errors['title']) ? "form__input--error" : "";
           $value = isset($gif['title']) ? $gif['title'] : ""; ?>
 
           <label class="form__label" for="name">Название:</label>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form__row">
-          <?php $classname = isset($errors['Описание']) ? "form__input--error" : "";
+          <?php $classname = isset($errors['description']) ? "form__input--error" : "";
           $value = isset($gif['description']) ? $gif['description'] : ""; ?>
 
           <label class="form__label " for="description">Описание:</label>
@@ -54,7 +54,7 @@
         <p>Пожалуйста, исправьте следующие ошибки:</p>
         <ul>
           <?php foreach($errors as $err => $val): ?>
-          <li><strong><?=$err;?>:</strong> <?=$val;?></li>
+          <li><strong><?=$dict[$err];?>:</strong> <?=$val;?></li>
           <?php endforeach; ?>
         </ul>
       </div>
