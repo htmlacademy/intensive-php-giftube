@@ -11,21 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$form = $_POST;
 
 	$required = ['email', 'password'];
-	$dict = ['email' => 'Email', 'password' => 'Пароль'];
 	$errors = [];
 	/* END STATE 02 */
 	/* BEGIN STATE 03 */
-	foreach ($_POST as $key => $value) {
-		if (in_array($key, $required)) {
-			if (!$value) {
-				$errors[$dict[$key]] = 'Это поле надо заполнить';
-			}
-		}
-	}
+	foreach ($required as $field) {
+	    if (empty($form[$field])) {
+	        $errors[$field] = 'Это поле надо заполнить';
+        }
+    }
 	/* END STATE 03 */
 
 	/* BEGIN STATE 04 */
-	if ($user = searchUserByEmail($form['email'], $users)) {
+	if (!count($errors) and $user = searchUserByEmail($form['email'], $users)) {
 		/* BEGIN STATE 05 */
 		if (password_verify($form['password'], $user['password'])) {
 			$_SESSION['user'] = $user;
@@ -33,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		/* END STATE 05 */
 		/* BEGIN STATE 06 */
 		else {
-			$errors[$dict['password']] = 'Неверный пароль';
+			$errors['password'] = 'Неверный пароль';
 		}
 		/* END STATE 06 */
 	}
 	/* END STATE 04 */
 	/* BEGIN STATE 07 */
 	else {
-		$errors[$dict['email']] = 'Такой пользователь не найден';
+		$errors['email'] = 'Такой пользователь не найден';
 	}
 	/* END STATE 07 */
 
@@ -51,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* END STATE 08 */
 	/* BEGIN STATE 09 */
 	else {
-		header("Location: /search.php");
+		header("Location: /index.php");
 		exit();
 	}
 	/* END STATE 09 */
@@ -59,7 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /* END STATE 01 */
 /* BEGIN STATE 10 */
 else {
-	$page_content = include_template('enter.php', []);
+    if (isset($_SESSION['user'])) {
+        $page_content = include_template('welcome.php', ['username' => $_SESSION['user']['name']]);
+    }
+    else {
+        $page_content = include_template('enter.php', []);
+    }
 }
 /* END STATE 10 */
 
@@ -67,7 +69,7 @@ else {
 $layout_content = include_template('layout.php', [
 	'content'    => $page_content,
 	'categories' => [],
-	'title'      => 'GifTube - Вход на сайт'
+	'title'      => 'GifTube'
 ]);
 
 print($layout_content);

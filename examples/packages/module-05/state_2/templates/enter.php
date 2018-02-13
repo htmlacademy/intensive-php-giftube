@@ -8,7 +8,7 @@
   <form class="form" action="" method="post">
     <div class="form__column">
       <div class="form__row">
-				<?php $classname = isset($errors['Email']) ? "form__input--error" : "";
+				<?php $classname = isset($errors['email']) ? "form__input--error" : "";
 				$value = isset($form['email']) ? $form['email'] : ""; ?>
 
         <label class="form__label" for="email">E-mail:</label>
@@ -18,13 +18,13 @@
 				<?php if ($classname): ?>
           <div class="error-notice">
             <span class="error-notice__icon"></span>
-            <span class="error-notice__tooltip"><?=$errors['Email'];?></span>
+            <span class="error-notice__tooltip"><?=$errors['email'];?></span>
           </div>
 				<?php endif; ?>
       </div>
 
       <div class="form__row">
-				<?php $classname = isset($errors['Пароль']) ? "form__input--error" : "";
+				<?php $classname = isset($errors['password']) ? "form__input--error" : "";
 				$value = isset($form['password']) ? $form['password'] : ""; ?>
 
         <label class="form__label" for="password">Пароль:</label>
@@ -34,7 +34,7 @@
 				<?php if ($classname): ?>
           <div class="error-notice">
             <span class="error-notice__icon"></span>
-            <span class="error-notice__tooltip"><?=$errors['Пароль'];?></span>
+            <span class="error-notice__tooltip"><?=$errors['password'];?></span>
           </div>
 				<?php endif; ?>
       </div>
