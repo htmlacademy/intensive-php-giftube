@@ -1,5 +1,5 @@
 <ul class="gif-list">
-    <?php while($gif = mysqli_fetch_assoc($gifs)): ?>
+    <?php foreach ($gifs as $gif): ?>
         <li class="gif gif-list__item">
             <div class="gif__picture">
                 <a href="gif.php?id=<?=$gif['id'];?>" class="gif__preview">
@@ -17,5 +17,5 @@
                 </div>
             </div>
         </li>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 </ul>

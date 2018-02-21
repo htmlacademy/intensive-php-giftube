@@ -30,7 +30,8 @@ else {
     /* END STATE 01 */
 
     /* BEGIN STATE 02 */
-    if ($gifs = mysqli_query($link, $sql)) {
+    if ($res = mysqli_query($link, $sql)) {
+        $gifs = mysqli_fetch_all($res, MYSQLI_ASSOC);
         // передаем в шаблон результат выполнения
         $content = include_template('main.php', ['gifs' => $gifs]);
     }

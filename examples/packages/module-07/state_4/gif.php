@@ -40,9 +40,10 @@ else {
                  . "WHERE category_id = " . $gif['category_id'] . " LIMIT 3";
 
             $result = mysqli_query($link, $sql);
+            $sim_gifs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
             // передаем в шаблон результат выполнения
-            $content = include_template('gif.php', ['gif' => $gif, 'result' => $result]);
+            $content = include_template('gif.php', ['gif' => $gif, 'sim_gifs' => $sim_gifs]);
             /* END STATE 04 */
         }
         /* END STATE 03 */

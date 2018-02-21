@@ -28,11 +28,10 @@ else {
 
         /* BEGIN STATE 01 */
         $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
-        $stmt = mysqli_prepare($link, $sql);
         /* END STATE 01 */
 
         /* BEGIN STATE 02 */
-        mysqli_stmt_bind_param($stmt, 'isss', $gif['category'], $gif['title'], $gif['description'], $gif['path']);
+        $stmt = db_get_prepare_stmt($link, $sql, [$gif['category'], $gif['title'], $gif['description'], $gif['path']]);
         $res = mysqli_stmt_execute($stmt);
         /* END STATE 02 */
 

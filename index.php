@@ -2,7 +2,7 @@
 require_once 'init.php';
 require_once 'DbHelper.php';
 
-$dbHelper = new Database(...$db_cfg);
+$dbHelper = new DbHelper(...$db_cfg);
 
 if ($dbHelper->getLastError()) {
 	show_error($content, $dbHelper->getLastError());

@@ -34,7 +34,7 @@
     <h3 class="content__additional-title">Похожие гифки:</h3>
 
     <ul class="gif-list gif-list--vertical">
-        <?php while ($rel_gif = mysqli_fetch_assoc($result)): ?>
+        <?php foreach ($sim_gifs as $rel_gif): ?>
             <li class="gif gif--small gif-list__item">
                 <div class="gif__picture">
                     <a href="/gif.php?id=<?=$rel_gif['id'];?>" class="gif__preview">
@@ -52,6 +52,6 @@
                     </div>
                 </div>
             </li>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </ul>
 </aside>
