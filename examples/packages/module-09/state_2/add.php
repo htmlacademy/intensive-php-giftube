@@ -24,7 +24,7 @@ else {
     $content = include_template('add.php', ['categories' => $categories]);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $gif = $_POST['gif'];
+        $gif = $_POST;
 
         $filename = uniqid() . '.gif';
         move_uploaded_file($_FILES['gif_img']['tmp_name'], 'uploads/' . $filename);
@@ -34,8 +34,8 @@ else {
         $gifConverter->createAndSaveThumbnail();
         /* END STATE 02 */
 
-        $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), 1, ?, ?, ?, ?)';
-        $params = [$_SESSION['user_id'], $gif['title'], $gif['description'], $filename];
+        $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), 1, 1, ?, ?, ?)';
+        $params = [$gif['title'], $gif['description'], $filename];
         $stmt = db_get_prepare_stmt($link, $sql, $params);
 
         $res = mysqli_stmt_execute($stmt);
