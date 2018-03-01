@@ -34,10 +34,10 @@ else {
         $gifConverter->createAndSaveThumbnail();
         /* END STATE 02 */
 
-        $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
-        $stmt = mysqli_prepare($link, $sql);
+        $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), 1, ?, ?, ?, ?)';
+        $params = [$_SESSION['user_id'], $gif['category'], $gif['title'], $gif['description'], $filename];
+        $stmt = db_get_prepare_stmt($link, $sql, $params);
 
-        mysqli_stmt_bind_param($stmt, 'isss', $gif['category'], $gif['title'], $gif['description'], $filename);
         $res = mysqli_stmt_execute($stmt);
         
         if ($res) {
