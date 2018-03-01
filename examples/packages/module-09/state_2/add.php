@@ -35,7 +35,7 @@ else {
         /* END STATE 02 */
 
         $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), 1, ?, ?, ?, ?)';
-        $params = [$_SESSION['user_id'], $gif['category'], $gif['title'], $gif['description'], $filename];
+        $params = [$_SESSION['user_id'], $gif['title'], $gif['description'], $filename];
         $stmt = db_get_prepare_stmt($link, $sql, $params);
 
         $res = mysqli_stmt_execute($stmt);
