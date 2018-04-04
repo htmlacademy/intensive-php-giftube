@@ -28,6 +28,7 @@ else {
     /* END STATE 02 */
     /* BEGIN STATE 03 */
     if ($gifs = mysqli_query($link, $sql)) {
+        $gifs = mysqli_fetch_all($gifs, MYSQLI_ASSOC);
         // передаем в шаблон результат выполнения
         $content = include_template('search.php', ['gifs' => $gifs]);
     }
