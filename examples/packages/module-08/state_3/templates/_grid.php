@@ -19,3 +19,7 @@
         </li>
     <?php endforeach; ?>
 </ul>
+
+<?php if (!count($gifs)): ?>
+<p class="error">По вашему запросу ничего не найдено</p>
+<?php endif; ?>
