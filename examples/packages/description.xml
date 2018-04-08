@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <modules>
+    <module number="01">
+        <name>Основы синтаксиса</name>
+        <description>
+            Начинаем знакомиться с синтаксисом языка PHP. Рассмотрим как работать с переменными,
+            научимся пользоваться условными конструкциями и разберем как встраивать PHP код в HTML верстку.
+        </description>
+    </module>
     <module number="02">
         <name>Массивы, циклы и функции</name>
         <description>
