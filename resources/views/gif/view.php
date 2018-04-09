@@ -91,7 +91,7 @@ $userModel = $user->getUserModel();
         <?php foreach ($gif->findAllBy(['category_id' => $gif->category_id]) as $item): ?>
         <li class="gif gif--small gif-list__item">
             <div class="gif__picture">
-                <a href="/gif/view?id=<?=$gif->id;?>" class="gif__preview">
+                <a href="/gif/view?id=<?=$item->id;?>" class="gif__preview">
                     <img src="uploads/preview_<?=$item->path;?>" alt="" width="200" height="200">
                 </a>
             </div>
