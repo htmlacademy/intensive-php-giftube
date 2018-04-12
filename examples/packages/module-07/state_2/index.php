@@ -1,47 +1,76 @@
 <?php
-require_once 'init.php';
+require_once('functions.php');
+require_once('data.php');
+require_once('func.php');
 
-if (!$link) {
-    $error = mysqli_connect_error();
-    $content = include_template('error.php', ['error' => $error]);
+session_start();
+
+/* BEGIN STATE 01 */
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	/* BEGIN STATE 02 */
+	$form = $_POST;
+
+	$required = ['email', 'password'];
+	$errors = [];
+	/* END STATE 02 */
+	/* BEGIN STATE 03 */
+	foreach ($required as $field) {
+	    if (empty($form[$field])) {
+	        $errors[$field] = 'Это поле надо заполнить';
+        }
+    }
+	/* END STATE 03 */
+
+	/* BEGIN STATE 04 */
+	if (!count($errors) and $user = searchUserByEmail($form['email'], $users)) {
+		/* BEGIN STATE 05 */
+		if (password_verify($form['password'], $user['password'])) {
+			$_SESSION['user'] = $user;
+		}
+		/* END STATE 05 */
+		/* BEGIN STATE 06 */
+		else {
+			$errors['password'] = 'Неверный пароль';
+		}
+		/* END STATE 06 */
+	}
+	/* END STATE 04 */
+	/* BEGIN STATE 07 */
+	else {
+		$errors['email'] = 'Такой пользователь не найден';
+	}
+	/* END STATE 07 */
+
+	/* BEGIN STATE 08 */
+	if (count($errors)) {
+		$page_content = include_template('enter.php', ['form' => $form, 'errors' => $errors]);
+	}
+	/* END STATE 08 */
+	/* BEGIN STATE 09 */
+	else {
+		header("Location: /index.php");
+		exit();
+	}
+	/* END STATE 09 */
 }
+/* END STATE 01 */
+/* BEGIN STATE 10 */
 else {
-    // Запрос на получение списка категорий
-    $sql = 'SELECT `id`, `name` FROM categories';
-
-    // Выполняем запрос и получаем результат
-    $result = mysqli_query($link, $sql);
-
-    // запрос выполнен успешно
-    if ($result) {
-        // получаем все категории в виде двумерного массива
-        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    if (isset($_SESSION['user'])) {
+        $page_content = include_template('welcome.php', ['username' => $_SESSION['user']['name']]);
     }
     else {
-        // получить текст последней ошибки
-        $error = mysqli_error($link);
-        $content = include_template('error.php', ['error' => $error]);
+        $page_content = include_template('enter.php', []);
     }
-    /* BEGIN STATE 01 */
-    // запрос на показ девяти самых популярных гифок
-    $sql = 'SELECT gifs.id, title, path, like_count, users.name FROM gifs '
-         . 'JOIN users ON gifs.user_id = users.id '
-         . 'ORDER BY show_count DESC LIMIT 9';
-    /* END STATE 01 */
-
-    /* BEGIN STATE 02 */
-    if ($res = mysqli_query($link, $sql)) {
-        $gifs = mysqli_fetch_all($res, MYSQLI_ASSOC);
-        // передаем в шаблон результат выполнения
-        $content = include_template('main.php', ['gifs' => $gifs]);
-    }
-    /* END STATE 02 */
-    /* BEGIN STATE 03 */
-    else {
-        $content = include_template('error.php', ['error' => mysqli_error($link)]);
-    }
-    /* END STATE 03 */
-
 }
+/* END STATE 10 */
 
-print include_template('index.php', ['content' => $content, 'categories' => $categories]);
+/* BEGIN STATE 11 */
+$layout_content = include_template('layout.php', [
+	'content'    => $page_content,
+	'categories' => [],
+	'title'      => 'GifTube'
+]);
+
+print($layout_content);
+/* END STATE 11 */
