@@ -1,5 +1,6 @@
 <?php
 /* BEGIN STATE 01 */
+date_default_timezone_set('Europe/Moscow');
 $day_of_week  = date('N');
 $current_hour = date('G');
 /* END STATE 01 */
