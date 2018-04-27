@@ -88,7 +88,7 @@
       </file>
     </files>
   </example>
-  <example name="Циклы" index="4">
+  <example name="Циклы" index="4" mode="replace">
     <description>to do</description>
     <files>
       <file name="loops.php" main="true" show="true">
