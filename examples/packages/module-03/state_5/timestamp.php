@@ -9,7 +9,7 @@ print("С начала 1970 года прошло $ts секунд!<br>");
 /* END STATE 01 */
 /* BEGIN STATE 02 */
 // Узнаем когда закончится интенсив
-$int_end = "7 March 2018";
+$int_end = "30 May 2018";
 $end_ts = strtotime($int_end);
 
 print("TS для окончания интенсива: $end_ts<br>");
@@ -17,7 +17,7 @@ print("TS для окончания интенсива: $end_ts<br>");
 /* BEGIN STATE 03 */
 // В одном дне 86400 секунд
 $secs_in_day = 86400;
-
+$end_ts = strtotime("30 May 2018");
 $ts_diff = $end_ts - $ts;
 $days_until_end = floor($ts_diff / $secs_in_day);
 
@@ -26,7 +26,7 @@ print("До окончания интенсива осталось дней: $da
 /* BEGIN STATE 04 */
 // TS для полночи
 $ts_midnight = strtotime('tomorrow');
-$secs_to_midnight = $ts_midnight - $ts;
+$secs_to_midnight = $ts_midnight - time();
 
 $hours = floor($secs_to_midnight / 3600);
 $minutes = floor(($secs_to_midnight % 3600) / 60);
