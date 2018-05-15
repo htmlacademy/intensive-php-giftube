@@ -29,8 +29,8 @@ else {
 	/* END STATE 02 */
 
 	/* BEGIN STATE 03 */
-    $sql = 'SELECT g.id, title, path, like_count, users.name FROM gifs g '
-         . 'JOIN users u ON gifs.user_id = users.id '
+    $sql = 'SELECT g.id, title, path, like_count, u.name FROM gifs g '
+         . 'JOIN users u ON g.user_id = u.id '
          . 'ORDER BY g.' . $sort_field  . ' DESC LIMIT 9';
     /* END STATE 03 */
 
