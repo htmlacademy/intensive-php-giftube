@@ -17,7 +17,7 @@ print("TS для окончания интенсива: $end_ts<br>");
 /* BEGIN STATE 03 */
 // В одном дне 86400 секунд
 $secs_in_day = 86400;
-$end_ts = strtotime("30 May 2018");
+$end_ts = strtotime("17 October 2018");
 $ts_diff = $end_ts - $ts;
 $days_until_end = floor($ts_diff / $secs_in_day);
 

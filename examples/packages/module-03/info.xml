@@ -46,7 +46,7 @@
         <intro order="9">Это шаблон заглушки. Мы подключим его, если в конфиге сайта опция "enable" будет равна false.</intro>
         <states/>
       </file>
-      <file name="funcs.php" main="false" show="false">
+      <file name="funcs.php" main="false" show="true">
         <states/>
       </file>
     </files>
@@ -92,27 +92,7 @@
       </file>
     </files>
   </example>
-  <example name="Буферизация вывода" index="3">
-    <description>to do</description>
-    <files>
-      <file name="index.php" main="true" show="true">
-        <intro order="1">Буферизация - это способ сохранить всю выводимую на экран информацию, вместо её фактического показа.
-        </intro>
-        <states>
-          <state order="2">Текст, который сразу же будет выведен на экран</state>
-          <state order="3">Напишем цикл, который отработает 10 раз</state>
-          <state order="4">Внутри цикла будем показывать очередное значение переменной $counter с новой строки</state>
-          <state order="5">Сбросим буфер вывода PHP. Эта команда очистит буфер и сразу же покажет его содержимое, не
-            дожидаясь окончания работы сценария
-          </state>
-          <state order="6" reload="true">Сделаем задержку в одну секунду, чтобы каждая новая цифра появлялась на экране через
-            секунду
-          </state>
-        </states>
-      </file>
-    </files>
-  </example>
-  <example name="Фильтрация данных" index="4">
+  <example name="Фильтрация данных" index="3">
     <description>to do</description>
     <files>
       <file name="index.php" main="true" show="true">
@@ -138,7 +118,7 @@
       </file>
     </files>
   </example>
-  <example name="Дата и время" index="5" mode="replace">
+  <example name="Дата и время" index="4" mode="replace">
     <description>to do</description>
     <files>
       <file name="date.php" main="true" show="true">

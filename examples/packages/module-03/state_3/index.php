@@ -1,28 +1,26 @@
 <?php
-// отключаем компрессию вывода
-ini_set('zlib.output_compression',0);
-
+require_once('functions.php');
 /* BEGIN STATE 01 */
-print("<h1>Подождите 10 секунд</h1>");
+function esc($str) {
+	$text = htmlspecialchars($str);
+	//$text = strip_tags($str);
+
+	return $text;
+}
 /* END STATE 01 */
 
 /* BEGIN STATE 02 */
-$counter = 1;
+$comments = [];
 
-while ($counter <= 10) {
-	/* BEGIN STATE 03 */
-	print($counter);
-	print("<br>");
-	// хак, чтобы преодолеть минимальный размер буфера
-	print(str_repeat(' ', 1024*64));
-	/* END STATE 03 */
-	/* BEGIN STATE 04 */
-	flush();
-	/* END STATE 04 */
-
-	/* BEGIN STATE 05 */
-	$counter++;
-	sleep(1);
-	/* END STATE 05 */
+if (isset($_POST['message'])) {
+	$comments = [$_POST['message']];
 }
 /* END STATE 02 */
+/* BEGIN STATE 03 */
+$page_content = include_template('view.php', ['comments' => $comments]);
+$layout_content = include_template('layout.php', [
+	'content' => $page_content,
+	'categories' => [], 'title' => 'GifTube - Просмотр гифки'
+]);
+print($layout_content);
+/* END STATE 03 */
