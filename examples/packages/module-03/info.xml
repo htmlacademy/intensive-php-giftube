@@ -46,7 +46,7 @@
         <intro order="9">Это шаблон заглушки. Мы подключим его, если в конфиге сайта опция "enable" будет равна false.</intro>
         <states/>
       </file>
-      <file name="funcs.php" main="false" show="true">
+      <file name="funcs.php" main="false" show="false">
         <states/>
       </file>
     </files>
