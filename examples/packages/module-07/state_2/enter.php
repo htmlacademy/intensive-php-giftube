@@ -1,7 +1,6 @@
 <?php
+require_once('init.php');
 require_once('functions.php');
-require_once('data.php');
-require_once('func.php');
 
 session_start();
 
@@ -22,7 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* END STATE 03 */
 
 	/* BEGIN STATE 04 */
-	if (!count($errors) and $user = searchUserByEmail($form['email'], $users)) {
+	$email = mysqli_real_escape_string($link, $form['email']);
+	$sql = "SELECT * FROM users WHERE email = '$email'";
+	$res = mysqli_query($link, $sql);
+
+	$user = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
+
+	if (!count($errors) and $user) {
 		/* BEGIN STATE 05 */
 		if (password_verify($form['password'], $user['password'])) {
 			$_SESSION['user'] = $user;
@@ -48,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* END STATE 08 */
 	/* BEGIN STATE 09 */
 	else {
-		header("Location: /index.php");
+		header("Location: /enter.php");
 		exit();
 	}
 	/* END STATE 09 */

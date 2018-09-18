@@ -18,9 +18,10 @@
         </states>
       </file>
       <file name="gif.php" main="false" show="true">
+        <intro order="8">Сценарий страницы просмотра гифки</intro>
         <states>
-          <state order="8">Выполним запрос на получение гифок из той же категории (похожие гифки)</state>
-          <state order="9" reload="true">Узнаем, добавлена ли эта гифка в избранное, выполнив запрос.</state>
+          <state order="9">Выполним запрос на получение гифок из той же категории (похожие гифки)</state>
+          <state order="10" reload="true">Узнаем, добавлена ли эта гифка в избранное, выполнив запрос.</state>
         </states>
       </file>
       <file name="templates/gif.php" main="false" show="true">
@@ -44,7 +45,7 @@
           <state order="3">Узнаем общее число гифок. Считаем кол-во страниц и смещение</state>
           <state order="4">Заполняем массив номерами всех страниц</state>
           <state order="5">Формируем запрос на показ списка гифок, учитывая смещение и число гифок на странице</state>
-          <state order="8">Передаем в шаблон полученные гифки и всю информацию для пагинации</state>
+          <state order="8" reload="true">Передаем в шаблон полученные гифки и всю информацию для пагинации</state>
         </states>
       </file>
       <file name="templates/main.php" main="false" show="true">
@@ -80,7 +81,7 @@
           <state order="5">Напишем SQL запрос на поиск с использованием директивы MATCH. На месте искомой строки стоит
             плейсхолдер
           </state>
-          <state order="7">Выполним подготовленное выражение, получим его результат и преобразуем в двумерный массив</state>
+          <state order="7" reload="true">Выполним подготовленное выражение, получим его результат и преобразуем в двумерный массив</state>
         </states>
       </file>
       <file name="templates/search.php" main="false" show="true">
