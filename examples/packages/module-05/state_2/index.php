@@ -44,4 +44,4 @@ else {
 
 }
 
-print include_template('index.php', ['content' => $content, 'categories' => $categories]);
+print(include_template('index.php', ['content' => $content, 'categories' => $categories]));

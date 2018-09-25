@@ -25,5 +25,5 @@ else {
 /* END STATE 01 */
 
 /* BEGIN STATE 04 */
-print include_template('index.php', ['content' => $content, 'categories' => $categories]);
+print(include_template('index.php', ['content' => $content, 'categories' => $categories]));
 /* END STATE 04 */

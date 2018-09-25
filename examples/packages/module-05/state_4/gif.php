@@ -54,4 +54,4 @@ else {
     /* END STATE 02 */
 }
 
-print include_template('index.php', ['content' => $content, 'categories' => $categories]);
+print(include_template('index.php', ['content' => $content, 'categories' => $categories]));
