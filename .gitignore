@@ -3,5 +3,5 @@ uploads/*
 vendor/
 cache/*.json
 config/db.php
-composer.json
+/composer.json
 composer.lock
