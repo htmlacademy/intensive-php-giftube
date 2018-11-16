@@ -55,9 +55,8 @@ $gif = [
 ];
 
 foreach ($gif as $key => $value) {
-	print("Ключ: " . $key);
-	print("Значение: " . $value);
-
+	print("Ключ: " . $key . "<br>");
+	print("Значение: " . $value . "<br><br>");
 }
 ?>
 /* END STATE 05 */

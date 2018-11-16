@@ -45,11 +45,3 @@ print($gif_list[0]['title']);
 /* END STATE 03 */
 /* BEGIN STATE 04 */
 $gif_list = [$first_gif, $second_gif];
-
-// Получаем случайный индекс
-$rand = array_rand($gif_list, 1);
-
-print("<pre>");
-print_r($gif_list[$rand]);
-print("</pre>");
-/* END STATE 04 */

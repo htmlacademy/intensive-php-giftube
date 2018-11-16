@@ -76,3 +76,20 @@ $categories = array_merge($categories, $new_cats);
 sort($categories);
 var_dump($categories);
 /* END STATE 14 */
+/* BEGIN STATE 15 */
+
+
+// Разделили значения в строке знаком "точка с запятой"
+$salad_str = "Руккола;Маслины;Листья салата;Помидоры";
+$salad_arr = explode(";", $salad_str);
+
+var_dump($salad_arr);
+/* END STATE 15 */
+/* BEGIN STATE 16 */
+
+
+$opts = [21, "Венцеслав", true, 176];
+list($age, $name, $is_male, $height) = $opts;
+
+print("Его зовут $name, ему $age лет, его рост $height см.");
+/* END STATE 16 */
