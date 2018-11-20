@@ -58,7 +58,7 @@ function include_template($name, $data) {
 
     ob_start();
     extract($data);
-    require_once $name;
+    require $name;
 
     $result = ob_get_clean();
 

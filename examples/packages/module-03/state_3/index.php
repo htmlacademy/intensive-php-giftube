@@ -10,11 +10,7 @@ function esc($str) {
 /* END STATE 01 */
 
 /* BEGIN STATE 02 */
-$comments = [];
-
-if (isset($_POST['message'])) {
-	$comments = [$_POST['message']];
-}
+$comments = require('post.php');
 /* END STATE 02 */
 /* BEGIN STATE 03 */
 $page_content = include_template('view.php', ['comments' => $comments]);

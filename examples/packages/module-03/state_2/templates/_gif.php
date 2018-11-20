@@ -10,7 +10,9 @@
 		</h3>
 
 		<div class="gif__description-data">
-			<span class="gif__username">@<?=$gif['author'];?></span>
+			<span class="gif__username">@<?=$gif['author'];?>
+                от <small><?=show_date($gif['dt']); ?></small>
+            </span>
 			<span class="gif__likes">0</span>
 		</div>
 	</div>

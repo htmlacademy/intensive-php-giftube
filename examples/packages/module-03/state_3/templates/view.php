@@ -21,16 +21,21 @@
 
 	<div class="comment-list">
 		<h3 class="comment-list__title">Комментарии:</h3>
-
-		<?php foreach ($comments as $comment) : ?>
-			<article class="comment">
+        /* BEGIN STATE 01 */
+        <?php foreach ($comments as $comment) : ?>
+            /* BEGIN STATE 02 */
+            <article class="comment">
 				<div class="comment__data">
 					<div class="comment__author">аноним</div>
-					<p class="comment__text"><?=esc($comment);?></p>
-				</div>
+                    /* BEGIN STATE 03 */
+                    <p class="comment__text"><?=esc($comment);?></p>
+                    /* BEGIN STATE 03 */
+                </div>
 			</article>
-		<?php endforeach; ?>
-	</div>
+            /* BEGIN STATE 02 */
+        <?php endforeach; ?>
+        /* BEGIN STATE 01 */
+    </div>
 
 		<form class="comment-form" action="" method="post">
 			<label class="comment-form__label" for="comment">Добавить комментарий:</label>
