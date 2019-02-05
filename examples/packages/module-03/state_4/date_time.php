@@ -3,7 +3,7 @@ date_default_timezone_set("Europe/Moscow");
 setlocale(LC_ALL, 'ru_RU');
 
 /* BEGIN STATE 01 */
-$int_end_str = "19.12.2018";
+$int_end_str = "06.03.2019";
 /* END STATE 01 */
 /* BEGIN STATE 02 */
 $dt_end = date_create($int_end_str);
