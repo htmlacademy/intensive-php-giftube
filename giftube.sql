@@ -15,11 +15,7 @@ CREATE TABLE `comments` (
   `user_id` int(11) unsigned NOT NULL,
   `gif_id` int(11) unsigned NOT NULL,
   `content` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `gif_id` (`gif_id`),
-  CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`gif_id`) REFERENCES `gifs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `gifs`;
@@ -34,11 +30,7 @@ CREATE TABLE `gifs` (
   `title` char(255) NOT NULL,
   `description` text,
   `path` char(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `gifs_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gifs_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `gifs_fav`;
@@ -46,11 +38,7 @@ CREATE TABLE `gifs_fav` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `gif_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `gif_id` (`gif_id`),
-  CONSTRAINT `gifs_fav_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gifs_fav_ibfk_2` FOREIGN KEY (`gif_id`) REFERENCES `gifs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `gifs_like` (
@@ -59,9 +47,7 @@ CREATE TABLE `gifs_like` (
   `gif_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `gif_id` (`gif_id`),
-  CONSTRAINT `gifs_like_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `gifs_like_ibfk_2` FOREIGN KEY (`gif_id`) REFERENCES `gifs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `gif_id` (`gif_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `users`;

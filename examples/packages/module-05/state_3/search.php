@@ -6,7 +6,7 @@ if (!$link) {
     show_error($content, $error);
 }
 else {
-    $sql = 'SELECT `id`, `name` FROM categories';
+    $sql = 'SELECT id, name FROM categories';
     $result = mysqli_query($link, $sql);
 
     if ($result) {
@@ -18,7 +18,6 @@ else {
 
     /* BEGIN STATE 01 */
     $search = trim($_GET['q']) ?? '';
-    $search = mysqli_real_escape_string($link, $search);
     /* END STATE 01 */
 
     /* BEGIN STATE 02 */
@@ -27,14 +26,20 @@ else {
 	}
 	else {
 		/* BEGIN STATE 03 */
+        $search = "%" . $search . "%";
+
 		// запрос на поиск гифок по имени или описанию
-		$sql = "SELECT gifs.id, title, path, like_count, users.name FROM gifs "
-		  . "JOIN users ON gifs.user_id = users.id "
-		  . "WHERE `title` LIKE '%$search%' OR `description` LIKE '%$search%'";
+		$sql = "SELECT g.id, title, path, like_count, u.name FROM gifs g "
+		  . "JOIN users u ON g.user_id = u.id "
+		  . "WHERE `title` LIKE ? OR `description` LIKE ?";
 		/* END STATE 03 */
 
 		/* BEGIN STATE 04 */
-		if ($gifs = mysqli_query($link, $sql)) {
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, 'ss', $search, $search);
+        mysqli_stmt_execute($stmt);
+
+		if ($gifs = mysqli_stmt_get_result($stmt)) {
 			$gifs = mysqli_fetch_all($gifs, MYSQLI_ASSOC);
 			// передаем в шаблон результат выполнения
 			$content = include_template('search.php', ['gifs' => $gifs]);

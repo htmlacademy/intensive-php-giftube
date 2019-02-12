@@ -16,12 +16,14 @@ else {
         show_error($content, mysqli_error($link));
     }
 
-    $id = intval($_GET['id']);
+    $id = mysqli_real_escape_string($link, $_GET['id']);
     /* BEGIN STATE 01 */
     // запрос на показ гифки по ID
     $sql = "SELECT gifs.id, title, path, description, show_count, like_count, users.name, category_id FROM gifs "
          . "JOIN users ON gifs.user_id = users.id "
-         . "WHERE gifs.id = " . $id;
+         . "WHERE gifs.id = '%s'";
+
+    $sql = sprintf($sql, $id);
     /* END STATE 01 */
     /* BEGIN STATE 02 */
     if ($result = mysqli_query($link, $sql)) {
