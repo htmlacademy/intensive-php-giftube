@@ -38,19 +38,7 @@
 
                 <input class="form__input"
                        type="text" name="signup[name]" id="nickname"
-                       placeholder="Ваш никнейм на сайте" value="<?=$values['email'] ?? ''; ?>">
-            </div>
-
-            <div class="form__row">
-                <label class="form__label" for="avatar">Фото:</label>
-
-                <div class="form__input-file">
-                    <input class="visually-hidden" type="file" name="signup[avatar]" id="preview" value="Выбрать файл:">
-
-                    <label for="preview">
-                        <span>Выбрать файл</span>
-                    </label>
-                </div>
+                       placeholder="Ваш никнейм на сайте" value="<?=$values['name'] ?? ''; ?>">
             </div>
         </div>
 
