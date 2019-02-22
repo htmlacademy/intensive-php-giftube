@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         else {
             $password = password_hash($form['password'], PASSWORD_DEFAULT);
 
-            $sql = 'INSERT INTO users (dt_add, email, name, password, token) VALUES (NOW(), ?, ?, ?, "")';
+            $sql = 'INSERT INTO users (dt_add, email, name, password) VALUES (NOW(), ?, ?, ?)';
             $stmt = db_get_prepare_stmt($link, $sql, [$form['email'], $form['name'], $password]);
             $res = mysqli_stmt_execute($stmt);
         }
