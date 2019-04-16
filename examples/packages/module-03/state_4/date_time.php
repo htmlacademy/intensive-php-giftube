@@ -3,7 +3,7 @@ date_default_timezone_set("Europe/Moscow");
 setlocale(LC_ALL, 'ru_RU');
 
 /* BEGIN STATE 01 */
-$int_end_str = "06.03.2019";
+$int_end_str = "10.06.2019";
 /* END STATE 01 */
 /* BEGIN STATE 02 */
 $dt_end = date_create($int_end_str);
@@ -15,7 +15,7 @@ $dt_now = date_create("now");
 $dt_diff = date_diff($dt_end, $dt_now);
 /* END STATE 04 */
 /* BEGIN STATE 05 */
-$days_count = date_interval_format($dt_diff, "%d");
+$days_count = date_interval_format($dt_diff, "%a");
 /* END STATE 05 */
 /* BEGIN STATE 06 */
 print("До окончания интенсива осталось $days_count дней");
