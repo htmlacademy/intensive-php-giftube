@@ -1,0 +1,16 @@
+/* BEGIN STATE 01 */
+SELECT * FROM users;
+/* END STATE 01 */
+/* BEGIN STATE 02 */
+SELECT email, name FROM users;
+/* END STATE 02 */
+/* BEGIN STATE 03 */
+SELECT * FROM users ORDER BY dt_add DESC;
+/* END STATE 03 */
+/* BEGIN STATE 04 */
+SELECT * FROM categories LIMIT 3
+/* BEGIN STATE 05 */
+OFFSET 3
+/* END STATE 05 */
+;
+/* END STATE 04 */

@@ -21,6 +21,12 @@
             кода на внешний вид и поведение.
         </description>
     </module>
+    <module number="04">
+        <name>Язык запросов к базе данных: SQL</name>
+        <description>
+            Учимся писать простые запросы для получения и добавления информации в MySQL
+        </description>
+    </module>
     <module number="05">
         <name>Практика работы с MySQL</name>
         <description>
