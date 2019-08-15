@@ -10,4 +10,6 @@ SELECT * FROM users WHERE email LIKE '%@gmail.com' AND dt_add < '2019-01-01';
 /* BEGIN STATE 04 */
 SELECT * FROM categories WHERE id BETWEEN 1 AND 5;
 /* END STATE 04 */
-
+/* BEGIN STATE 05 */
+SELECT * FROM users WHERE avatar_path IS NULL;
+/* END STATE 05 */
