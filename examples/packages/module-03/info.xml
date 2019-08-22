@@ -89,7 +89,10 @@
         <intro order="3">Здесь данные для шаблона главной страницы.</intro>
         <states/>
       </file>
-      <file name="functions.php" main="false" show="false">
+      <file name="functions.php" main="false" show="true">
+        <intro order="11">Здесь находится сама функция-шаблонизатор. Её задача подключить шаблон, передать туда
+          значения и захватить весь вывод. Функция возвращает результат - html-код - в виде строки. Такая же
+          функция находится у вас в личном проекте.</intro>
         <states/>
       </file>
     </files>
