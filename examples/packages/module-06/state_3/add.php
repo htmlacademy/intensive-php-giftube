@@ -34,23 +34,23 @@ else {
         $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
         /* END STATE 03 */
 
-        /* BEGIN STATE 02 */
-        $stmt = db_get_prepare_stmt($link, $sql, [$gif['category'], $gif['title'], $gif['description'], $gif['path']]);
+        /* BEGIN STATE 04 */
+        $stmt = db_get_prepare_stmt($link, $sql, $gif);
         $res = mysqli_stmt_execute($stmt);
-        /* END STATE 02 */
+        /* END STATE 04 */
 
-        /* BEGIN STATE 03 */
+        /* BEGIN STATE 05 */
         if ($res) {
             $gif_id = mysqli_insert_id($link);
 
             header("Location: gif.php?id=" . $gif_id);
         }
-        /* END STATE 03 */
-        /* BEGIN STATE 04 */
+        /* END STATE 05 */
+        /* BEGIN STATE 06 */
         else {
             $content = include_template('error.php', ['error' => mysqli_error($link)]);
         }
-        /* END STATE 04 */
+        /* END STATE 06 */
     }
 }
 
