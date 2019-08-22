@@ -32,7 +32,7 @@
                 <div class="form__row">
                     <label class="form__label" for="category">Категория:</label>
 
-                    <select class="form__input form__input--select" name="gif[category]" id="category">
+                    <select class="form__input form__input--select" name="category_id" id="category">
                         <option value="">Выберите категорию</option>
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?=$cat['id'] ?>"><?=$cat['name']; ?></option>
@@ -42,7 +42,7 @@
 
                 <div class="form__row">
                     <label class="form__label" for="name">Название:</label>
-                    <input class="form__input" type="text" name="gif[title]" id="name" value=""
+                    <input class="form__input" type="text" name="title" id="name" value=""
                            placeholder="Введите название">
                 </div>
 
@@ -50,7 +50,7 @@
                     <label class="form__label" for="description">Описание:</label>
                     <textarea
                             class="form__input"
-                            name="gif[description]" id="description" rows="5" cols="80"
+                            name="description" id="description" rows="5" cols="80"
                             placeholder="Краткое описание"></textarea>
                 </div>
             </div>

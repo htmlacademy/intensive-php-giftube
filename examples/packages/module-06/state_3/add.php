@@ -20,15 +20,19 @@ else {
     $content = include_template('add.php', ['categories' => $categories]);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $gif = $_POST['gif'];
+        /* BEGIN STATE 01 */
+        $gif = $_POST;
+        /* END STATE 01 */
 
+        /* BEGIN STATE 02 */
         $filename = uniqid() . '.gif';
         $gif['path'] = $filename;
         move_uploaded_file($_FILES['gif_img']['tmp_name'], 'uploads/' . $filename);
+        /* END STATE 02 */
 
-        /* BEGIN STATE 01 */
+        /* BEGIN STATE 03 */
         $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
-        /* END STATE 01 */
+        /* END STATE 03 */
 
         /* BEGIN STATE 02 */
         $stmt = db_get_prepare_stmt($link, $sql, [$gif['category'], $gif['title'], $gif['description'], $gif['path']]);
