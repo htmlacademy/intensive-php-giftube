@@ -5,7 +5,7 @@ require_once('functions.php');
 $tpl_data = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $form = $_POST['signup'];
+    $form = $_POST;
     $errors = [];
 
     $req_fields = ['email', 'password', 'name'];

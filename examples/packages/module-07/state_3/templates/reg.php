@@ -21,7 +21,7 @@
                 <label class="form__label" for="email">E-mail:</label>
 
                 <input class="form__input"
-                       type="text" name="signup[email]" id="email"  placeholder="Ваш e-mail"
+                       type="text" name="email" id="email"  placeholder="Ваш e-mail"
                        value="<?=$values['email'] ?? ''; ?>">
             </div>
 
@@ -29,7 +29,7 @@
                 <label class="form__label" for="password">Пароль:</label>
 
                 <input class="form__input"
-                       type="password" name="signup[password]" id="password"
+                       type="password" name="password" id="password"
                        placeholder="Задайте пароль">
             </div>
 
@@ -37,7 +37,7 @@
                 <label class="form__label" for="nickname">Имя:</label>
 
                 <input class="form__input"
-                       type="text" name="signup[name]" id="nickname"
+                       type="text" name="name" id="nickname"
                        placeholder="Ваш никнейм на сайте" value="<?=$values['name'] ?? ''; ?>">
             </div>
         </div>

@@ -2,8 +2,6 @@
 require_once('init.php');
 require_once('functions.php');
 
-session_start();
-
 /* BEGIN STATE 01 */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* BEGIN STATE 02 */
@@ -53,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	/* END STATE 08 */
 	/* BEGIN STATE 09 */
 	else {
-		header("Location: /enter.php");
+		header("Location: /index.php");
 		exit();
 	}
 	/* END STATE 09 */
@@ -61,11 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /* END STATE 01 */
 /* BEGIN STATE 10 */
 else {
+    $page_content = include_template('enter.php', []);
+
     if (isset($_SESSION['user'])) {
-        $page_content = include_template('welcome.php', ['username' => $_SESSION['user']['name']]);
-    }
-    else {
-        $page_content = include_template('enter.php', []);
+        header("Location: /index.php");
+        exit();
     }
 }
 /* END STATE 10 */
