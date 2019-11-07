@@ -23,7 +23,8 @@ else {
 	/* END STATE 01 */
 
 	/* BEGIN STATE 02 */
-    if (isset($_GET['tab']) && $_GET['tab'] == 'new') {
+    $tab = filter_input(INPUT_GET, 'tab');
+    if ($tab == 'new') {
     	$sort_field = 'dt_add';
 	}
 	/* END STATE 02 */

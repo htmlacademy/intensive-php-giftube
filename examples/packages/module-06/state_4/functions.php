@@ -66,20 +66,10 @@ function include_template($name, $data) {
 }
 
 function getPostVal($name) {
-    return $_POST[$name] ?? "";
+    return filter_input(INPUT_POST, $name);
 }
 
-function validateFilled($name) {
-    if (empty($_POST[$name])) {
-        return "Это поле должно быть заполнено";
-    }
-
-    return null;
-}
-
-function validateCategory($name, $allowed_list) {
-    $id = $_POST[$name];
-
+function validateCategory($id, $allowed_list) {
     if (!in_array($id, $allowed_list)) {
         return "Указана несуществующая категория";
     }
@@ -87,11 +77,12 @@ function validateCategory($name, $allowed_list) {
     return null;
 }
 
-function validateLength($name, $min, $max) {
-    $len = strlen($_POST[$name]);
-
-    if ($len < $min or $len > $max) {
-        return "Значение должно быть от $min до $max символов";
+function validateLength($value, $min, $max) {
+    if ($value) {
+        $len = strlen($value);
+        if ($len < $min or $len > $max) {
+            return "Значение должно быть от $min до $max символов";
+        }
     }
 
     return null;

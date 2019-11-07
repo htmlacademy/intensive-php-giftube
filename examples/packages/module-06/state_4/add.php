@@ -14,43 +14,41 @@ if ($result) {
 /* BEGIN STATE 01 */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /* BEGIN STATE 02 */
-	$gif = $_POST;
-
-	$required = ['title', 'description', 'category_id'];
+	$required = ['title', 'category_id'];
 	$errors = [];
 /* END STATE 02 */
 
 /* BEGIN STATE 03 */
     $rules = [
-        'category_id' => function() use ($cats_ids) {
-            return validateCategory('category_id', $cats_ids);
+        'category_id' => function($value) use ($cats_ids) {
+            return validateCategory($value, $cats_ids);
         },
-        'title' => function() {
-            return validateLength('title', 10, 200);
+        'title' => function($value) {
+            return validateLength($value, 10, 200);
         },
-        'description' => function() {
-            return validateLength('description', 10, 3000);
+        'description' => function($value) {
+            return validateLength($value, 10, 3000);
         }
     ];
 /* END STATE 03 */
-
 /* BEGIN STATE 04 */
-    foreach ($_POST as $key => $value) {
+    $vals = filter_input_array(INPUT_POST, ['title' => FILTER_DEFAULT, 'description' => FILTER_DEFAULT,
+        'category_id' => FILTER_DEFAULT], true);
+/* END STATE 04 */
+
+/* BEGIN STATE 05 */
+    foreach ($vals as $key => $value) {
         if (isset($rules[$key])) {
             $rule = $rules[$key];
             $errors[$key] = $rule();
         }
+
+        if (in_array($key, $required) && !$value) {
+            $errors[$key] = 'Это поле надо заполнить';
+        }
     }
 
     $errors = array_filter($errors);
-/* END STATE 04 */
-
-/* BEGIN STATE 05 */
-	foreach ($required as $key) {
-		if (empty($_POST[$key])) {
-            $errors[$key] = 'Это поле надо заполнить';
-		}
-	}
 /* END STATE 05 */
 
 /* BEGIN STATE 06 */
