@@ -35,7 +35,8 @@
                   <option>Выбрать</option>
                  <?php foreach ($categories as $cat): ?>
                     <option value="<?= $cat['id'] ?>"
-                      <?php if ($cat['id'] == $gif['category_id']): ?>selected<?php endif; ?>><?=$cat['name'];?></option>
+                      <?php if ($cat['id'] == getPostVal('category_id')): ?>selected<?php endif; ?>><?=$cat['name'];
+                      ?></option>
                  <?php endforeach; ?>
                </select>
             </div>

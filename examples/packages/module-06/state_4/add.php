@@ -32,19 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 /* END STATE 03 */
 /* BEGIN STATE 04 */
-    $vals = filter_input_array(INPUT_POST, ['title' => FILTER_DEFAULT, 'description' => FILTER_DEFAULT,
+    $gif = filter_input_array(INPUT_POST, ['title' => FILTER_DEFAULT, 'description' => FILTER_DEFAULT,
         'category_id' => FILTER_DEFAULT], true);
 /* END STATE 04 */
 
 /* BEGIN STATE 05 */
-    foreach ($vals as $key => $value) {
+    foreach ($gif as $key => $value) {
         if (isset($rules[$key])) {
             $rule = $rules[$key];
             $errors[$key] = $rule($value);
         }
 
         if (in_array($key, $required) && empty($value)) {
-            $errors[$key] = 'Это поле надо заполнить';
+            $errors[$key] = "Поле $key надо заполнить";
         }
     }
 
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /* BEGIN STATE 11 */
 	if (count($errors)) {
-		$page_content = include_template('add.php', ['gif' => $vals, 'errors' => $errors, 'categories' => $categories]);
+		$page_content = include_template('add.php', ['gif' => $gif, 'errors' => $errors, 'categories' => $categories]);
 	}
 /* END STATE 11 */
 /* BEGIN STATE 12 */
