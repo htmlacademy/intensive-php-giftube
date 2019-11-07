@@ -40,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     foreach ($vals as $key => $value) {
         if (isset($rules[$key])) {
             $rule = $rules[$key];
-            $errors[$key] = $rule();
+            $errors[$key] = $rule($value);
         }
 
-        if (in_array($key, $required) && !$value) {
+        if (in_array($key, $required) && empty($value)) {
             $errors[$key] = 'Это поле надо заполнить';
         }
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /* END STATE 05 */
 
 /* BEGIN STATE 06 */
-	if (isset($_FILES['gif_img']['name'])) {
+	if (!empty($_FILES['gif_img']['name'])) {
 		$tmp_name = $_FILES['gif_img']['tmp_name'];
 		$path = $_FILES['gif_img']['name'];
         $filename = uniqid() . '.gif';
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 /* BEGIN STATE 11 */
 	if (count($errors)) {
-		$page_content = include_template('add.php', ['gif' => $gif, 'errors' => $errors, 'categories' => $categories]);
+		$page_content = include_template('add.php', ['gif' => $vals, 'errors' => $errors, 'categories' => $categories]);
 	}
 /* END STATE 11 */
 /* BEGIN STATE 12 */
