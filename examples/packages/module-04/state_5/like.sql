@@ -1,3 +1,4 @@
+
 /* BEGIN STATE 01 */
 SELECT id, title, description FROM gifs WHERE title LIKE 'рыбак';
 /* END STATE 01 */
