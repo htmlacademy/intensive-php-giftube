@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 /* END STATE 11 */
 /* BEGIN STATE 12 */
 	else {
-        $sql = 'INSERT INTO gifs (dt_add, category_id, user_id, title, description, path) VALUES (NOW(), ?, 1, ?, ?, ?)';
+        $sql = 'INSERT INTO gifs (dt_add, user_id, title, description, category_id, path) VALUES (NOW(), 1, ?, ?, ?, ?)';
         $stmt = db_get_prepare_stmt($link, $sql, $gif);
         $res = mysqli_stmt_execute($stmt);
 
