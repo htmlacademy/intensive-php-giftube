@@ -558,6 +558,8 @@ body {
   display: block;
 
   transform: translate(-50%, -50%);
+
+  object-fit: cover;
 }
 
 .gif__picture label {
@@ -751,6 +753,8 @@ body {
 .comment__picture {
   flex-shrink: 1;
   margin-right: 28px;
+
+  object-fit: cover;
 }
 
 .comment__author {
