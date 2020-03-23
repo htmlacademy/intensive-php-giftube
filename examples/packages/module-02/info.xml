@@ -49,6 +49,9 @@
           </state>
         </states>
       </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
+      </file>
     </files>
   </example>
   <example name="Ассоциативные массивы" index="2">
@@ -71,6 +74,9 @@
           </state>
         </states>
       </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
+      </file>
     </files>
   </example>
   <example name="Двумерные массивы" index="3">
@@ -90,6 +96,9 @@
             под которым он сохранен, а затем интересующий ключ
           </state>
         </states>
+      </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
       </file>
     </files>
   </example>

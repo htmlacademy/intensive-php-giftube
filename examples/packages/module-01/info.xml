@@ -21,6 +21,9 @@
           <state order="9" reload="true">Вместе со значением переменной можно вывести дополнительную информацию - её тип и размер.</state>
         </states>
       </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
+      </file>
     </files>
   </example>
   <example name="Условные конструкции" index="2">
@@ -42,6 +45,9 @@
           <state order="9" reload="true">Заключительным шагом сообщим посетителю о статусе работы интернет-филиала.</state>
         </states>
       </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
+      </file>
     </files>
   </example>
   <example name="Интеграция PHP с версткой" index="3">
@@ -60,6 +66,9 @@
           гифки будет скрыт или показан в зависимости от значения переменной $show_gif.</state>
           <state order="6" reload="true">Используем одну переменную для показа ссылки на адрес элеткронной почты.</state>
         </states>
+      </file>
+      <file name="dummy" show="false" main="false">
+        <states/>
       </file>
     </files>
   </example>
