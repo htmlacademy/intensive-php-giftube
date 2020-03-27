@@ -128,6 +128,9 @@
           </state>
         </states>
       </file>
+      <file name="index.php" main="false" show="false">
+        <states/>
+      </file>
     </files>
   </example>
   <example name="Функции" index="5">
