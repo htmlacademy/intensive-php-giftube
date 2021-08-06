@@ -1,0 +1,49 @@
+.gif__description {
+  color: #000000;
+}
+
+.gif__picture img {
+  max-width: 520px;
+}
+
+.form__errors {
+  margin-bottom: 20px;
+  padding: 10px;
+
+  text-align: left;
+  color: #000000;
+
+  background-color: #f27458;
+}
+
+.hide {
+  display: none;
+}
+
+#gifControl:checked + label {
+  opacity: 0;
+}
+
+#gifControl:checked + label + img + img {
+  display: none;
+}
+
+.gif_img.preview {
+  position: absolute;
+}
+
+.gif__preview {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: block;
+}
+
+.gif--small .gif__preview {
+  height: 200px;
+}
+
+.gif__preview:hover {
+  background-color: #ffffff;
+  opacity: 0.5;
+}
