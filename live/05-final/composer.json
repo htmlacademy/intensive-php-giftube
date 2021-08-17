@@ -1,0 +1,12 @@
+{
+    "name": "frexin/intensive-php-giftube",
+    "authors": [
+        {
+            "name": "Senkevich Kirill",
+            "email": "sks89@mail.ru"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.1"
+    }
+}
