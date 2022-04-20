@@ -44,10 +44,22 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
     return $stmt;
 }
 
+/**
+ * Функция для показа ошибки
+ * @param $content string Результатирущий html
+ * @param $error string Текст ошибки
+ * @return void
+ */
 function show_error(&$content, $error) {
     $content = include_template('error.php', ['error' => $error]);
 }
 
+/**
+ * Подключение шаблона
+ * @param $name string Имя шаблона
+ * @param $data array Массив с данными для шаблона
+ * @return false|string
+ */
 function include_template($name, $data) {
     $name = 'templates/' . $name;
     $result = '';
@@ -65,10 +77,12 @@ function include_template($name, $data) {
     return $result;
 }
 
-function getPostVal($name) {
-    return filter_input(INPUT_POST, $name);
-}
-
+/**
+ * Валидатор, проверяющий что такая категория существует
+ * @param $id integer id категории
+ * @param $allowed_list array массив из допустимых категорий
+ * @return string|null
+ */
 function validateCategory($id, $allowed_list) {
     if (!in_array($id, $allowed_list)) {
         return "Указана несуществующая категория";
@@ -77,6 +91,13 @@ function validateCategory($id, $allowed_list) {
     return null;
 }
 
+/**
+ * Валидатор, проверяющий что длина строки находится в ограниченных пределах
+ * @param $value string строка, которую проверяем
+ * @param $min integer мин. длина
+ * @param $max integer макс. длина
+ * @return string|null
+ */
 function validateLength($value, $min, $max) {
     if ($value) {
         $len = strlen($value);
@@ -86,4 +107,8 @@ function validateLength($value, $min, $max) {
     }
 
     return null;
+}
+
+function getPostVal($name) {
+    return filter_input(INPUT_POST, $name);
 }
