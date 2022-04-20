@@ -7,6 +7,6 @@
         }
     ],
     "require": {
-        "swiftmailer/swiftmailer": "^6.1"
+        "symfony/mailer": "^5.4"
     }
 }
