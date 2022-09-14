@@ -1,16 +1,19 @@
 <?php
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mime\Email;
+
 require_once 'vendor/autoload.php';
 require_once 'init.php';
 require_once 'functions.php';
 
 /* BEGIN STATE 01 */
-$transport = new Swift_SmtpTransport("phpdemo.ru", 25);
-$transport->setUsername("keks@phpdemo.ru");
-$transport->setPassword("htmlacademy");
+$dsn = 'smtp://75f3c8c888f4c0:d3bf00f9a2376d@smtp.mailtrap.io:2525?encryption=tls&auth_mode=login';
+$transport = Transport::fromDsn($dsn);
 /* END STATE 01 */
 
 /* BEGIN STATE 02 */
-$mailer = new Swift_Mailer($transport);
+$mailer = new Mailer($transport);
 /* END STATE 02 */
 
 
@@ -39,15 +42,15 @@ if ($res && mysqli_num_rows($res)) {
         /* END STATE 06 */
 
         /* BEGIN STATE 07 */
-        $message = new Swift_Message();
-        $message->setSubject("Самые горячие гифки за этот месяц");
-        $message->setFrom(['keks@phpdemo.ru' => 'GifTube']);
-        $message->setBcc($recipients);
+        $message = new Email();
+        $message->subject("Самые горячие гифки за этот месяц");
+        $message->from('keks@phpdemo.ru');
+        $message->to($recipients);
         /* END STATE 07 */
 
         /* BEGIN STATE 08 */
         $msg_content = include_template('month_email.php', ['gifs' => $gifs]);
-        $message->setBody($msg_content, 'text/html');
+        $message->html($msg_content);
         /* END STATE 08 */
 
         /* BEGIN STATE 09 */
